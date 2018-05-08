@@ -4,6 +4,14 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>listaIndArr.h</itemPath>
+      <itemPath>listaIndEn.h</itemPath>
+      <itemPath>listaOrdArr.h</itemPath>
+      <itemPath>listaOrdEn.h</itemPath>
+      <itemPath>listaPosArr.h</itemPath>
+      <itemPath>listaPosDoEn.h</itemPath>
+      <itemPath>listaPosSimEn.h</itemPath>
+      <itemPath>pila.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -25,14 +33,6 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>listaIndArr.h</itemPath>
-    <itemPath>listaIndEn.h</itemPath>
-    <itemPath>listaOrdArr.h</itemPath>
-    <itemPath>listaOrdEn.h</itemPath>
-    <itemPath>listaPosArr.h</itemPath>
-    <itemPath>listaPosDoEn.h</itemPath>
-    <itemPath>listaPosSimEn.h</itemPath>
-    <itemPath>pila.h</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
