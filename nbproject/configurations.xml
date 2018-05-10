@@ -4,14 +4,14 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>listaIndArr.h</itemPath>
-      <itemPath>listaIndEn.h</itemPath>
-      <itemPath>listaOrdArr.h</itemPath>
-      <itemPath>listaOrdEn.h</itemPath>
-      <itemPath>listaPosArr.h</itemPath>
-      <itemPath>listaPosDoEn.h</itemPath>
-      <itemPath>listaPosSimEn.h</itemPath>
-      <itemPath>pila.h</itemPath>
+      <itemPath>ListaIndArr.h</itemPath>
+      <itemPath>ListaIndEn.h</itemPath>
+      <itemPath>ListaOrdArr.h</itemPath>
+      <itemPath>ListaOrdEn.h</itemPath>
+      <itemPath>ListaPosArr.h</itemPath>
+      <itemPath>ListaPosDoEn.h</itemPath>
+      <itemPath>ListaPosSimEn.h</itemPath>
+      <itemPath>Pila.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -47,23 +47,23 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
-      <item path="listaIndArr.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaIndArr.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaIndEn.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaIndEn.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaOrdArr.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaOrdArr.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaOrdEn.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaOrdEn.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaPosArr.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaPosArr.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaPosDoEn.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaPosDoEn.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaPosSimEn.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaPosSimEn.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Pila.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="pila.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -87,23 +87,23 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="listaIndArr.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaIndArr.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaIndEn.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaIndEn.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaOrdArr.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaOrdArr.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaOrdEn.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaOrdEn.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaPosArr.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaPosArr.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaPosDoEn.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaPosDoEn.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="listaPosSimEn.h" ex="false" tool="3" flavor2="0">
+      <item path="ListaPosSimEn.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Pila.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="pila.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
