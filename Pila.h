@@ -10,7 +10,7 @@
  *
  * Created on 7 de mayo de 2018, 11:11 PM
  */
-
+#include <cstdlib>
 #ifndef PILA_H
 #define PILA_H
 
@@ -49,55 +49,54 @@ public:
     //EFE: Borra el elemento en el tope de la Pila.
     //REQ: La Pila inicializada y no vacía.
     //MOD: La Pila.
-    V& sacar();
+    V sacar();
     
     //EFE: Retorna el elemento en el tope  de la Pila para usarlo pero no lo borra.
     //REQ: La Pila inicializada y no vacía.
     //MOD:
-    V& tope();
+    V tope();
     
     //EFE: Retorna la cantidad de elementos en P.
     //REQ: La Pila inicializada.
     //MOD:
     int numElem();
-
-private:   
     
+private:
     template < typename T >
     struct Nodo{
         T elemento;
         Nodo *siguiente;
-        Nodo(): siguiente(0){
+        Nodo():siguiente(nullptr){
         }
-        Nodo(T newE): elemento(newE), siguiente(0){
+        Nodo(T newE): elemento(newE), siguiente(nullptr){
         }
     };
-    
     int cantidadElem;
-    Nodo *top;
-    static Nodo *nodoNulo;
+    Nodo<V> *top;
+    static Nodo<V> *nodoNulo;
 };
 
-Nodo* Pila::nodoNulo = nullptr;
+template < typename V >
+Pila<V>::Nodo<V>* Pila<V>::nodoNulo = nullptr;
 
 template < typename V >
-Pila::Pila(){
+Pila<V>::Pila(){
 }
 
 template < typename V >
-Pila::~Pila(){
+Pila<V>::~Pila(){
 }
 
 template < typename V >
-void Pila::iniciar(){
+void Pila<V>::iniciar(){
     cantidadElem = 0;
     top = nodoNulo;
 }
 
 template < typename V >
-void Pila::destruir(){
+void Pila<V>::destruir(){
     while(top != nodoNulo){
-        Nodo *n = top;
+        Nodo<V> *n = top;
         top = top->siguiente;
         delete n;
     }
@@ -105,16 +104,16 @@ void Pila::destruir(){
 }
 
 template < typename V >
-void Pila::vaciar(){
+void Pila<V>::vaciar(){
     while(top != nodoNulo){
-        Nodo *n = top;
+        Nodo<V> *n = top;
         top = top->siguiente;
         delete n;
     }
 }
 
 template < typename V >
-bool Pila::vacia(){
+bool Pila<V>::vacia(){
     bool vacio = false;
     if (top == nodoNulo)
         vacio = true;
@@ -122,17 +121,17 @@ bool Pila::vacia(){
 }
 
 template < typename V >
-void Pila::meter(V elemento){
-    Nodo *n = new Nodo<elemento>;
-    n->siguiente = top->siguiente;
+void Pila<V>::meter(V elemento){
+    Nodo<V> *n = new Nodo<V>(elemento);
+    n->siguiente = top;
     top = n;
     cantidadElem++;
 }
 
 template < typename V >
-V& Pila::sacar(){
+V Pila<V>::sacar(){
     V e = top->elemento;
-    Nodo *n = top;
+    Nodo<V> *n = top;
     top = top->siguiente;
     delete n;
     cantidadElem--;
@@ -140,12 +139,12 @@ V& Pila::sacar(){
 }
 
 template < typename V >
-V& Pila::tope(){
+V Pila<V>::tope(){
     return top->elemento;
 }
 
 template < typename V >
-int Pila::numElem(){
+int Pila<V>::numElem(){
     return cantidadElem;
 }
 #endif /* PILA_H */
