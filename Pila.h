@@ -110,6 +110,7 @@ void Pila<V>::vaciar(){
         top = top->siguiente;
         delete n;
     }
+    cantidadElem = 0;
 }
 
 template < typename V >
