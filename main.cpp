@@ -15,6 +15,13 @@
 #include <iostream>
 #include <fstream>
 #include "Pila.h"
+//#include "ListaIndArr.h"
+//#include "ListaIndEn.h"
+//#include "ListaOrdArr.h"
+//#include "ListaOrdEn.h"
+//#include "ListaPosArr.h"
+//#include "ListaPosDoEn.h"
+//#include "ListaPosSimEn.h"
 using namespace std;
 
 /*
@@ -22,15 +29,16 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     
-    Pila<int> pila;
-    pila.iniciar();
-    pila.meter(4);
-    pila.meter(34);
-    pila.meter(23);
-    int e = pila.sacar();
-    int i = pila.numElem();
+    Pila<int>* pila = new Pila<int>;
+    pila->iniciar();
+    pila->meter(4);
+    pila->meter(34);
+    pila->meter(23);
+    int e = pila->sacar();
+    int i = pila->numElem();
     cout << i << endl;
-    cout << e << endl;    
+    cout << e << endl;
+    pila->destruir();
     return 0;
 }
 
