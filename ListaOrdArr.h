@@ -79,7 +79,7 @@ public:
     
 private:   
     V arreglo[MAX];
-    int ultimo;
+    int ultimoElem;
     int cantidadElem;
     static V elemNulo;
 };
@@ -97,21 +97,18 @@ ListaOrdArr<V>::~ListaOrdArr(){
 
 template < typename V >
 void ListaOrdArr<V>::iniciar(){
-    int cantidadElem = 0;
-    int ultimo = 0;
+    cantidadElem = 0;
+    ultimoElem = 0;
 }
 
 template < typename V >
 void ListaOrdArr<V>::destruir(){
-    delete this;
 }
 
 template < typename V >
 void ListaOrdArr<V>::vaciar(){
-    for(int i = 0; i < cantidadElem; i++)
-        arreglo[i] = -1;
-    int cantidadElem = 0;
-    int ultimo = 0;
+    cantidadElem = 0;
+    ultimoElem = 0;
 }
 
 template < typename V >
@@ -125,10 +122,22 @@ bool ListaOrdArr<V>::vacia(){
 template < typename V >
 void ListaOrdArr<V>::agregar(V newE){
     if(cantidadElem == 0)
-        arreglo[ultimo] = newE;
+        arreglo[ultimoElem] = newE;
     else{
-        arreglo[ultimo+1] = newE;
-        ultimo++;
+        int i = 0;
+        while(i < cantidadElem){
+            if(arreglo[i] < newE)
+                i++;
+            else if(newE < arreglo[i]){
+                V elemTrans = arreglo[i];
+                arreglo[i] = newE;
+                newE = elemTrans;
+                i++;
+            }else
+                i = cantidadElem;
+        }
+        arreglo[ultimoElem+1] = newE;
+        ultimoElem++;
     }
     cantidadElem++;
 }
@@ -147,17 +156,27 @@ void ListaOrdArr<V>::borrar(V elem){
         i++; 
     }
     cantidadElem--;
-    ultimo--;
+    ultimoElem--;
 }
 
 template < typename V >
 V ListaOrdArr<V>::primero(){
-    return arreglo[0];
+    V firstElem;
+    if (cantidadElem == 0)
+        firstElem = elemNulo;
+    else
+        firstElem = arreglo[0];
+    return firstElem;
 }
 
 template < typename V >
 V ListaOrdArr<V>::ultimo(){
-    return arreglo[ultimo];
+    V lastElem;
+    if(cantidadElem == 0)
+        lastElem = elemNulo;
+    else
+        lastElem = arreglo[ultimoElem];
+    return lastElem;
 }
 
 template < typename V >
@@ -169,7 +188,7 @@ V ListaOrdArr<V>::siguiente(V elem){
         int antI = 0;
         while(arreglo[antI] != elem)
             antI++;
-        if(antI == ultimo)
+        if(antI == ultimoElem)
             elemSig = -1;
         else
             elemSig = arreglo[antI+1];

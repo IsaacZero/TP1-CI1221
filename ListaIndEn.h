@@ -112,7 +112,6 @@ void ListaIndEn<V>::destruir(){
         iter = iter->siguiente;
         delete n;
     }
-    delete this;
 }
 
 template < typename V >
