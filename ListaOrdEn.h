@@ -81,9 +81,9 @@ private:
     struct Nodo{
         T elemento;
         Nodo *siguiente;
-        Nodo(): siguiente(nullptr){
+        Nodo(): siguiente(nodoNulo){
         }
-        Nodo(T newE): elemento(newE){
+        Nodo(T newE): elemento(newE), siguiente(nodoNulo){
         }
     };
     int cantidadElem;
@@ -92,7 +92,7 @@ private:
 };
 
 template < typename V >
-ListaIndEn<V>::Nodo<V>* ListaIndEn<V>::nodoNulo = nullptr;
+ListaOrdEn<V>::Nodo<V>* ListaOrdEn<V>::nodoNulo = nullptr;
 
 template < typename V >
 ListaOrdEn<V>::ListaOrdEn(){
@@ -110,25 +110,31 @@ void ListaOrdEn<V>::iniciar(){
 
 template < typename V >
 void ListaOrdEn<V>::destruir(){
-    Nodo<V> *iter = inicio;
-    Nodo<V> *n;
-    while(iter != nodoNulo){
-        n = iter;
-        iter = iter->siguiente;
-        delete n;
+    if(cantidadElem != 0){
+        Nodo<V> *iter = inicio;
+        Nodo<V> *n;
+        inicio = nodoNulo;
+        while(iter != nodoNulo){
+            n = iter;
+            iter = iter->siguiente;
+            delete n;
+        }
+        delete iter;
     }
-    delete this;
+    cantidadElem = 0;
 }
 
 template < typename V >
 void ListaOrdEn<V>::vaciar(){
     Nodo<V> *iter = inicio;
     Nodo<V> *n;
+    inicio = nodoNulo;
     while(iter != nodoNulo){
         n = iter;
         iter = iter->siguiente;
         delete n;
     }
+    delete iter;
     cantidadElem = 0;
 }
 
@@ -156,12 +162,12 @@ void ListaOrdEn<V>::agregar(V newE){
         Nodo<V> *iter = inicio;
         Nodo<V> *n = new Nodo<V>(newE);
         while(!inserted){
-            if (iter->siguiente->elemento > n->elemento && iter->elemento != n->elemento){
-                n->siguiente = iter->siguiente;
+            if(iter->siguiente == nodoNulo && iter->elemento < n->elemento){
                 iter->siguiente = n;
                 inserted = true;
                 cantidadElem++;
-            }else if(iter->siguiente == nodoNulo && iter->elemento != n->elemento){
+            }else if(iter->siguiente != nodoNulo && iter->siguiente->elemento > n->elemento && iter->elemento < n->elemento){
+                n->siguiente = iter->siguiente;
                 iter->siguiente = n;
                 inserted = true;
                 cantidadElem++;
@@ -198,16 +204,26 @@ void ListaOrdEn<V>::borrar(V elem){
 
 template < typename V >
 V ListaOrdEn<V>::primero(){
-    V elem = inicio->elemento;
+    V elem;
+    if(cantidadElem == 0)
+        elem = -1;
+    else
+        elem = inicio->elemento;
     return elem;
 }
 
 template < typename V >
 V ListaOrdEn<V>::ultimo(){
-    Nodo<V> *iter = inicio;
-    while(iter->siguiente != nodoNulo)
-        iter = iter->siguiente;
-    return iter->elemento;
+    V lastElem;
+    if (cantidadElem == 0)
+        lastElem = -1;
+    else{
+        Nodo<V> *iter = inicio;
+        while(iter->siguiente != nodoNulo)
+            iter = iter->siguiente;
+        lastElem = iter->elemento;
+    }
+    return lastElem;
 }
 
 template < typename V >
@@ -236,7 +252,7 @@ V ListaOrdEn<V>::anterior(V elem){
         Nodo<V> *iter = inicio;
         while(iter->siguiente->elemento != elem)
             iter = iter->siguiente;
-        ant = iter;
+        ant = iter->elemento;
     }
     return ant;
 }

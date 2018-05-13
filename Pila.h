@@ -100,7 +100,6 @@ void Pila<V>::destruir(){
         top = top->siguiente;
         delete n;
     }
-    delete this;
 }
 
 template < typename V >
@@ -130,18 +129,28 @@ void Pila<V>::meter(V elemento){
 }
 
 template < typename V >
-V Pila<V>::sacar(){
-    V e = top->elemento;
-    Nodo<V> *n = top;
-    top = top->siguiente;
-    delete n;
-    cantidadElem--;
+V Pila<V>::sacar(){ 
+    V e;
+    if(cantidadElem == 0)
+        e = -1;
+    else{
+        e = top->elemento;
+        Nodo<V> *n = top;
+        top = top->siguiente;
+        delete n;
+        cantidadElem--;
+    }
     return e;
 }
 
 template < typename V >
 V Pila<V>::tope(){
-    return top->elemento;
+    V e;
+    if(cantidadElem == 0)
+        e = -1;
+    else
+        e = top->elemento;
+    return e;
 }
 
 template < typename V >
