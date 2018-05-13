@@ -76,7 +76,7 @@ public:
      
 private:
     
-    E arreglo[];
+    E arreglo[MAX];
     int cantidadElem;
     static E elemNulo;
 };
@@ -95,8 +95,6 @@ ListaIndArr<E>::~ListaIndArr(){
 template < typename E >
 void ListaIndArr<E>::iniciar(){
     int cantidadElem = 0;
-    int ultimo = 0;
-    arreglo = E[MAX];
 }
 
 template < typename E >
@@ -107,6 +105,7 @@ void ListaIndArr<E>::destruir(){
 template < typename E >
 void ListaIndArr<E>::vaciar(){
     arreglo = E[MAX];
+    int cantidadElem = 0;
 }
     
 template < typename E >
