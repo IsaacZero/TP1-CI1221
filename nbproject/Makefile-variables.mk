@@ -8,17 +8,17 @@ CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=MinGW_TDM-Windows
-CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW_TDM-Windows
-CND_ARTIFACT_NAME_Debug=tp1-ci1221
-CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW_TDM-Windows/tp1-ci1221
+CND_ARTIFACT_DIR_Debug=build/Debug/MinGW_TDM-Windows/tests/TestFiles
+CND_ARTIFACT_NAME_Debug=f2
+CND_ARTIFACT_PATH_Debug=build/Debug/MinGW_TDM-Windows/tests/TestFiles/f2
 CND_PACKAGE_DIR_Debug=dist/Debug/MinGW_TDM-Windows/package
 CND_PACKAGE_NAME_Debug=tp1-ci1221.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/MinGW_TDM-Windows/package/tp1-ci1221.tar
 # Release configuration
 CND_PLATFORM_Release=MinGW_TDM-Windows
-CND_ARTIFACT_DIR_Release=dist/Release/MinGW_TDM-Windows
-CND_ARTIFACT_NAME_Release=tp1-ci1221
-CND_ARTIFACT_PATH_Release=dist/Release/MinGW_TDM-Windows/tp1-ci1221
+CND_ARTIFACT_DIR_Release=build/Release/MinGW_TDM-Windows/tests/TestFiles
+CND_ARTIFACT_NAME_Release=f2
+CND_ARTIFACT_PATH_Release=build/Release/MinGW_TDM-Windows/tests/TestFiles/f2
 CND_PACKAGE_DIR_Release=dist/Release/MinGW_TDM-Windows/package
 CND_PACKAGE_NAME_Release=tp1-ci1221.tar
 CND_PACKAGE_PATH_Release=dist/Release/MinGW_TDM-Windows/package/tp1-ci1221.tar
