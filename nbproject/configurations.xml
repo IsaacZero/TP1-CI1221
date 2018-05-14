@@ -38,6 +38,12 @@
                      kind="TEST">
         <itemPath>tests/tertPila.cpp</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3"
+                     displayName="testListaIndArr"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/testListaIndArr.cpp</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -105,9 +111,26 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+        </linkerTool>
+      </folder>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/tertPila.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/testListaIndArr.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/testListaOrd.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -179,9 +202,26 @@
           <output>${TESTDIR}/TestFiles/f2</output>
         </linkerTool>
       </folder>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+        </linkerTool>
+      </folder>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/tertPila.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/testListaIndArr.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="tests/testListaOrd.cpp" ex="false" tool="1" flavor2="0">
       </item>

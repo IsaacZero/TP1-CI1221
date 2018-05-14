@@ -104,7 +104,7 @@ void ListaIndArr<E>::destruir(){
 
 template < typename E >
 void ListaIndArr<E>::vaciar(){
-    arreglo = E[MAX];
+    arreglo = new E[MAX];
     int cantidadElem = 0;
 }
     
@@ -126,7 +126,7 @@ void ListaIndArr<E>::insertar(E elem, int i){
 template < typename E >
 void ListaIndArr<E>::borrar(int i){
     for(int m = i; m < cantidadElem; m++){
-        if (m < (cantidadElem-1) {
+        if (m < (cantidadElem-1)) {
             arreglo[m] = arreglo[m+1];
         } else if ((m == (MAX - 1)) || (m == (cantidadElem - 1)) ){
             arreglo[m] = elemNulo;
@@ -135,7 +135,7 @@ void ListaIndArr<E>::borrar(int i){
 }
 
 template < typename E >
-void ListaIndArr<E>::recuperar(int i){
+E ListaIndArr<E>::recuperar(int i){
     return arreglo[i];
 }
 
@@ -152,7 +152,7 @@ void ListaIndArr<E>::intercambiar(int i, int j){
 }
 
 template < typename E >
-void ListaIndArr<E>::numElem(){
+int ListaIndArr<E>::numElem(){
     return cantidadElem;
 
 #endif /* LISTAINDARR_H */
