@@ -142,7 +142,6 @@ class ListaPosSimEn{
             iter = iter->siguiente;
             delete n;
         }
-        delete this;
     }
     
     template < typename E>

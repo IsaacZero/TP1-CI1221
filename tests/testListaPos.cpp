@@ -20,7 +20,7 @@
  */
 
 typedef ListaPosDoEn<int> Lista;
-//typedef ListaPosDoEn::P Pos;
+typedef ListaPosDoEn<int>::Pos Position;
 
 void testIniciar() {
     Lista listaPosDoEn;
@@ -31,12 +31,14 @@ void testIniciar() {
 }
 
 void testDestruir() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    for(int i = 0; i < 4; i++){
-        listaPosDoEn.agregarAlFinal(i);
+    if(true){
+        Lista listaPosDoEn;
+        listaPosDoEn.iniciar();
+        for(int i = 0; i < 4; i++){
+            listaPosDoEn.agregarAlFinal(i);
+        }
+        listaPosDoEn.destruir();
     }
-    listaPosDoEn.destruir();
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
     if (listaPosDoEn.vacia() == false) {
@@ -76,12 +78,12 @@ void testVacia() {
 void testInsertar() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
     if (listaPosDoEn.recuperar(inicio) != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta al inicio" << std::endl;
     }
-    ListaPosDoEn::P siguiente = listaPosDoEn.siguiente(inicio);
+    Position siguiente = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, siguiente);
     if (listaPosDoEn.recuperar(siguiente) != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta en el medio" << std::endl;
@@ -91,10 +93,10 @@ void testInsertar() {
 void testAgregarAlFinal() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
     listaPosDoEn.agregarAlFinal(1);
-    ListaPosDoEn::P siguiente = listaPosDoEn.siguiente(inicio);
+    Position siguiente = listaPosDoEn.siguiente(inicio);
     if (listaPosDoEn.recuperar(siguiente) != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testAgregarAlFinal (testListaPos) No agrega al final" << std::endl;
     }
@@ -103,18 +105,18 @@ void testAgregarAlFinal() {
 void testBorrar() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
-    ListaPosDoEn::P segundo = listaPosDoEn.siguiente(inicio);
+    Position segundo = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, segundo);
-    ListaPosDoEn::P tercero = listaPosDoEn.siguiente(segundo);
+    Position tercero = listaPosDoEn.siguiente(segundo);
     listaPosDoEn.insertar(2, segundo);
     listaPosDoEn.borrar(segundo);
     if (listaPosDoEn.recuperar(listaPosDoEn.siguiente(inicio)) != 2) {
         std::cout << "%TEST_FAILED% time=0 testname=testBorrar (testListaPos) No elimina en el medio" << std::endl;
     }
     listaPosDoEn.borrar(tercero);
-    ListaPosDoEn::P ultimo = listaPosDoEn.ultima();
+    Position ultimo = listaPosDoEn.ultima();
     if (listaPosDoEn.recuperar(ultimo) != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testBorrar (testListaPos) No elimina al final" << std::endl;
     }
@@ -127,11 +129,11 @@ void testBorrar() {
 void testRecuperar() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
-    ListaPosDoEn::P segundo = listaPosDoEn.siguiente(inicio);
+    Position segundo = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, segundo);
-    ListaPosDoEn::P tercero = listaPosDoEn.siguiente(segundo);
+    Position tercero = listaPosDoEn.siguiente(segundo);
     listaPosDoEn.insertar(2, tercero);
     int i = listaPosDoEn.recuperar(inicio);
     if (i != 0) {
@@ -150,11 +152,11 @@ void testRecuperar() {
 void testModificarElemento() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
-    ListaPosDoEn::P segundo = listaPosDoEn.siguiente(inicio);
+    Position segundo = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, segundo);
-    ListaPosDoEn::P tercero = listaPosDoEn.siguiente(segundo);
+    Position tercero = listaPosDoEn.siguiente(segundo);
     listaPosDoEn.insertar(2, tercero);    
     listaPosDoEn.modificarElemento(3, inicio);
     int i = listaPosDoEn.recuperar(inicio);
@@ -176,9 +178,9 @@ void testModificarElemento() {
 void testIntercambiar() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
-    ListaPosDoEn::P segundo = listaPosDoEn.siguiente(inicio);
+    Position segundo = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, segundo);
     listaPosDoEn.intercambiar(inicio, segundo);
     int i = listaPosDoEn.recuperar(inicio);
@@ -194,7 +196,7 @@ void testIntercambiar() {
 void testPrimera() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
     int i = listaPosDoEn.recuperar(inicio);
     if (i != 0) {
@@ -205,11 +207,11 @@ void testPrimera() {
 void testUltima() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
-    ListaPosDoEn::P segundo = listaPosDoEn.siguiente(inicio);
+    Position segundo = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, segundo);
-    ListaPosDoEn::P result = listaPosDoEn.ultima();
+    Position result = listaPosDoEn.ultima();
      int j = listaPosDoEn.recuperar(result);
     if (j != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testUltima (testListaPos) No devuelve el puntero al último" << std::endl;
@@ -219,9 +221,9 @@ void testUltima() {
 void testSiguiente() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
-    ListaPosDoEn::P segundo = listaPosDoEn.siguiente(inicio);
+    Position segundo = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, segundo);
     int j = listaPosDoEn.recuperar(result);
     if (j != 0) {
@@ -232,11 +234,11 @@ void testSiguiente() {
 void testAnterior() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P inicio = listaPosDoEn.primera();
+    Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
-    ListaPosDoEn::P segundo = listaPosDoEn.siguiente(inicio);
+    Position segundo = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, segundo);
-    ListaPosDoEn::P result = listaPosDoEn.anterior(segundo);
+    Position result = listaPosDoEn.anterior(segundo);
     int j = listaPosDoEn.recuperar(result);
     if (j != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testAnterior (testListaPos) No devuelve el puntero al anterior" << std::endl;
@@ -246,7 +248,7 @@ void testAnterior() {
 void testNumElem() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    ListaPosDoEn::P siguiente = listaPosDoEn.primera();
+    Position siguiente = listaPosDoEn.primera();
     for(int i = 0; i<4; i++){
         listaPosDoEn.insertar(i, siguiente);
         siguiente = listaPosDoEn.siguiente(siguiente); 
