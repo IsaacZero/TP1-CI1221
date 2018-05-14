@@ -1,3 +1,3 @@
-build/Debug/MinGW_TDM-Windows/main.o: main.cpp ListaPosDoEn.h
+build/Debug/MinGW_TDM-Windows/main.o: main.cpp Pila.h
 
-ListaPosDoEn.h:
+Pila.h:

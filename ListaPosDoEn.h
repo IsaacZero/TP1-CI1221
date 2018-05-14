@@ -136,12 +136,15 @@ class ListaPosDoEn{
     
     template < typename E>
     void ListaPosDoEn<E>::destruir(){
+        if(cantElem != 0){
         Nodo<E> *iter = inicio;
         Nodo<E> *n;
         while(iter != posNula){
             n = iter;
             iter = iter->siguiente;
             delete n;
+        }
+        delete iter;
         }
     }
     
@@ -245,9 +248,7 @@ class ListaPosDoEn{
     template < typename E>
     typename ListaPosDoEn<E>::Pos ListaPosDoEn<E>::ultima(){
         Nodo<E> *iter = inicio;
-        Nodo<E> *n;
         while(iter->siguiente != posNula){
-            n = iter;
             iter = iter->siguiente;
         }
         return iter;
