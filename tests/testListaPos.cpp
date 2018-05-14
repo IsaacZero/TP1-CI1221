@@ -13,14 +13,23 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include "ListaPosDoEn.h"
+//#include "ListaPosDoEn.h"
+//#include "ListaPosSimEn.h"
+#include "ListaPosArr.h"
  
 /*
  * Simple C++ Test Suite
  */
 
-typedef ListaPosDoEn<int> Lista;
-typedef ListaPosDoEn<int>::Pos Position;
+//typedef ListaPosDoEn<int> Lista;
+//typedef ListaPosDoEn<int>::Pos Position;
+
+//typedef ListaPosSimEn<int> Lista;
+//typedef ListaPosSimEn<int>::Pos Position;
+
+typedef ListaPosArr<int> Lista;
+typedef ListaPosArr<int>::Pos Position;
+
 
 void testIniciar() {
     Lista listaPosDoEn;

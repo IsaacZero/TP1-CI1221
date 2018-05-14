@@ -19,7 +19,7 @@
 template < typename E>
 class ListaPosArr{
 public:    
-    typedef int P;
+    typedef int Pos;
     ListaPosArr();
     virtual ~listaPosArr();
     
@@ -46,7 +46,7 @@ public:
     //EFE: Inserta el elemento elem en la lista en la posición pos
     //REQ: La Lista inicializada, que haya una cantidad menor de elementos a la maxima
     //MOD:  La lista L
-    void insertar(E elem, P pos);
+    void insertar(E elem, Pos pos);
     
     //EFE: Inserta el elemento elem al final de la lista
     //REQ: La Lista inicializada, que haya una cantidad menor de elementos a la maxima
@@ -56,42 +56,42 @@ public:
     //EFE: Borra el elemento en la posición pos de la lista
     //REQ: La Lista inicializada, que pos sea valida en la Lista
     //MOD:  La lista L
-    void borrar(P pos);
+    void borrar(Pos pos);
     
     //EFE: Retorna el elemento en la posicion p de la lista 
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    void recuperar(P pos);
+    void recuperar(Pos pos);
     
     //EFE: Reemplaza el elemento e en la lista en la posición p por el que ya existía en dicha posición.
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    void modificarElemento(E elem,P pos);
+    void modificarElemento(E elem,Pos pos);
     
     //EFE: Intercambia de posición a los elementos en las posiciones pos1 y pos2 de la lista
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    void  intercambiar(P pos1, P pos2);
+    void  intercambiar(Pos pos1, Pos pos2);
     
     //EFE: Retorna la primer posición de la lista
     //REQ: La Lista inicializada no vacía
     //MOD:  La lista L
-    P primera();
+    Pos primera();
     
     //EFE: Retorna la última posición de la lista
     //REQ: La Lista inicializada no vacía
     //MOD:  La lista L
-    P ultima();
+    Pos ultima();
     
     //EFE: Retorna la posición siguiente de la posición pos en la lista
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    P siguiente(P pos);
+    Pos siguiente(Pos pos);
     
     //EFE:Retorna la posición anterior de la posición pos en la lista
     //REQ: La Lista inicializada. p válida en la Lista
     //MOD:  La lista L
-    P anterior(P pos);
+    Pos anterior(Pos pos);
     
     //EFE: Retorna la cantidad de elementos en la lista.
     //REQ: L inicializada.
@@ -103,42 +103,42 @@ public:
         
         E arreglo[MAX];
         int cantElem;
-        P ultimo;
+        Pos ultimo;
         
-        static P posNula;   
+        static Pos posNula;   
 };  
 
     template < typename E>
-    P ListaPosArr::posNula = -1;
+    Pos ListaPosArr<E>::posNula = -1;
     
     template < typename E>
-    ListaPosArr::ListaPosArr(){
+    ListaPosArr<E>::ListaPosArr(){
     }
     
     template < typename E>
-    ListaPosArr::~ListaPosArr(){
+    ListaPosArr<E>::~ListaPosArr(){
     }
     
     template < typename E>
-    void ListaPosArr::iniciar(){
+    void ListaPosArr<E>::iniciar(){
         cantElem = 0;
         ultimo = -1;
     }
     
     template < typename E>
-    void ListaPosArr::destruir(){
-        ListaPosArr::~ListaPosArr();
+    void ListaPosArr<E>::destruir(){
+        ListaPosArr<E>::~ListaPosArr();
     }
     
     template < typename E>
-    void ListaPosArr::vaciar(){
+    void ListaPosArr<E>::vaciar(){
         arreglo = E[MAX];
-        int cantidadElem = 0;
+        cantElem = 0;
         ultimo = -1;
     }
     
     template < typename E>
-    bool ListaPosArr::vacia(){
+    bool ListaPosArr<E>::vacia(){
         bool vacia = true;
         if(ultimo != 0){
             vacia =false;
@@ -147,7 +147,7 @@ public:
     }
     
     template < typename E>
-    void ListaPosArr::insertar(E elem, P pos){
+    void ListaPosArr<E>::insertar(E elem, P pos){
         E aux1 = arreglo[pos];
         arreglo[pos] = elem;
         cantElem++;
@@ -161,14 +161,14 @@ public:
     }
     
     template < typename E>
-    void ListaPosArr::agregarAlFinal(E elem){
+    void ListaPosArr<E>::agregarAlFinal(E elem){
         arreglo[ultimo] = elem;
         ultimo++;
         cantElem++;
     }
     
     template < typename E>
-    void ListaPosArr::borrar(P pos){
+    void ListaPosArr<E>::borrar(P pos){
         for (int i = pos; i<cantElem; i++){
             arreglo[i] = arreglo[i+1];
         }
@@ -178,39 +178,39 @@ public:
     
     
     template < typename E>
-    E ListaPosArr::recuperar(P pos){
+    E ListaPosArr<E>::recuperar(Pos pos){
         return arreglo[pos];
     }
     
     template < typename E>
-    void ListaPosArr::modificarElemento(E elem, P pos){
+    void ListaPosArr<E>::modificarElemento(E elem, Pos pos){
         arreglo[pos] = elem;
     }
     
     template < typename E>
-    void ListaPosArr::intercambiar(P pos1, P pos2){
+    void ListaPosArr<E>::intercambiar(Pos pos1, Pos pos2){
         E aux = arreglo[pos1];
         arreglo[pos1] = arreglo[pos2];
         arreglo[pos2] = aux;
     }
     
     template < typename E>
-    P ListaPosArr::primera(){
+    typename ListaPosDoEn<E>::Pos ListaPosArr::primera(){
         return 0;
     }
     
     template < typename E>
-    P ListaPosArr::ultima(){
+    typename ListaPosDoEn<E>::Pos ListaPosArr::ultima(){
         return ultimo;
     }
     
     template < typename E>
-    P ListaPosArr::siguiente(P pos){
+    typename ListaPosDoEn<E>::Pos ListaPosArr::siguiente(Pos pos){
         return pos + 1;
     }
     
     template < typename E>
-    P ListaPosArr::anterior(P pos){
+    typename ListaPosDoEn<E>::Pos ListaPosArr::anterior(Pos pos){
         return pos + 1;
     }
     

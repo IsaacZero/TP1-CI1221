@@ -105,12 +105,15 @@ void ListaIndEn<V>::iniciar(){
 
 template < typename V >
 void ListaIndEn<V>::destruir(){
-    Nodo<V> *iter = inicio;
-    Nodo<V> *n;
-    while(iter != nodoNulo){
-        n = iter;
-        iter = iter->siguiente;
-        delete n;
+    if (cantidadElem != 0){
+        Nodo<V> *iter = inicio;
+        Nodo<V> *n;
+        while(iter != nodoNulo){
+            n = iter;
+            iter = iter->siguiente;
+            delete n;
+        }
+        delete iter;
     }
 }
 
@@ -145,7 +148,7 @@ void ListaIndEn<V>::insertar(V elemento, int indice){
         int i = 1;
         Nodo<V> *n = new Nodo<V>(elemento);
         Nodo<V> *iter = inicio;
-        while(i != indice){
+        while(i+1 < indice){
             iter = iter->siguiente;
             i++;
         }

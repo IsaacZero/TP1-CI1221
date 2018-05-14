@@ -13,9 +13,11 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include "ListaIndArr.h"
+//#include "ListaIndArr.h"
+#include "listaIndEn.h"
 
-typedef ListaIndArr<int> Lista;
+//typedef ListaIndArr<int> Lista;
+typedef ListaIndEn<int> Lista;
 
 /*
  * Simple C++ Test Suite

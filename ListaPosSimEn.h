@@ -33,7 +33,7 @@ class ListaPosSimEn{
     
     public:    
 
-    typedef Nodo<E>* P;
+    typedef Nodo<E>* Pos;
     
     ListaPosSimEn();
     virtual ~ListaPosSimEn();
@@ -61,7 +61,7 @@ class ListaPosSimEn{
     //EFE: Inserta el elemento elem en la lista en la posición pos
     //REQ: La Lista inicializada, que haya una cantidad menor de elementos a la maxima
     //MOD:  La lista L
-    void insertar(E elem, P pos);
+    void insertar(E elem, Pos pos);
     
     //EFE: Inserta el elemento elem al final de la lista
     //REQ: La Lista inicializada, que haya una cantidad menor de elementos a la maxima
@@ -71,42 +71,42 @@ class ListaPosSimEn{
     //EFE: Borra el elemento en la posición pos de la lista
     //REQ: La Lista inicializada, que pos sea valida en la Lista
     //MOD:  La lista L
-    void borrar(P pos);
+    void borrar(Pos pos);
     
     //EFE: Retorna el elemento en la posicion p de la lista 
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    void recuperar(P pos);
+    void recuperar(Pos pos);
     
     //EFE: Reemplaza el elemento e en la lista en la posición p por el que ya existía en dicha posición.
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    void modificarElemento(E elem,P pos);
+    void modificarElemento(E elem,Pos pos);
     
     //EFE: Intercambia de posición a los elementos en las posiciones pos1 y pos2 de la lista
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    void  intercambiar(P pos1, P pos2);
+    void  intercambiar(Pos pos1, Pos pos2);
     
     //EFE: Retorna la primer posición de la lista
     //REQ: La Lista inicializada no vacía
     //MOD:  La lista L
-    P primera();
+    Pos primera();
     
     //EFE: Retorna la última posición de la lista
     //REQ: La Lista inicializada no vacía
     //MOD:  La lista L
-    P ultima();
+    Pos ultima();
     
     //EFE: Retorna la posición siguiente de la posición pos en la lista
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    P siguiente(P pos);
+    Pos siguiente(Pos pos);
     
     //EFE:Retorna la posición anterior de la posición pos en la lista
     //REQ: La Lista inicializada. p válida en la Lista
     //MOD:  La lista L
-    P anterior(P pos);
+    Pos anterior(Pos pos);
     
     //EFE: Retorna la cantidad de elementos en la lista.
     //REQ: L inicializada.
@@ -166,7 +166,7 @@ class ListaPosSimEn{
     }
     
     template < typename E>
-    void ListaPosSimEn<E>::insertar(E elem, P pos){
+    void ListaPosSimEn<E>::insertar(E elem, Pos pos){
         if(inicio == posNula){
              Nodo<E> *n = new Nodo<E>(elem);
              inicio = n;
@@ -197,7 +197,7 @@ class ListaPosSimEn{
     }
     
     template < typename E>
-    void ListaPosSimEn<E>::borrar(P pos){
+    void ListaPosSimEn<E>::borrar(Pos pos){
         if (inicio == pos){
             inicio = pos->siguiente;
             delete pos;
@@ -215,29 +215,29 @@ class ListaPosSimEn{
     
     
     template < typename E>
-    E ListaPosSimEn<E>::recuperar(P pos){
+    E ListaPosSimEn<E>::recuperar(Pos pos){
         return pos->elemento;
     }
     
     template < typename E>
-    void ListaPosSimEn<E>::modificarElemento(E elem, P pos){
+    void ListaPosSimEn<E>::modificarElemento(E elem, Pos pos){
         pos->elemento = elem;
     }
     
     template < typename E>
-    void ListaPosSimEn<E>::intercambiar(P pos1, P pos2){
+    void ListaPosSimEn<E>::intercambiar(Pos pos1, Pos pos2){
         E aux = pos1->elemento;
         pos1 -> elemento = pos2 -> elemento;
         pos2 -> elemento = aux;        
     }
     
     template < typename E>
-    P ListaPosSimEn<E>::primera(){
+    typename ListaPosDoEn<E>::Pos ListaPosSimEn<E>::primera(){
         return inicio;
     }
     
     template < typename E>
-    P ListaPosSimEn<E>::ultima(){
+    typename ListaPosDoEn<E>::Pos ListaPosSimEn<E>::ultima(){
         Nodo<E>* iter = inicio;
         Nodo<E>* n;
         while(iter->siguiente != posNula){
@@ -248,12 +248,12 @@ class ListaPosSimEn{
     }
     
     template < typename E>
-    P ListaPosSimEn<E>::siguiente(P pos){
+    typename ListaPosDoEn<E>::Pos ListaPosSimEn<E>::siguiente(Pos pos){
         return pos->siguiente;
     }
     
     template < typename E>
-    P ListaPosSimEn<E>::anterior(P pos){
+    typename ListaPosDoEn<E>::Pos ListaPosSimEn<E>::anterior(Pos pos){
         Nodo<E>* iter = inicio;
         Nodo<E>* n;
         while(iter->siguiente != pos){
