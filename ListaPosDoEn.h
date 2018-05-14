@@ -18,7 +18,22 @@
 
 template < typename E>
 class ListaPosDoEn{
-public:    
+    private: 
+        template < typename Elem>
+        struct Nodo{
+            Elem elemento;
+            Nodo* siguiente;
+            Nodo* anterior;
+            Nodo(): siguiente(nullptr), anterior(nullptr){};
+            Nodo(E nuevoElem): elemento(nuevoElem){};
+            
+        };
+        
+        int cantElem;
+        Nodo<E>* inicio;
+        static Nodo<E>* posNula;
+        
+    public:    
     
     typedef Nodo<E>* P;
     
@@ -63,7 +78,7 @@ public:
     //EFE: Retorna el elemento en la posicion p de la lista 
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    void recuperar(P pos);
+    E recuperar(P pos);
     
     //EFE: Reemplaza el elemento e en la lista en la posición p por el que ya existía en dicha posición.
     //REQ: La Lista inicializada. pos válida en la Lista
@@ -99,42 +114,27 @@ public:
     //REQ: L inicializada.
     //MOD:
     int numElem();
-    
-    private: 
-        template < typename E>
-        struct Nodo{
-            E elemento;
-            Nodo* siguiente;
-            Nodo* anterior;
-            Nodo(): siguiente(nullptr), anterior(nullptr){};
-            Nodo(E nuevoElem): elemento(nuevoElem){};
-            
-        };
-        
-        int cantElem;
-        Nodo<E>* inicio;
-        static Nodo<E>* posNula;
 };  
 
     template < typename E>
-    ListaPosDoEn<E>::Nodo<E>* ListaPosDoEn::posNula = nullptr;
+    ListaPosDoEn<E>::Nodo<E>* ListaPosDoEn<E>::posNula = nullptr;
     
     template < typename E>
-    ListaPosDoEn::ListaPosDoEn(){
+    ListaPosDoEn<E>::ListaPosDoEn(){
     }
     
     template < typename E>
-    ListaPosDoEn::~ListaPosDoEn(){
+    ListaPosDoEn<E>::~ListaPosDoEn(){
     }
     
     template < typename E>
-    void ListaPosDoEn::iniciar(){
+    void ListaPosDoEn<E>::iniciar(){
         cantElem = 0;
         inicio = posNula;
     }
     
     template < typename E>
-    void ListaPosDoEn::destruir(){
+    void ListaPosDoEn<E>::destruir(){
         Nodo<E> *iter = inicio;
         Nodo<E> *n;
         while(iter != posNula){
@@ -146,7 +146,7 @@ public:
     }
     
     template < typename E>
-    void ListaPosDoEn::vaciar(){
+    void ListaPosDoEn<E>::vaciar(){
         Nodo<E> *iter = inicio;
         Nodo<E> *n;
         while(iter != posNula){
@@ -158,7 +158,7 @@ public:
     }
     
     template < typename E>
-    bool ListaPosDoEn::vacia(){
+    bool ListaPosDoEn<E>::vacia(){
         bool vacia = true;
         if(inicio != posNula){
             vacia =false;
@@ -167,8 +167,12 @@ public:
     }
     
     template < typename E>
-    void ListaPosDoEn::insertar(E elem, P pos){
-        if (inicio == pos){
+    void ListaPosDoEn<E>::insertar(E elem, P pos){
+        if(inicio == posNula){
+             Nodo<E> *n = new Nodo<E>(elem);
+             inicio = n;
+        }
+        else if (inicio == pos){
             Nodo<E> *j = *pos;
             pos->elemento = elem;
             pos->siguiente->anterior = j;
@@ -189,7 +193,7 @@ public:
     }
     
     template < typename E>
-    void ListaPosDoEn::agregarAlFinal(E elem){
+    void ListaPosDoEn<E>::agregarAlFinal(E elem){
         Nodo<E>* ultimo = this->ultima(); 
         Nodo<E> *j = *ultimo;
         j->elemento = elem;
@@ -200,7 +204,7 @@ public:
     }
     
     template < typename E>
-    void ListaPosDoEn::borrar(P pos){
+    void ListaPosDoEn<E>::borrar(P pos){
         if (inicio == pos){
             inicio = pos->siguiente;
             delete pos;
@@ -217,29 +221,29 @@ public:
     
     
     template < typename E>
-    E ListaPosDoEn::recuperar(P pos){
+    E ListaPosDoEn<E>::recuperar(P pos){
         return pos->elemento;
     }
     
     template < typename E>
-    void ListaPosDoEn::modificarElemento(E elem, P pos){
+    void ListaPosDoEn<E>::modificarElemento(E elem, P pos){
         pos->elemento = elem;
     }
     
     template < typename E>
-    void ListaPosDoEn::intercambiar(P pos1, P pos2){
+    void ListaPosDoEn<E>::intercambiar(P pos1, P pos2){
         E aux = pos1->elemento;
         pos1 -> elemento = pos2 -> elemento;
         pos2 -> elemento = aux;        
     }
     
     template < typename E>
-    P ListaPosDoEn::primera(){
+    P ListaPosDoEn<E>::primera(){
         return inicio;
     }
     
     template < typename E>
-    P ListaPosDoEn::ultima(){
+    P ListaPosDoEn<E>::ultima(){
         Nodo<E> *iter = inicio;
         Nodo<E> *n;
         while(iter->siguiente != posNula){
@@ -250,17 +254,17 @@ public:
     }
     
     template < typename E>
-    P ListaPosDoEn::siguiente(P pos){
+    P ListaPosDoEn<E>::siguiente(P pos){
         return pos->siguiente;
     }
     
     template < typename E>
-    P ListaPosDoEn::anterior(P pos){
+    P ListaPosDoEn<E>::anterior(P pos){
         return pos->anterior;
     }
     
     template < typename E>
-    int ListaPosDoEn::numElem(){
+    int ListaPosDoEn<E>::numElem(){
         return cantElem;
     }
     
