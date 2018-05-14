@@ -19,7 +19,7 @@ typedef ListaIndArr<int> Lista;
 /*
  * Simple C++ Test Suite
 */ 
-void testIniciar() {
+void testIniciar(){
     Lista listaIndArr;
     listaIndArr.iniciar();
     if (listaIndArr.vacia() == false) {

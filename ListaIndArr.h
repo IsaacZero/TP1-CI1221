@@ -55,7 +55,7 @@ public:
     
     // EFE: Retorna el elemento i-ésimo de la lista L\\
     // REQ: Lista L inicializada, p válida en L\\
-    // MOD:: \\
+    // MOD::
 
     E recuperar(int i);
     
@@ -94,7 +94,7 @@ ListaIndArr<E>::~ListaIndArr(){
 
 template < typename E >
 void ListaIndArr<E>::iniciar(){
-    int cantidadElem = 0;
+    cantidadElem = 0;
 }
 
 template < typename E >
@@ -104,8 +104,8 @@ void ListaIndArr<E>::destruir(){
 
 template < typename E >
 void ListaIndArr<E>::vaciar(){
-    arreglo = new E[MAX];
-    int cantidadElem = 0;
+    //arreglo = new E[MAX];
+    cantidadElem = 0;
 }
     
 template < typename E >
@@ -154,6 +154,6 @@ void ListaIndArr<E>::intercambiar(int i, int j){
 template < typename E >
 int ListaIndArr<E>::numElem(){
     return cantidadElem;
-
+}
 #endif /* LISTAINDARR_H */
 
