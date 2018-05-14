@@ -104,7 +104,10 @@ void ListaIndArr<E>::destruir(){
 
 template < typename E >
 void ListaIndArr<E>::vaciar(){
-    arreglo = new E[MAX];
+    E arregloVacio[MAX];
+    for(int i = 0; i < MAX; i++){
+        arreglo[i] = arregloVacio[i];
+    }
     int cantidadElem = 0;
 }
     
@@ -154,6 +157,6 @@ void ListaIndArr<E>::intercambiar(int i, int j){
 template < typename E >
 int ListaIndArr<E>::numElem(){
     return cantidadElem;
-
+}
 #endif /* LISTAINDARR_H */
 

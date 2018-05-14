@@ -97,7 +97,7 @@ ListaOrdEn<V>::Nodo<V>* ListaOrdEn<V>::nodoNulo = nullptr;
 template < typename V >
 ListaOrdEn<V>::ListaOrdEn(){
 }
-
+ 
 template < typename V >
 ListaOrdEn<V>::~ListaOrdEn(){
 }

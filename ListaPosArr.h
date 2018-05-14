@@ -16,10 +16,10 @@
 
 #define MAX 100
 
-template < typename E, typename int P>
+template < typename E>
 class ListaPosArr{
 public:    
-
+    typedef int P;
     ListaPosArr();
     virtual ~listaPosArr();
     
@@ -99,7 +99,7 @@ public:
     int numElem();
     
     private: 
-        template < typename E, typename int P>
+        template < typename E>
         
         E arreglo[MAX];
         int cantElem;
@@ -108,36 +108,36 @@ public:
         static P posNula;   
 };  
 
-    template < typename E, typename int P>
+    template < typename E>
     P ListaPosArr::posNula = -1;
     
-    template < typename E, typename int P>
+    template < typename E>
     ListaPosArr::ListaPosArr(){
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     ListaPosArr::~ListaPosArr(){
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     void ListaPosArr::iniciar(){
         cantElem = 0;
         ultimo = -1;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     void ListaPosArr::destruir(){
         ListaPosArr::~ListaPosArr();
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     void ListaPosArr::vaciar(){
         arreglo = E[MAX];
         int cantidadElem = 0;
         ultimo = -1;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     bool ListaPosArr::vacia(){
         bool vacia = true;
         if(ultimo != 0){
@@ -146,7 +146,7 @@ public:
         return vacia;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     void ListaPosArr::insertar(E elem, P pos){
         E aux1 = arreglo[pos];
         arreglo[pos] = elem;
@@ -160,14 +160,14 @@ public:
         
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     void ListaPosArr::agregarAlFinal(E elem){
         arreglo[ultimo] = elem;
         ultimo++;
         cantElem++;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     void ListaPosArr::borrar(P pos){
         for (int i = pos; i<cantElem; i++){
             arreglo[i] = arreglo[i+1];
@@ -177,44 +177,44 @@ public:
     }
     
     
-    template < typename E, typename int P>
+    template < typename E>
     E ListaPosArr::recuperar(P pos){
         return arreglo[pos];
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     void ListaPosArr::modificarElemento(E elem, P pos){
         arreglo[pos] = elem;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     void ListaPosArr::intercambiar(P pos1, P pos2){
         E aux = arreglo[pos1];
         arreglo[pos1] = arreglo[pos2];
         arreglo[pos2] = aux;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     P ListaPosArr::primera(){
         return 0;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     P ListaPosArr::ultima(){
         return ultimo;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     P ListaPosArr::siguiente(P pos){
         return pos + 1;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     P ListaPosArr::anterior(P pos){
         return pos + 1;
     }
     
-    template < typename E, typename int P>
+    template < typename E>
     int ListaPosArr::numElem(){
         return numElem;
     }

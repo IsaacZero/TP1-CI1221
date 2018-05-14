@@ -5,10 +5,10 @@
  */
 
 /* 
- * File:   testListaIndArr.cpp
+ * File:   testListaInd.cpp
  * Author: Javier
  *
- * Created on 13 de mayo de 2018, 05:18 PM
+ * Created on 13 de mayo de 2018, 06:23 PM
  */
 
 #include <stdlib.h>
@@ -16,9 +16,11 @@
 #include "ListaIndArr.h"
 
 typedef ListaIndArr<int> Lista;
+
 /*
  * Simple C++ Test Suite
 */ 
+
 void testIniciar() {
     Lista listaIndArr;
     listaIndArr.iniciar();
@@ -33,6 +35,9 @@ void testDestruir() {
     for(int i = 0; i < 4; i++){
         listaIndArr.insertar(i,i);
     }
+    listaIndArr.destruir();
+    
+    listaIndArr.iniciar();
     if (listaIndArr.vacia() == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testDestruir (testListaIndArr) No destruyó la lista" << std::endl;
     }
@@ -195,4 +200,3 @@ int main(int argc, char** argv) {
 
     return (EXIT_SUCCESS);
 }
-
