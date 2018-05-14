@@ -76,9 +76,9 @@ private:
     struct Nodo{
         T elemento;
         Nodo *siguiente;
-        Nodo(): siguiente(nullptr){
+        Nodo(): siguiente(nodoNulo){
         }
-        Nodo(T newE): elemento(newE){
+        Nodo(T newE): elemento(newE), siguiente(nodoNulo){
         }
     };
     int cantidadElem;
@@ -139,13 +139,13 @@ bool ListaIndEn<V>::vacia(){
 
 template < typename V >
 void ListaIndEn<V>::insertar(V elemento, int indice){
-    if (indice == 1){
+    if (indice == 0){
         Nodo<V> *n = new Nodo<V>(elemento);
         inicio = n;
         cantidadElem++;
     }
     else{
-        int i = 1;
+        int i = 0;
         Nodo<V> *n = new Nodo<V>(elemento);
         Nodo<V> *iter = inicio;
         while(i+1 < indice){
@@ -160,16 +160,16 @@ void ListaIndEn<V>::insertar(V elemento, int indice){
 
 template < typename V >
 void ListaIndEn<V>::borrar(int indice){
-    if (indice == 1){
+    if (indice == 0){
         Nodo<V> *n = inicio;
         inicio = inicio->siguiente;
         delete n;
         cantidadElem--;
     }
     else{
-        int i = 1;
+        int i = 0;
         Nodo<V> *n = inicio;
-        Nodo<V> *ns;
+        Nodo<V> *ns = n->siguiente;
         while(i != indice-1){
             n = n->siguiente;
             ns = n->siguiente;
@@ -184,10 +184,10 @@ void ListaIndEn<V>::borrar(int indice){
 template < typename V >
 V ListaIndEn<V>::recuperar(int indice){
     V elem;
-    if (indice == 1)
+    if (indice == 0)
         elem = inicio->elemento;
     else{
-        int i = 1;
+        int i = 0;
         Nodo<V> *n = inicio;
         while(i != indice){
             n = n->siguiente;
@@ -200,10 +200,10 @@ V ListaIndEn<V>::recuperar(int indice){
 
 template < typename V >
 void ListaIndEn<V>::modificarElemento(V newE, int indice){
-    if(indice == 1)
+    if(indice == 0)
         inicio->elemento = newE;
     else{
-        int i = 1;
+        int i = 0;
         Nodo<V> *n = inicio;
         while(i != indice){
             n = n->siguiente;

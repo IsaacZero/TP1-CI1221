@@ -88,7 +88,6 @@ void testInsertar() {
 }
 
 void testBorrar() {
-    int i;
     Lista listaIndArr;
     listaIndArr.iniciar();
     for(int i = 0; i < 4; i++){
@@ -101,7 +100,6 @@ void testBorrar() {
 }
 
 void testRecuperar() {
-    int i;
     Lista listaIndArr;
     listaIndArr.iniciar();
     for(int i = 0; i < 4; i++){
