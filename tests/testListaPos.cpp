@@ -31,15 +31,15 @@ void testIniciar() {
 }
 
 void testDestruir() {
-    if(true){
+    //if(true){
         Lista listaPosDoEn;
         listaPosDoEn.iniciar();
         for(int i = 0; i < 4; i++){
             listaPosDoEn.agregarAlFinal(i);
         }
         listaPosDoEn.destruir();
-    }
-    Lista listaPosDoEn;
+    //}
+    //Lista listaPosDoEn;
     listaPosDoEn.iniciar();
     if (listaPosDoEn.vacia() == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testDestruir (testListaPos) message=error No destruyó la lista" << std::endl;
@@ -209,8 +209,7 @@ void testUltima() {
     listaPosDoEn.iniciar();
     Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
-    Position segundo = listaPosDoEn.siguiente(inicio);
-    listaPosDoEn.insertar(1, segundo);
+    listaPosDoEn.agregarAlFinal(1);
     Position result = listaPosDoEn.ultima();
      int j = listaPosDoEn.recuperar(result);
     if (j != 1) {
@@ -225,7 +224,7 @@ void testSiguiente() {
     listaPosDoEn.insertar(0, inicio);
     Position segundo = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, segundo);
-    int j = listaPosDoEn.recuperar(result);
+    int j = listaPosDoEn.recuperar(inicio);
     if (j != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testSiguiente (testListaPos) No devuelve el puntero al siguiente" << std::endl;
     }
@@ -266,7 +265,11 @@ int main(int argc, char** argv) {
     std::cout << "%TEST_STARTED% testIniciar (testListaPos)" << std::endl;
     testIniciar();
     std::cout << "%TEST_FINISHED% time=0 testIniciar (testListaPos)" << std::endl;
-
+    
+    std::cout << "%TEST_STARTED% testUltima (testListaPos)" << std::endl;
+    testUltima();
+    std::cout << "%TEST_FINISHED% time=0 testUltima (testListaPos)" << std::endl;    
+    
     std::cout << "%TEST_STARTED% testDestruir (testListaPos)" << std::endl;
     testDestruir();
     std::cout << "%TEST_FINISHED% time=0 testDestruir (testListaPos)" << std::endl;
@@ -306,10 +309,6 @@ int main(int argc, char** argv) {
     std::cout << "%TEST_STARTED% testPrimera (testListaPos)" << std::endl;
     testPrimera();
     std::cout << "%TEST_FINISHED% time=0 testPrimera (testListaPos)" << std::endl;
-
-    std::cout << "%TEST_STARTED% testUltima (testListaPos)" << std::endl;
-    testUltima();
-    std::cout << "%TEST_FINISHED% time=0 testUltima (testListaPos)" << std::endl;
 
     std::cout << "%TEST_STARTED% testSiguiente (testListaPos)" << std::endl;
     testSiguiente();

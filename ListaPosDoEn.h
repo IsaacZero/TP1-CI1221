@@ -102,12 +102,12 @@ class ListaPosDoEn{
     Pos ultima();
     
     //EFE: Retorna la posición siguiente de la posición pos en la lista
-    //REQ: La Lista inicializada. pos válida en la Lista
+    //REQ: La Lista inicializada. pos válida en la Lista h y pos no es el ultimo 
     //MOD:  La lista L
     Pos siguiente(Pos pos);
     
     //EFE:Retorna la posición anterior de la posición pos en la lista
-    //REQ: La Lista inicializada. p válida en la Lista
+    //REQ: La Lista inicializada. p válida en la Lista y pos no es el
     //MOD:  La lista L
     Pos anterior(Pos pos);
     
