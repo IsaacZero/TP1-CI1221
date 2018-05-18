@@ -18,12 +18,12 @@ template <typename E>
 class ListaPosSimEn{
     
     private: 
-        template < typename Elem>
+        template < typename V>
         struct Nodo{
-            Elem elemento;
+            V elemento;
             Nodo* siguiente;
-            Nodo(): siguiente(nullptr), anterior(nullptr){};
-            Nodo(Elem nuevoElem): elemento(nuevoElem){};
+            Nodo(): siguiente(posNula){};
+            Nodo(V nuevoElem): elemento(nuevoElem), siguiente(posNula){};
             
         };
         
@@ -76,7 +76,7 @@ class ListaPosSimEn{
     //EFE: Retorna el elemento en la posicion p de la lista 
     //REQ: La Lista inicializada. pos válida en la Lista
     //MOD:  La lista L
-    void recuperar(Pos pos);
+    E recuperar(Pos pos);
     
     //EFE: Reemplaza el elemento e en la lista en la posición p por el que ya existía en dicha posición.
     //REQ: La Lista inicializada. pos válida en la Lista
@@ -117,7 +117,7 @@ class ListaPosSimEn{
 };  
 
     template < typename E>
-    ListaPosSimEn<E>::Nodo<E>* ListaPosSimEn::posNula = nullptr;
+    ListaPosSimEn<E>::Nodo<E>* ListaPosSimEn<E>::posNula = nullptr;
     
     template < typename E>
     ListaPosSimEn<E>::ListaPosSimEn(){
@@ -167,32 +167,46 @@ class ListaPosSimEn{
     
     template < typename E>
     void ListaPosSimEn<E>::insertar(E elem, Pos pos){
-        if(inicio == posNula){
-             Nodo<E> *n = new Nodo<E>(elem);
-             inicio = n;
+        /*if (inicio == pos){
+            //Nodo<E> *j = pos;
+            Nodo<E> *n = new Nodo<E>(elem);
+            inicio = n;
+            inicio->siguiente = pos;
+            cantElem++;
+        }else {
+            Nodo<E> *j = pos;
+            Nodo<E> *n = new Nodo<E>(elem);
+            pos = n;
+            pos->siguiente = j;
+            cantElem++;
+        }*/
+        if(pos == posNula){
+            Nodo<E> *n = new Nodo<E>(elem);
+            pos = n;
+            cantElem++;
         }
-        else if (inicio == pos){
-            Nodo<E> *j = *pos;
-            pos->elemento = elem;
-            pos->siguiente = j;
-        }else if(pos->siguiente = posNula){
-            Nodo<E> *j = *pos;
-            pos->elemento = elem;
-            pos->siguiente = j;
-        }else{
-            Nodo<E> *j = *pos;
-            pos->elemento = elem;
-            pos->siguiente = j;
+        else{
+            Nodo<E> *n = new Nodo<E>(elem);
+            Pos j = pos;
+            pos = n;
+            n->siguiente = j;
+            cantElem++;
         }
     }
    
     template < typename E>
     void ListaPosSimEn<E>::agregarAlFinal(E elem){
-        Nodo<E>* ultimo = this->ultima(); 
-        Nodo<E> *j = *ultimo;
-        j->elemento = elem;
-        ultimo->siguiente = j;
-        j->siguiente = posNula;
+        if(cantElem == 0){
+            Nodo<E> *n = new Nodo<E>(elem);
+            inicio = n;
+        }
+        else{
+            Nodo<E>* ultimo = this->ultima(); 
+            Nodo<E> *j = ultimo;
+            j->elemento = elem;
+            ultimo->siguiente = j;
+            j->siguiente = posNula;
+        }
         cantElem++;
     }
     
@@ -216,7 +230,12 @@ class ListaPosSimEn{
     
     template < typename E>
     E ListaPosSimEn<E>::recuperar(Pos pos){
-        return pos->elemento;
+        E elem;
+        if(pos == posNula)
+            elem = -1;
+        else
+            elem = pos->elemento;
+        return elem;
     }
     
     template < typename E>
@@ -227,18 +246,18 @@ class ListaPosSimEn{
     template < typename E>
     void ListaPosSimEn<E>::intercambiar(Pos pos1, Pos pos2){
         E aux = pos1->elemento;
-        pos1 -> elemento = pos2 -> elemento;
-        pos2 -> elemento = aux;        
+        pos1->elemento = pos2->elemento;
+        pos2->elemento = aux;        
     }
     
     template < typename E>
-    typename ListaPosDoEn<E>::Pos ListaPosSimEn<E>::primera(){
+    typename ListaPosSimEn<E>::Pos ListaPosSimEn<E>::primera(){
         return inicio;
     }
     
     template < typename E>
-    typename ListaPosDoEn<E>::Pos ListaPosSimEn<E>::ultima(){
-        Nodo<E>* iter = inicio;
+    typename ListaPosSimEn<E>::Pos ListaPosSimEn<E>::ultima(){
+        Nodo<E>* iter = inicio;  
         Nodo<E>* n;
         while(iter->siguiente != posNula){
             n = iter;
@@ -248,12 +267,12 @@ class ListaPosSimEn{
     }
     
     template < typename E>
-    typename ListaPosDoEn<E>::Pos ListaPosSimEn<E>::siguiente(Pos pos){
+    typename ListaPosSimEn<E>::Pos ListaPosSimEn<E>::siguiente(Pos pos){
         return pos->siguiente;
     }
     
     template < typename E>
-    typename ListaPosDoEn<E>::Pos ListaPosSimEn<E>::anterior(Pos pos){
+    typename ListaPosSimEn<E>::Pos ListaPosSimEn<E>::anterior(Pos pos){
         Nodo<E>* iter = inicio;
         Nodo<E>* n;
         while(iter->siguiente != pos){

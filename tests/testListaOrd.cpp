@@ -13,7 +13,8 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include "ListaOrdArr.h"
+
+#include "listaOrdArr.h"
 //#include "ListaOrdEn.h"
 
 typedef ListaOrdArr<int> Lista;

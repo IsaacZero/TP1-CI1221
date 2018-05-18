@@ -13,9 +13,10 @@
 
 #include <stdlib.h>
 #include <iostream>
+
 //#include "ListaPosDoEn.h"
-//#include "ListaPosSimEn.h"
-#include "ListaPosArr.h"
+#include "ListaPosSimEn.h"
+//#include "ListaPosArr.h"
  
 /*
  * Simple C++ Test Suite
@@ -24,11 +25,11 @@
 //typedef ListaPosDoEn<int> Lista;
 //typedef ListaPosDoEn<int>::Pos Position;
 
-//typedef ListaPosSimEn<int> Lista;
-//typedef ListaPosSimEn<int>::Pos Position;
+typedef ListaPosSimEn<int> Lista;
+typedef ListaPosSimEn<int>::Pos Position;
 
-typedef ListaPosArr<int> Lista;
-typedef ListaPosArr<int>::Pos Position;
+//typedef ListaPosArr<int> Lista;
+//typedef ListaPosArr<int>::Pos Position;
 
 
 void testIniciar() {
@@ -40,17 +41,17 @@ void testIniciar() {
 }
 
 void testDestruir() {
-    //if(true){
-        Lista listaPosDoEn;
-        listaPosDoEn.iniciar();
+    if(true){
+        Lista lista;
+        lista.iniciar();
         for(int i = 0; i < 4; i++){
-            listaPosDoEn.agregarAlFinal(i);
+            lista.agregarAlFinal(i);
         }
-        listaPosDoEn.destruir();
-    //}
-    //Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    if (listaPosDoEn.vacia() == false) {
+        lista.destruir();
+    }
+    Lista lista;
+    lista.iniciar();
+    if (!lista.vacia()) {
         std::cout << "%TEST_FAILED% time=0 testname=testDestruir (testListaPos) message=error No destruyó la lista" << std::endl;
     }
 }
@@ -89,11 +90,14 @@ void testInsertar() {
     listaPosDoEn.iniciar();
     Position inicio = listaPosDoEn.primera();
     listaPosDoEn.insertar(0, inicio);
-    if (listaPosDoEn.recuperar(inicio) != 0) {
+    inicio = listaPosDoEn.primera();
+    int result = listaPosDoEn.recuperar(inicio);
+    if (result != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta al inicio" << std::endl;
     }
     Position siguiente = listaPosDoEn.siguiente(inicio);
     listaPosDoEn.insertar(1, siguiente);
+    siguiente = listaPosDoEn.siguiente(inicio);
     if (listaPosDoEn.recuperar(siguiente) != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta en el medio" << std::endl;
     }
@@ -220,7 +224,7 @@ void testUltima() {
     listaPosDoEn.insertar(0, inicio);
     listaPosDoEn.agregarAlFinal(1);
     Position result = listaPosDoEn.ultima();
-     int j = listaPosDoEn.recuperar(result);
+    int j = listaPosDoEn.recuperar(result);
     if (j != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testUltima (testListaPos) No devuelve el puntero al último" << std::endl;
     }
@@ -273,11 +277,7 @@ int main(int argc, char** argv) {
 
     std::cout << "%TEST_STARTED% testIniciar (testListaPos)" << std::endl;
     testIniciar();
-    std::cout << "%TEST_FINISHED% time=0 testIniciar (testListaPos)" << std::endl;
-    
-    std::cout << "%TEST_STARTED% testUltima (testListaPos)" << std::endl;
-    testUltima();
-    std::cout << "%TEST_FINISHED% time=0 testUltima (testListaPos)" << std::endl;    
+    std::cout << "%TEST_FINISHED% time=0 testIniciar (testListaPos)" << std::endl;   
     
     std::cout << "%TEST_STARTED% testDestruir (testListaPos)" << std::endl;
     testDestruir();
@@ -318,6 +318,10 @@ int main(int argc, char** argv) {
     std::cout << "%TEST_STARTED% testPrimera (testListaPos)" << std::endl;
     testPrimera();
     std::cout << "%TEST_FINISHED% time=0 testPrimera (testListaPos)" << std::endl;
+    
+    std::cout << "%TEST_STARTED% testUltima (testListaPos)" << std::endl;
+    testUltima();
+    std::cout << "%TEST_FINISHED% time=0 testUltima (testListaPos)" << std::endl; 
 
     std::cout << "%TEST_STARTED% testSiguiente (testListaPos)" << std::endl;
     testSiguiente();

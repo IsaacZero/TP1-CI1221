@@ -123,19 +123,19 @@ public:
     
     template < typename E>
     void ListaPosArr<E>::destruir(){
-        ListaPosArr<E>::~ListaPosArr();
+        
     }
     
     template < typename E>
     void ListaPosArr<E>::vaciar(){
         cantElem = 0;
-        ultimo = 0;
+        ultimo = -1;
     }
     
     template < typename E>
     bool ListaPosArr<E>::vacia(){
         bool vacia = true;
-        if(ultimo != 0){
+        if(ultimo != -1){
             vacia =false;
         }
         return vacia;
@@ -148,16 +148,16 @@ public:
         cantElem++;
         ultimo++;
         for (int i = pos+1; i<cantElem; i++){
-            E aux2 = arreglo[i];
+            elem = arreglo[i];
             arreglo[i] = aux1;
-            aux1 = aux2;
+            aux1 = elem;
         }
         
     }
     
     template < typename E>
     void ListaPosArr<E>::agregarAlFinal(E elem){
-        arreglo[ultimo] = elem;
+        arreglo[ultimo+1] = elem;
         ultimo++;
         cantElem++;
     }
@@ -191,7 +191,12 @@ public:
     
     template < typename E>
     typename ListaPosArr<E>::Pos ListaPosArr<E>::primera(){
-        return 0;
+        Pos pos;
+        if (cantElem == 0)
+            pos = -1;
+        else
+            pos = 0;
+        return pos;
     }
     
     template < typename E>
