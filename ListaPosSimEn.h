@@ -179,10 +179,23 @@ class ListaPosSimEn{
             pos = n;
             pos->siguiente = j;
             cantElem++;
-        }*/
-        if(pos == posNula){
+        }
+        Nodo<E> *n = new Nodo<E>(elem);
+        Pos j = pos;
+        *pos = *n;
+        n->siguiente = j;
+        cantElem++;*/
+        if(pos == inicio){
             Nodo<E> *n = new Nodo<E>(elem);
-            pos = n;
+            Pos j = inicio;
+            inicio = n;
+            n->siguiente = j;
+            cantElem++;
+        }
+        else if(pos->siguiente == posNula){
+            Nodo<E> *n = new Nodo<E>(pos->elemento);
+            pos->elemento = elem;
+            pos->siguiente = n;
             cantElem++;
         }
         else{
@@ -202,10 +215,8 @@ class ListaPosSimEn{
         }
         else{
             Nodo<E>* ultimo = this->ultima(); 
-            Nodo<E> *j = ultimo;
-            j->elemento = elem;
-            ultimo->siguiente = j;
-            j->siguiente = posNula;
+            Nodo<E> *n = new Nodo<E>(elem);
+            ultimo->siguiente = n;
         }
         cantElem++;
     }
@@ -258,9 +269,7 @@ class ListaPosSimEn{
     template < typename E>
     typename ListaPosSimEn<E>::Pos ListaPosSimEn<E>::ultima(){
         Nodo<E>* iter = inicio;  
-        Nodo<E>* n;
         while(iter->siguiente != posNula){
-            n = iter;
             iter = iter->siguiente;
         }
         return iter;

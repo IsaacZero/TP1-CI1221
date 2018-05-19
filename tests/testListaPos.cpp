@@ -88,29 +88,41 @@ void testVacia() {
 void testInsertar() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
+    listaPosDoEn.agregarAlFinal(0);
     Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
-    inicio = listaPosDoEn.primera();
     int result = listaPosDoEn.recuperar(inicio);
     if (result != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta al inicio" << std::endl;
     }
-    Position siguiente = listaPosDoEn.siguiente(inicio);
-    listaPosDoEn.insertar(1, siguiente);
-    siguiente = listaPosDoEn.siguiente(inicio);
-    if (listaPosDoEn.recuperar(siguiente) != 1) {
+    
+    listaPosDoEn.insertar(1, inicio);
+    inicio = listaPosDoEn.primera();
+    result = listaPosDoEn.recuperar(inicio);
+    if (result != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta en el medio" << std::endl;
+    }
+    
+    Position sig = listaPosDoEn.siguiente(inicio);
+    result = listaPosDoEn.recuperar(sig);
+    if (result != 0) {
+        std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta al inicio" << std::endl;
     }
 }
 
 void testAgregarAlFinal() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
-    Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
+    listaPosDoEn.agregarAlFinal(0);
     listaPosDoEn.agregarAlFinal(1);
+    Position inicio = listaPosDoEn.primera();
     Position siguiente = listaPosDoEn.siguiente(inicio);
-    if (listaPosDoEn.recuperar(siguiente) != 1) {
+    int result = listaPosDoEn.recuperar(inicio);
+    if (result != 0) {
+        std::cout << "%TEST_FAILED% time=0 testname=testAgregarAlFinal (testListaPos) No agrega al final" << std::endl;
+    }
+    
+    result = listaPosDoEn.recuperar(siguiente);
+    if (result != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testAgregarAlFinal (testListaPos) No agrega al final" << std::endl;
     }
 }
@@ -118,14 +130,17 @@ void testAgregarAlFinal() {
 void testBorrar() {
     Lista listaPosDoEn;
     listaPosDoEn.iniciar();
+    listaPosDoEn.agregarAlFinal(0);
     Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
+    listaPosDoEn.insertar(1, inicio);
+    inicio = listaPosDoEn.primera();
     Position segundo = listaPosDoEn.siguiente(inicio);
-    listaPosDoEn.insertar(1, segundo);
-    Position tercero = listaPosDoEn.siguiente(segundo);
     listaPosDoEn.insertar(2, segundo);
     listaPosDoEn.borrar(segundo);
-    if (listaPosDoEn.recuperar(listaPosDoEn.siguiente(inicio)) != 2) {
+    listaPosDoEn.agregarAlFinal(23);
+    segundo = listaPosDoEn.siguiente(inicio);
+    Position tercero = listaPosDoEn.siguiente(segundo);
+    if (listaPosDoEn.recuperar(tercero) != 23) {
         std::cout << "%TEST_FAILED% time=0 testname=testBorrar (testListaPos) No elimina en el medio" << std::endl;
     }
     listaPosDoEn.borrar(tercero);
@@ -133,6 +148,8 @@ void testBorrar() {
     if (listaPosDoEn.recuperar(ultimo) != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testBorrar (testListaPos) No elimina al final" << std::endl;
     }
+    
+    listaPosDoEn.borrar(segundo);
     listaPosDoEn.borrar(inicio);
     if (listaPosDoEn.vacia() == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testBorrar (testListaPos) No elimina el primero" << std::endl;
