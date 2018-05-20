@@ -35,6 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/AlgListaIndex.o \
+	${OBJECTDIR}/AlgListaOrd.o \
+	${OBJECTDIR}/AlgListaPos.o \
 	${OBJECTDIR}/main.o
 
 # Test Directory
@@ -77,6 +80,21 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp1-ci1221.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp1-ci1221 ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/AlgListaIndex.o: AlgListaIndex.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AlgListaIndex.o AlgListaIndex.cpp
+
+${OBJECTDIR}/AlgListaOrd.o: AlgListaOrd.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AlgListaOrd.o AlgListaOrd.cpp
+
+${OBJECTDIR}/AlgListaPos.o: AlgListaPos.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AlgListaPos.o AlgListaPos.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -130,6 +148,45 @@ ${TESTDIR}/tests/tertPila.o: tests/tertPila.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I. -std=c++11 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/tertPila.o tests/tertPila.cpp
 
+
+${OBJECTDIR}/AlgListaIndex_nomain.o: ${OBJECTDIR}/AlgListaIndex.o AlgListaIndex.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/AlgListaIndex.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AlgListaIndex_nomain.o AlgListaIndex.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/AlgListaIndex.o ${OBJECTDIR}/AlgListaIndex_nomain.o;\
+	fi
+
+${OBJECTDIR}/AlgListaOrd_nomain.o: ${OBJECTDIR}/AlgListaOrd.o AlgListaOrd.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/AlgListaOrd.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AlgListaOrd_nomain.o AlgListaOrd.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/AlgListaOrd.o ${OBJECTDIR}/AlgListaOrd_nomain.o;\
+	fi
+
+${OBJECTDIR}/AlgListaPos_nomain.o: ${OBJECTDIR}/AlgListaPos.o AlgListaPos.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/AlgListaPos.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} "$@.d";\
+	    $(COMPILE.cc) -g -std=c++11 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AlgListaPos_nomain.o AlgListaPos.cpp;\
+	else  \
+	    ${CP} ${OBJECTDIR}/AlgListaPos.o ${OBJECTDIR}/AlgListaPos_nomain.o;\
+	fi
 
 ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

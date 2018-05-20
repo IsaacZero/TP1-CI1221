@@ -20,13 +20,13 @@ template < typename E>
 class ListaPosDoEn{
     
     private: 
-        template < typename Elem>
+        template < typename V>
         struct Nodo{
-            Elem elemento;
+            V elemento;
             Nodo* siguiente;
             Nodo* anterior;
-            Nodo(): siguiente(nullptr), anterior(nullptr){};
-            Nodo(E nuevoElem): elemento(nuevoElem){};
+            Nodo(): siguiente(posNula), anterior(posNula){};
+            Nodo(V nuevoElem): elemento(nuevoElem), siguiente(posNula), anterior(posNula){};
             
         };
         
@@ -137,15 +137,17 @@ class ListaPosDoEn{
     template < typename E>
     void ListaPosDoEn<E>::destruir(){
         if(cantElem != 0){
-        Nodo<E> *iter = inicio;
-        Nodo<E> *n;
-        while(iter != posNula){
-            n = iter;
-            iter = iter->siguiente;
-            delete n;
-        }
+            Nodo<E> *iter = inicio;
+            Nodo<E> *n;
+            while(iter != posNula){
+                n = iter;
+                iter = iter->siguiente;
+                delete n;
+            }
         delete iter;
         }
+        cantElem = 0;
+        inicio = posNula;
     }
     
     template < typename E>
@@ -171,47 +173,54 @@ class ListaPosDoEn{
     
     template < typename E>
     void ListaPosDoEn<E>::insertar(E elem, Pos pos){
-        if(inicio == posNula){
-             Nodo<E> *n = new Nodo<E>(elem);
-             inicio = n;
-        }
-        else if (inicio == pos){
-            Nodo<E> *j = pos;
+        if (inicio == pos){
+            Nodo<E> *n = new Nodo<E>(elem);
+            Nodo<E> *j = inicio;
+            inicio = n;
+            j->anterior = inicio;
+            n->siguiente = j;
+            cantElem++;
+        }else if(pos->siguiente == posNula){
+            Nodo<E> *n = new Nodo<E>(pos->elemento);
             pos->elemento = elem;
-            pos->siguiente->anterior = j;
-            pos->siguiente = j;
-            j->anterior = pos;
-        }else if(pos->siguiente = posNula){
-            Nodo<E> *j = pos;
-            pos->elemento = elem;
-            pos->siguiente = j;
-            j->anterior = pos;
+            pos->siguiente = n;
+            n->anterior = pos;
+            cantElem++;
         }else{
-            Nodo<E> *j = pos;
-            pos->elemento = elem;
-            pos->siguiente->anterior = j;
-            pos->siguiente = j;
-            j->anterior = pos;
+            Nodo<E> *n = new Nodo<E>(elem);
+            n->siguiente = pos;
+            n->anterior = pos->anterior;
+            pos->anterior->siguiente = n;
+            pos->anterior = n;
+            cantElem++;
         }
     }
     
     template < typename E>
     void ListaPosDoEn<E>::agregarAlFinal(E elem){
-        Nodo<E>* ultimo = this->ultima(); 
-        Nodo<E> *j = ultimo;
-        j->elemento = elem;
-        ultimo->siguiente = j;
-        j->anterior = ultimo;
-        j->siguiente = posNula;
+        if(cantElem == 0){
+            Nodo<E> *n = new Nodo<E>(elem);
+            inicio = n;
+        }
+        else{
+            Nodo<E>* ultimo = this->ultima();
+            Nodo<E> *n = new Nodo<E>(elem);
+            ultimo->siguiente = n;
+            n->anterior = ultimo;
+        }
         cantElem++;
     }
     
     template < typename E>
     void ListaPosDoEn<E>::borrar(Pos pos){
-        if (inicio == pos){
+        if (inicio == pos && pos->siguiente != posNula){
+            inicio = pos->siguiente;
+            inicio->anterior = posNula;
+            delete pos;
+        }else if (inicio == pos && pos->siguiente == posNula){
             inicio = pos->siguiente;
             delete pos;
-        }else if(pos->siguiente = posNula){
+        }else if(pos->siguiente == posNula){
             pos->anterior->siguiente = posNula;
             delete pos;
         }else{

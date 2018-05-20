@@ -167,24 +167,6 @@ class ListaPosSimEn{
     
     template < typename E>
     void ListaPosSimEn<E>::insertar(E elem, Pos pos){
-        /*if (inicio == pos){
-            //Nodo<E> *j = pos;
-            Nodo<E> *n = new Nodo<E>(elem);
-            inicio = n;
-            inicio->siguiente = pos;
-            cantElem++;
-        }else {
-            Nodo<E> *j = pos;
-            Nodo<E> *n = new Nodo<E>(elem);
-            pos = n;
-            pos->siguiente = j;
-            cantElem++;
-        }
-        Nodo<E> *n = new Nodo<E>(elem);
-        Pos j = pos;
-        *pos = *n;
-        n->siguiente = j;
-        cantElem++;*/
         if(pos == inicio){
             Nodo<E> *n = new Nodo<E>(elem);
             Pos j = inicio;
@@ -226,12 +208,12 @@ class ListaPosSimEn{
         if (inicio == pos){
             inicio = pos->siguiente;
             delete pos;
-        }else if(pos->siguiente = posNula){
-            Nodo<E>* anterior = this->anterior(pos);
+        }else if(pos->siguiente == posNula){
+            Pos anterior = this->anterior(pos);
             anterior->siguiente = posNula;
             delete pos;
         }else{
-            Nodo<E>* anterior = this->anterior(pos);
+            Pos anterior = this->anterior(pos);
             anterior->siguiente = pos->siguiente;
             delete pos;
         }
@@ -283,9 +265,7 @@ class ListaPosSimEn{
     template < typename E>
     typename ListaPosSimEn<E>::Pos ListaPosSimEn<E>::anterior(Pos pos){
         Nodo<E>* iter = inicio;
-        Nodo<E>* n;
         while(iter->siguiente != pos){
-            n = iter;
             iter = iter->siguiente;
         }
         return iter;

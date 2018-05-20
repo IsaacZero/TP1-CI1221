@@ -13,7 +13,7 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include "Pila.h"
+#include "pila.h"
 
 /*
  * Simple C++ Test Suite

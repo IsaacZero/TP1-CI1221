@@ -15,8 +15,8 @@
 #include <iostream>
 
 //#include "ListaPosDoEn.h"
-#include "ListaPosSimEn.h"
-//#include "ListaPosArr.h"
+//#include "ListaPosSimEn.h"
+#include "ListaPosArr.h"
  
 /*
  * Simple C++ Test Suite
@@ -25,17 +25,17 @@
 //typedef ListaPosDoEn<int> Lista;
 //typedef ListaPosDoEn<int>::Pos Position;
 
-typedef ListaPosSimEn<int> Lista;
-typedef ListaPosSimEn<int>::Pos Position;
+//typedef ListaPosSimEn<int> Lista;
+//typedef ListaPosSimEn<int>::Pos Position;
 
-//typedef ListaPosArr<int> Lista;
-//typedef ListaPosArr<int>::Pos Position;
+typedef ListaPosArr<int> Lista;
+typedef ListaPosArr<int>::Pos Position;
 
 
 void testIniciar() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    if (listaPosDoEn.vacia() == false) {
+    Lista lista;
+    lista.iniciar();
+    if (lista.vacia() == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testIniciar (testListaPos) No inició la lista vacía" << std::endl;
     }
 }
@@ -57,235 +57,257 @@ void testDestruir() {
 }
 
 void testVaciar() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i < 4; i++){
-        listaPosDoEn.agregarAlFinal(i);
+        lista.agregarAlFinal(i);
     }
-    listaPosDoEn.vaciar();
-    if (listaPosDoEn.vacia() == false) {
+    lista.vaciar();
+    if (lista.vacia() == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testVaciar (testListaPos) No vació la lista" << std::endl;
     }
 }
 
 void testVacia() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    bool result = listaPosDoEn.vacia();
+    Lista lista;
+    lista.iniciar();
+    bool result = lista.vacia();
     if (result == false ) {
         std::cout << "%TEST_FAILED% time=0 testname=testVacia (testListaPos) No reconoce si la lista está vacía" << std::endl;
     }
     for(int i = 0; i < 4; i++){
-        listaPosDoEn.agregarAlFinal(i);
+        lista.agregarAlFinal(i);
     }
-    result = listaPosDoEn.vacia();
+    result = lista.vacia();
     if (true /*check result*/) {
         std::cout << "%TEST_FAILED% time=0 testname=testVacia (testListaPos) si la lista tiene elementos" << std::endl;
     }
     
+    lista.destruir();
 }
 
 void testInsertar() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    listaPosDoEn.agregarAlFinal(0);
-    Position inicio = listaPosDoEn.primera();
-    int result = listaPosDoEn.recuperar(inicio);
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(0);
+    Position inicio = lista.primera();
+    int result = lista.recuperar(inicio);
     if (result != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta al inicio" << std::endl;
     }
     
-    listaPosDoEn.insertar(1, inicio);
-    inicio = listaPosDoEn.primera();
-    result = listaPosDoEn.recuperar(inicio);
+    lista.insertar(1, inicio);
+    inicio = lista.primera();
+    result = lista.recuperar(inicio);
     if (result != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta en el medio" << std::endl;
     }
     
-    Position sig = listaPosDoEn.siguiente(inicio);
-    result = listaPosDoEn.recuperar(sig);
+    Position sig = lista.siguiente(inicio);
+    result = lista.recuperar(sig);
     if (result != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaPos) No inserta al inicio" << std::endl;
     }
+    
+    lista.destruir();
 }
 
 void testAgregarAlFinal() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    listaPosDoEn.agregarAlFinal(0);
-    listaPosDoEn.agregarAlFinal(1);
-    Position inicio = listaPosDoEn.primera();
-    Position siguiente = listaPosDoEn.siguiente(inicio);
-    int result = listaPosDoEn.recuperar(inicio);
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(0);
+    lista.agregarAlFinal(1);
+    Position inicio = lista.primera();
+    Position siguiente = lista.siguiente(inicio);
+    int result = lista.recuperar(inicio);
     if (result != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testAgregarAlFinal (testListaPos) No agrega al final" << std::endl;
     }
     
-    result = listaPosDoEn.recuperar(siguiente);
+    result = lista.recuperar(siguiente);
     if (result != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testAgregarAlFinal (testListaPos) No agrega al final" << std::endl;
     }
+    
+    lista.destruir();
 }
 
 void testBorrar() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    listaPosDoEn.agregarAlFinal(0);
-    Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(1, inicio);
-    inicio = listaPosDoEn.primera();
-    Position segundo = listaPosDoEn.siguiente(inicio);
-    listaPosDoEn.insertar(2, segundo);
-    listaPosDoEn.borrar(segundo);
-    listaPosDoEn.agregarAlFinal(23);
-    segundo = listaPosDoEn.siguiente(inicio);
-    Position tercero = listaPosDoEn.siguiente(segundo);
-    if (listaPosDoEn.recuperar(tercero) != 23) {
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(0);
+    Position inicio = lista.primera();
+    lista.insertar(1, inicio);
+    inicio = lista.primera();
+    Position segundo = lista.siguiente(inicio);
+    lista.insertar(2, segundo);
+    lista.borrar(segundo);
+    lista.agregarAlFinal(23);
+    segundo = lista.siguiente(inicio);
+    Position tercero = lista.siguiente(segundo);
+    if (lista.recuperar(tercero) != 23) {
         std::cout << "%TEST_FAILED% time=0 testname=testBorrar (testListaPos) No elimina en el medio" << std::endl;
     }
-    listaPosDoEn.borrar(tercero);
-    Position ultimo = listaPosDoEn.ultima();
-    if (listaPosDoEn.recuperar(ultimo) != 0) {
+    lista.borrar(tercero);
+    Position ultimo = lista.ultima();
+    if (lista.recuperar(ultimo) != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testBorrar (testListaPos) No elimina al final" << std::endl;
     }
     
-    listaPosDoEn.borrar(segundo);
-    listaPosDoEn.borrar(inicio);
-    if (listaPosDoEn.vacia() == false) {
+    lista.borrar(segundo);
+    lista.borrar(inicio);
+    if (lista.vacia() == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testBorrar (testListaPos) No elimina el primero" << std::endl;
     }
+    
+    lista.destruir();
 }
 
 void testRecuperar() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
-    Position segundo = listaPosDoEn.siguiente(inicio);
-    listaPosDoEn.insertar(1, segundo);
-    Position tercero = listaPosDoEn.siguiente(segundo);
-    listaPosDoEn.insertar(2, tercero);
-    int i = listaPosDoEn.recuperar(inicio);
-    if (i != 0) {
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(0);
+    Position inicio = lista.primera();
+    lista.insertar(1, inicio);
+    inicio = lista.primera();
+    Position segundo = lista.siguiente(inicio);
+    lista.insertar(2, segundo);
+    segundo = lista.siguiente(inicio);
+    Position tercero = lista.siguiente(segundo);
+    int i = lista.recuperar(inicio);
+    if (i != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testRecuperar (testListaPos) No recuperó el primero" << std::endl;
     }
-    i = listaPosDoEn.recuperar(segundo);
-    if (i != 1) {
+    i = lista.recuperar(segundo);
+    if (i != 2) {
         std::cout << "%TEST_FAILED% time=0 testname=testRecuperar (testListaPos) No recuperó el segundo" << std::endl;
     }
-    i = listaPosDoEn.recuperar(tercero);
-    if (i != 2) {
+    i = lista.recuperar(tercero);
+    if (i != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testRecuperar (testListaPos) No recuperó el tercero" << std::endl;
     }
+    lista.destruir();
 }
 
 void testModificarElemento() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
-    Position segundo = listaPosDoEn.siguiente(inicio);
-    listaPosDoEn.insertar(1, segundo);
-    Position tercero = listaPosDoEn.siguiente(segundo);
-    listaPosDoEn.insertar(2, tercero);    
-    listaPosDoEn.modificarElemento(3, inicio);
-    int i = listaPosDoEn.recuperar(inicio);
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(0);
+    Position inicio = lista.primera();
+    lista.insertar(1, inicio);
+    inicio = lista.primera();
+    Position segundo = lista.siguiente(inicio);
+    lista.insertar(2, segundo);
+    segundo = lista.siguiente(inicio);
+    Position tercero = lista.siguiente(segundo);  
+    lista.modificarElemento(3, inicio);
+    int i = lista.recuperar(inicio);
     if (i != 3) {
         std::cout << "%TEST_FAILED% time=0 testname=testModificarElemento (testListaPos) No modificó el primero" << std::endl;
     }
-    listaPosDoEn.modificarElemento(4, segundo);
-    i = listaPosDoEn.recuperar(segundo);
+    lista.modificarElemento(4, segundo);
+    i = lista.recuperar(segundo);
     if (i != 4) {
         std::cout << "%TEST_FAILED% time=0 testname=testModificarElemento (testListaPos) No modificó el segundo" << std::endl;
     }
-    listaPosDoEn.modificarElemento(5,tercero);
-    i = listaPosDoEn.recuperar(tercero);
+    lista.modificarElemento(5,tercero);
+    i = lista.recuperar(tercero);
     if (i != 5) {
         std::cout << "%TEST_FAILED% time=0 testname=testModificarElemento (testListaPos) No modificó el tercero" << std::endl;
     }
+    lista.destruir();
 }
 
 void testIntercambiar() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
-    Position segundo = listaPosDoEn.siguiente(inicio);
-    listaPosDoEn.insertar(1, segundo);
-    listaPosDoEn.intercambiar(inicio, segundo);
-    int i = listaPosDoEn.recuperar(inicio);
-    int j = listaPosDoEn.recuperar(segundo);
-    if ( i != 1 ) {
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(0);
+    Position inicio = lista.primera();
+    lista.insertar(1, inicio);
+    inicio = lista.primera();
+    Position segundo = lista.siguiente(inicio);
+    lista.intercambiar(inicio, segundo);
+    int i = lista.recuperar(inicio);
+    int j = lista.recuperar(segundo);
+    if ( i != 0 ) {
         std::cout << "%TEST_FAILED% time=0 testname=testIntercambiar (testListaPos) No intercambió bien el primero" << std::endl;
     }
-    if (j != 0) {
+    if (j != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testIntercambiar (testListaPos) No intercambió bien el segundo" << std::endl;
     }
+    lista.destruir();
 }
 
 void testPrimera() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
-    int i = listaPosDoEn.recuperar(inicio);
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(0);
+    Position inicio = lista.primera();
+    int i = lista.recuperar(inicio);
     if (i != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testPrimera (testListaPos) No devuelve el puntero al primero" << std::endl;
     }
+    lista.destruir();
 }
 
 void testUltima() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
-    listaPosDoEn.agregarAlFinal(1);
-    Position result = listaPosDoEn.ultima();
-    int j = listaPosDoEn.recuperar(result);
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(1);
+    Position inicio = lista.primera();
+    lista.insertar(0, inicio);
+    Position result = lista.ultima();
+    int j = lista.recuperar(result);
     if (j != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testUltima (testListaPos) No devuelve el puntero al último" << std::endl;
     }
+    lista.destruir();
 }
 
 void testSiguiente() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
-    Position segundo = listaPosDoEn.siguiente(inicio);
-    listaPosDoEn.insertar(1, segundo);
-    int j = listaPosDoEn.recuperar(inicio);
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(0);
+    Position inicio = lista.primera();
+    lista.insertar(1, inicio);
+    inicio = lista.primera();
+    inicio = lista.siguiente(inicio);
+    int j = lista.recuperar(inicio);
     if (j != 0) {
         std::cout << "%TEST_FAILED% time=0 testname=testSiguiente (testListaPos) No devuelve el puntero al siguiente" << std::endl;
     }
+    lista.destruir();
 }
 
 void testAnterior() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    Position inicio = listaPosDoEn.primera();
-    listaPosDoEn.insertar(0, inicio);
-    Position segundo = listaPosDoEn.siguiente(inicio);
-    listaPosDoEn.insertar(1, segundo);
-    Position result = listaPosDoEn.anterior(segundo);
-    int j = listaPosDoEn.recuperar(result);
-    if (j != 0) {
+    Lista lista;
+    lista.iniciar();
+    lista.agregarAlFinal(0);
+    Position inicio = lista.primera();
+    lista.insertar(1, inicio);
+    inicio = lista.primera();
+    Position segundo = lista.siguiente(inicio);
+    lista.insertar(2, segundo);
+    segundo = lista.siguiente(inicio);
+    Position result = lista.anterior(segundo);
+    int j = lista.recuperar(result);
+    if (j != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testAnterior (testListaPos) No devuelve el puntero al anterior" << std::endl;
     }
+    lista.destruir();
 }
 
 void testNumElem() {
-    Lista listaPosDoEn;
-    listaPosDoEn.iniciar();
-    Position siguiente = listaPosDoEn.primera();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i<4; i++){
-        listaPosDoEn.insertar(i, siguiente);
-        siguiente = listaPosDoEn.siguiente(siguiente); 
-        int result = listaPosDoEn.numElem();
+        lista.agregarAlFinal(i);
+        int result = lista.numElem();
         if (result != i+1) {
             std::cout << "%TEST_FAILED% time=0 testname=testNumElem (testListaPos) No reconoce que hay "<< i << " elementos"<< std::endl;
         }
     }
+    lista.destruir();
 }
 
 int main(int argc, char** argv) {

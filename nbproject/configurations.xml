@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="97">
+<configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>AlgListaIndex.h</itemPath>
+      <itemPath>AlgListaOrd.h</itemPath>
+      <itemPath>AlgListaPos.h</itemPath>
       <itemPath>ListaIndArr.h</itemPath>
       <itemPath>ListaIndEn.h</itemPath>
       <itemPath>ListaOrdArr.h</itemPath>
@@ -20,6 +23,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>AlgListaIndex.cpp</itemPath>
+      <itemPath>AlgListaOrd.cpp</itemPath>
+      <itemPath>AlgListaPos.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -71,6 +77,18 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
+      <item path="AlgListaIndex.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AlgListaIndex.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AlgListaOrd.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AlgListaOrd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AlgListaPos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AlgListaPos.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ListaIndArr.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ListaIndEn.h" ex="false" tool="3" flavor2="0">
@@ -179,6 +197,18 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="AlgListaIndex.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AlgListaIndex.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AlgListaOrd.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AlgListaOrd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="AlgListaPos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AlgListaPos.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ListaIndArr.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ListaIndEn.h" ex="false" tool="3" flavor2="0">

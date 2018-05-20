@@ -14,74 +14,74 @@
 #include <stdlib.h>
 #include <iostream>
 
-//#include "ListaIndArr.h"
-#include "listaIndEn.h"
+#include "ListaIndArr.h"
+//#include "listaIndEn.h"
 
-//typedef ListaIndArr<int> Lista;
-typedef ListaIndEn<int> Lista;
+typedef ListaIndArr<int> Lista;
+//typedef ListaIndEn<int> Lista;
 
 /*
  * Simple C++ Test Suite
 */ 
 
 void testIniciar() {
-    Lista listaIndArr;
-    listaIndArr.iniciar();
-    if (listaIndArr.vacia() == false) {
+    Lista lista;
+    lista.iniciar();
+    if (lista.vacia() == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testIniciar (testListaIndArr) No inició la lista vacía" << std::endl;
     }
 }
 
 void testDestruir() {
-    Lista listaIndArr;
-    listaIndArr.iniciar();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i < 4; i++){
-        listaIndArr.insertar(i,i);
+        lista.insertar(i,i);
     }
-    listaIndArr.destruir();
+    lista.destruir();
     
-    listaIndArr.iniciar();
-    if (listaIndArr.vacia() == false) {
+    lista.iniciar();
+    if (lista.vacia() == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testDestruir (testListaIndArr) No destruyó la lista" << std::endl;
     }
 }
 
 void testVaciar() {
-    Lista listaIndArr;
-    listaIndArr.iniciar();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i < 4; i++){
-        listaIndArr.insertar(i,i);
+        lista.insertar(i,i);
     }
-    listaIndArr.vaciar();
-    if (listaIndArr.vacia() == false) {
+    lista.vaciar();
+    if (lista.vacia() == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testVaciar (testListaIndArr) No vació la lista" << std::endl;
     }
 }
 
 void testVacia() {
-    Lista listaIndArr;
-    listaIndArr.iniciar();
-    bool result = listaIndArr.vacia();
+    Lista lista;
+    lista.iniciar();
+    bool result = lista.vacia();
     if (result == false) {
         std::cout << "%TEST_FAILED% time=0 testname=testVacia (testListaIndArr) No reconoce si la lista está vacía" << std::endl;
     }
     for(int i = 0; i < 4; i++){
-        listaIndArr.insertar(i,i);
+        lista.insertar(i,i);
     }
-    result = listaIndArr.vacia();
+    result = lista.vacia();
     if (result ==  true) {
         std::cout << "%TEST_FAILED% time=0 testname=testVacia (testListaIndArr) No reconoce si la lista tiene elementos" << std::endl;
     }
 }
 
 void testInsertar() {
-    Lista listaIndArr;
-    listaIndArr.iniciar();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i < 4; i++){
-        listaIndArr.insertar(i,i);
+        lista.insertar(i,i);
     }
     for(int i = 0; i < 4; i++){
-        if (listaIndArr.recuperar(i) != i) {
+        if (lista.recuperar(i) != i) {
         std::cout << "%TEST_FAILED% time=0 testname=testInsertar (testListaIndArr) No reconoce insertó bien el elemento "<< i << std::endl;
         }
     }
@@ -89,37 +89,37 @@ void testInsertar() {
 }
 
 void testBorrar() {
-    Lista listaIndArr;
-    listaIndArr.iniciar();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i < 4; i++){
-        listaIndArr.insertar(i,i);
+        lista.insertar(i,i);
     }
-    listaIndArr.borrar(1);
-    if (listaIndArr.recuperar(1) == 1) {
+    lista.borrar(1);
+    if (lista.recuperar(1) == 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testBorrar (testListaIndArr) No eliminó bien el elemento en el segundo lugar" << std::endl;
     }
 }
 
 void testRecuperar() {
-    Lista listaIndArr;
-    listaIndArr.iniciar();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i < 4; i++){
-        listaIndArr.insertar(i,i);
+        lista.insertar(i,i);
     }
-    int result = listaIndArr.recuperar(2);
+    int result = lista.recuperar(2);
     if (result != 2) {
         std::cout << "%TEST_FAILED% time=0 testname=testRecuperar (testListaIndArr) No recupero el 3er elemento de la lista" << std::endl;
     }
 }
 
 void testModificarElemento() {
-    Lista listaIndArr;
-    listaIndArr.iniciar();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i < 4; i++){
-        listaIndArr.insertar(i,i);
+        lista.insertar(i,i);
     }
-    listaIndArr.modificarElemento(7, 2);
-    if (listaIndArr.recuperar(2) != 7) {
+    lista.modificarElemento(7, 2);
+    if (lista.recuperar(2) != 7) {
         std::cout << "%TEST_FAILED% time=0 testname=testModificarElemento (testListaIndArr) No modifico el 3er elemento de la lista" << std::endl;
     }
 }
@@ -127,26 +127,26 @@ void testModificarElemento() {
 void testIntercambiar() {
     int i;
     int j;
-    Lista listaIndArr;
-    listaIndArr.iniciar();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i < 4; i++){
-        listaIndArr.insertar(i,i);
+        lista.insertar(i,i);
     }
-    listaIndArr.intercambiar(1,2);
-    if (listaIndArr.recuperar(2) != 1) {
+    lista.intercambiar(1,2);
+    if (lista.recuperar(2) != 1) {
         std::cout << "%TEST_FAILED% time=0 testname=testIntercambiar (testListaIndArr) No intercambió el valor en el 3er elemento" << std::endl;
     }
-    if (listaIndArr.recuperar(1) != 2) {
+    if (lista.recuperar(1) != 2) {
         std::cout << "%TEST_FAILED% time=0 testname=testIntercambiar (testListaIndArr) No intercambió el valor en el 2do elemento" << std::endl;
     }
 }
 
 void testNumElem() {
-    Lista listaIndArr;
-    listaIndArr.iniciar();
+    Lista lista;
+    lista.iniciar();
     for(int i = 0; i < 4; i++){
-        listaIndArr.insertar(i,i);        
-        if (listaIndArr.numElem() != i+1) {
+        lista.insertar(i,i);        
+        if (lista.numElem() != i+1) {
             std::cout << "%TEST_FAILED% time=0 testname=testNumElem (testListaIndArr) No cuenta hasta el elemento" << i+1 << std::endl;
         }
     }

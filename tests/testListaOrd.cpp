@@ -14,11 +14,11 @@
 #include <stdlib.h>
 #include <iostream>
 
-#include "listaOrdArr.h"
-//#include "ListaOrdEn.h"
+//#include "listaOrdArr.h"
+#include "ListaOrdEn.h"
 
-typedef ListaOrdArr<int> Lista;
-//typedef ListaOrdEn<int> Lista;
+//typedef ListaOrdArr<int> Lista;
+typedef ListaOrdEn<int> Lista;
 /*
  * Simple C++ Test Suite
  */
