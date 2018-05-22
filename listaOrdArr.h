@@ -121,10 +121,12 @@ bool ListaOrdArr<V>::vacia(){
 
 template < typename V >
 void ListaOrdArr<V>::agregar(V newE){
-    if(cantidadElem == 0)
+    if(cantidadElem == 0){
         arreglo[ultimoElem] = newE;
-    else{
+        cantidadElem++;
+    }else{
         int i = 0;
+        bool existente = false;
         while(i < cantidadElem){
             if(arreglo[i] < newE)
                 i++;
@@ -133,13 +135,17 @@ void ListaOrdArr<V>::agregar(V newE){
                 arreglo[i] = newE;
                 newE = elemTrans;
                 i++;
-            }else
+            }else{
                 i = cantidadElem;
+                existente = true;
+            }
         }
-        arreglo[ultimoElem+1] = newE;
-        ultimoElem++;
+        if(!existente){
+            arreglo[ultimoElem+1] = newE;
+            ultimoElem++;
+            cantidadElem++;
+        }
     }
-    cantidadElem++;
 }
 
 template < typename V >

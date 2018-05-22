@@ -51,7 +51,7 @@ public:
     //EFE: Elimina de L1 los elementos que estan en L2.
     //REQ: L1 y L2 inicializada.
     //MOD: La Lista L1.
-    void eliminar(Lista l1, Lista l2);
+    void eliminarElemRep(Lista l1, Lista l2);
     
     //EFE: Le agrega a L1 los elementos de L2.
     //REQ: L1 y L2 inicializados.
