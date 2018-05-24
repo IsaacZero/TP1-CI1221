@@ -136,18 +136,33 @@ void AlgListaIndex::burbujaOri(Lista l){
 void AlgListaIndex::burbujaBi(Lista l){
     if(l.numElem() > 1){
         int i = 0;
-        int ciclo = 1;
-        while(ciclo < l.numElem()){
-            for (int j = i+1; j < l.numElem()-ciclo; j++){
+        int ciclo = 2;
+        while((l.numElem() - ciclo) >= i){
+            for (int j = i; j <= l.numElem()-ciclo; j++){
                 if(l.recuperar(j) < l.recuperar(j+1))
                     l.intercambiar(j, (j+1));
             }
+            for(int j = l.numElem()-ciclo; j > i; j--){
+                if(l.recuperar(j-1) > l.recuperar(j))
+                    l.intercambiar(j-1, j);
+            }
+            ciclo++;
+            i++;
         }
     }
 }
 
 void AlgListaIndex::seleccionIter(Lista l){
-    
+    if(l.numElem() > 1){
+        int aux = 0;
+        for(int i = 0; i < l.numElem()-1; i++){
+            for(int j = i+1; j < l.numElem(); j++){
+                if(l.recuperar(i) < l.recuperar(j))
+                    aux = j;
+            }
+            l.intercambiar(i, aux);
+        }
+    }
 }
 
 void AlgListaIndex::seleccionRecUno(Lista l){
