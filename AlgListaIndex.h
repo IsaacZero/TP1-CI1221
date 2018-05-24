@@ -14,6 +14,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+
 #include "pila.h"
 
 using namespace std;
@@ -23,6 +24,8 @@ using namespace std;
 
 typedef ListaIndArr<int> Lista;
 //typedef ListaIndEn<int> Lista;
+
+typedef Pila<int> pila;
 
 #ifndef ALGLISTAINDEX_H
 #define ALGLISTAINDEX_H
@@ -86,7 +89,12 @@ public:
     //EFE: Ordena la lista con el algoritmo Seleccion de manera recursiva usando la pila del compilador.
     //REQ: L inicializada.
     //MOD: La Lista.
-    void seleccionRecUno(Lista l);
+    void seleccionRecUno(Lista l, int elem, int indice);
+    
+    /*EFE: Recibe el elemento con el que se compara en la lista y retorna el indice de el número más pequeño.
+    //REQ: L inicializada y elem contenido en L.
+    //MOD:
+    int seleccionRecUnoRec(Lista l, int elem);*/
     
     //EFE: Ordena la lista con el algoritmo Seleccion de manera recursiva usando el modelo pila creado.
     //REQ: L inicializada.
@@ -111,18 +119,18 @@ public:
     //EFE: Encuentra el sitio donde los apuntadores se traslapan y retorna la posicion.
     //REQ: L inicializada, pInicial y pFinal validos en l y elem contenido en la Lista.
     //MOD: La lista L.
-    int encontrarParticion(Lista l, int pInicial, int pFinal, int elem);
+    int encontrarParticion(Lista l, int pInicial, int pFinal, int pivote);
     
     //EFE: Ordena la lista con el algoritmo Quick Sort con la escogencia del pivote de Aho.
     //REQ: L inicializada.
     //MOD: La Lista.
-    void quickSortAho(Lista l);
+    void quickSortAho(Lista l, int pInicial, int pFinal);
     
     //EFE: Ordena la lista con el algoritmo Quick Sort tal que si la lista contiene menos de 50 elementos
     // los ordena por inserción.
     //REQ: L inicializada.
     //MOD: La lista.
-    void quickSortDos(Lista l);
+    void quickSortDos(Lista l, int pInicial, int pFinal);
     
     //EFE: Ordena la lista con el algoritmo Merge Sort. Este método se encarga de dividir
     // las listas en unas de la mitad del tamaño a la original.

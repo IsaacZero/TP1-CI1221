@@ -165,36 +165,113 @@ void AlgListaIndex::seleccionIter(Lista l){
     }
 }
 
-void AlgListaIndex::seleccionRecUno(Lista l){
-    
+void AlgListaIndex::seleccionRecUno(Lista l, int elem, int indice){
+    if(l.numElem() > 1){
+        int temp = 0;
+        for(int j = indice+1; j < l.numElem(); j++){
+            if(elem > l.recuperar(j))
+                temp = j;
+        }
+        l.intercambiar(indice, temp);
+        if(indice < l.numElem()-1)
+            this->seleccionRecUno(l, l.recuperar(indice+1), indice+1);
+    }
 }
 
 void AlgListaIndex::seleccionRecDos(Lista l){
-    
+    if(l.numElem() > 1){
+        pila pilaR;
+        pilaR.iniciar();
+        int indice = 0;
+        int elem = l.recuperar(indice);
+        int aux = 0;
+        pilaR.meter(indice);
+        while(!pilaR.vacia()){
+            indice = pilaR.sacar();
+            for(int j = indice+1; j < l.numElem(); j++){
+                if(l.recuperar(indice) > l.recuperar(j))
+                    aux = j;
+            }
+            l.intercambiar(indice, aux);
+            if(indice < l.numElem()-1)
+                pilaR.meter(indice+1);
+        }
+        pilaR.destruir();
+    }
 }
 
 void AlgListaIndex::insercion(Lista l){
-    
+    for(int i = 0; i < l.numElem()-1; i++){
+        int j = i+1;
+        if(l.recuperar(i) > l.recuperar(j)){
+            int elemAux = l.recuperar(j);
+            while (j > 0){
+                if(l.recuperar(i+1) < l.recuperar(j-1)){
+                    j--;
+                }else{
+                    l.insertar(elemAux, j);
+                    j = 0;
+                }
+            }
+        }
+    }
 }
 
 void AlgListaIndex::quickSort(Lista l, int opcion){
-    
+    if(l.numElem() > 1){
+        if(opcion == 1)
+            this->quickSortAho(l, 0, l.numElem()-1);
+        else
+            this->quickSortDos(l, 0, l.numElem()-1);
+    }
 }
 
 int AlgListaIndex::pivoteAho(Lista l, int pInicial, int pFinal){
-    
+    int pivote = -1;
+    int i = pInicial;
+    while(i < pFinal-1 && pivote != -1){
+        int primElem = l.recuperar(i);
+        if(primElem < l.recuperar(i+1))
+            pivote = i;
+        else if(primElem > l.recuperar(i+1))
+            pivote = i+1;
+        else
+            i++;
+    }
+    return pivote;
 }
 
-int AlgListaIndex::encontrarParticion(Lista l, int pInicial, int pFinal, int elem){
-    
+int AlgListaIndex::encontrarParticion(Lista l, int pInicial, int pFinal, int pivote){
+    int i = pInicial;
+    int j = pFinal;
+    while(i <= j){
+        l.intercambiar(i,j);
+        while(l.recuperar(i) < pivote)
+            i++;
+        while(l.recuperar(j) >= pivote)
+            j++;
+    }
+    return i;
 }
 
-void AlgListaIndex::quickSortAho(Lista l){
-    
+void AlgListaIndex::quickSortAho(Lista l, int pInicial, int pFinal){
+    if (pInicial != pFinal){
+        int pivote = this->pivoteAho(l, pInicial, pFinal);
+        if (pivote != -1){
+            int particion = this->encontrarParticion(l, pInicial, pFinal, l.recuperar(pivote));
+            this->quickSortAho(l, pInicial, particion);
+            this->quickSortAho(l, pInicial+1, pFinal);
+        }
+    }
 }
 
-void AlgListaIndex::quickSortDos(Lista l){
-    
+void AlgListaIndex::quickSortDos(Lista l, int pInicial, int pFinal){
+    if (pInicial != pFinal){
+        int pivote = l.recuperar(pInicial);
+        int particion = this->encontrarParticion(l, pInicial, pFinal, l.recuperar(pivote));
+        this->quickSortAho(l, pInicial, particion);
+        this->quickSortAho(l, pInicial+1, pFinal);
+    }
 }
 
 void AlgListaIndex::mergeSort(Lista l){
