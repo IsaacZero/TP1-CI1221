@@ -141,6 +141,7 @@ template < typename V >
 void ListaIndEn<V>::insertar(V elemento, int indice){
     if (indice == 0){
         Nodo<V> *n = new Nodo<V>(elemento);
+        n->siguiente = inicio;
         inicio = n;
         cantidadElem++;
     }
