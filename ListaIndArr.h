@@ -48,7 +48,7 @@ public:
     // MOD:: L
     void insertar(E elem, int i);
     
-    // EFE: Borra el elemento e i-ésimo de la lista L
+    // EFE: Borra el elemento i-ésimo de la lista L
     // REQ: L inicializada
     // MOD:: L
     void borrar(int i);

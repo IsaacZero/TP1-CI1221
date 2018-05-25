@@ -77,7 +77,9 @@ string AlgListaPos::listar(Lista listaPos){
         Position fin = listaPos.ultima();
         listaString = "La lista tiene como elementos: \n";
         while (iter != fin){
-            listaString += "-> " + listaPos.recuperar(iter) + " \n";
+            listaString += "->";
+            listaString += std::to_string(listaPos.recuperar(iter));
+            listaString += "\n";
             iter = listaPos.siguiente(iter);
         }
     }
@@ -106,7 +108,7 @@ bool AlgListaPos::subLista(Lista listaPos1,Lista listaPos2){
     Position iter2 = listaPos2.primera();
     Position fin2 = listaPos2.ultima();
     while (iter2 != fin2){
-        if(listaPos2.recuperar(iter1) == )
+        //if(listaPos2.recuperar(iter1) == )
     }
     return esSubLista;
 }
