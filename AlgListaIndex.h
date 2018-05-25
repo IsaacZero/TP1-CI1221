@@ -138,10 +138,11 @@ public:
     //MOD: La lista.
     void mergeSort(Lista l);
     
-    //EFE: Agrega de manera ordenada los elementos en izq y der a una tercera lista de resultado.
-    //REQ: Izq y Der inicializadas.
-    //MOD: La lista L3.
-    Lista merge(Lista izq, Lista der);
+    //EFE: Agrega de manera ordenada los elementos en izq y der a la lista que recibe de parametro. 
+    //Se entiende que es la principal.
+    //REQ: L, Izq y Der inicializadas.
+    //MOD: La lista L.
+    void merge(Lista izq, Lista der, Lista l);
     
     //EFE: Le agrega a L1 los elementos de L2, tal que no queden elementos repetidos en L1.
     //REQ: L1 y L2 inicializadas, ordenadas y sin elementos repetidos.

@@ -15,7 +15,7 @@
 #include <iostream>
 #include <fstream>
 #include "Pila.h"
-//#include "ListaIndArr.h"
+#include "ListaIndArr.h"
 #include "ListaIndEn.h"
 //#include "ListaIndArr.h"
 //#include "ListaOrdArr.h"
@@ -26,6 +26,7 @@
 using namespace std;
 
 typedef ListaIndEn<int> Lista;
+//typedef ListaIndArr<int> Lista;
 /*
  * 
  */
@@ -53,7 +54,7 @@ int main(int argc, char** argv) {
     bool reset = true;
     string poliedro = "";
     while (reset) {
-        for(int i = 0; i < lista2.numElem(); i++)
+        for(int i = 0; i < 4; i++)
             cout << lista2.recuperar(i) << endl;
             do {
                 cout << "Desea Volver a Jugar. Si o No" << endl;

@@ -90,7 +90,7 @@ bool AlgListaIndex::sublista(Lista l1, Lista l2){
     int elem = l1.recuperar(0);
     int indice = 0;
     int i = 0;
-    while(i < l2.numElem() && !esSubLista){
+    while(i < l2.numElem() && !esSubLista && (l2.numElem()-i) < l1.numElem()){
         if(elem == l2.recuperar(i)){
             indice++;
             i++;
@@ -280,7 +280,7 @@ void AlgListaIndex::mergeSort(Lista l){
         Lista izq, der;
         izq.iniciar();
         der.iniciar();
-        for(int i = 0; i < medio-1; i++)
+        for(int i = 0; i < medio; i++)
             izq.insertar(l.recuperar(i), i);
         for(int i = medio; i < l.numElem(); i++)
             der.insertar(l.recuperar(i), i);
@@ -295,34 +295,147 @@ void AlgListaIndex::mergeSort(Lista l){
             der.destruir();
         }
         else
-            l = this->merge(izq, der);
+            this->merge(izq, der, l);
     }
 }
 
-Lista AlgListaIndex::merge(Lista izq, Lista der){
-    
+void AlgListaIndex::merge(Lista izq, Lista der, Lista l){
+    int i = 0, j = 0, pos = 0;
+    while(i < izq.numElem() && j < der.numElem()){
+        if(izq.recuperar(i) < der.recuperar(j)){
+            l.modificarElemento(izq.recuperar(i), pos);
+            i++;
+            pos++;
+        }else{
+            l.modificarElemento(der.recuperar(j), pos);
+            j++;
+            pos++;
+        }
+    }
+    while(i < izq.numElem() && j >= der.numElem()){
+        l.modificarElemento(izq.recuperar(i), pos);
+        pos++;
+        i++;
+    }
+    while(j < der.numElem() && i >= izq.numElem()){
+        l.modificarElemento(der.recuperar(j), pos);
+        j++;
+        pos++;
+    }
 }
 
 void AlgListaIndex::unionUno(Lista l1, Lista l2){
-    
+    if(!l2.vacia() && !l1.vacia()){
+        int j = 0;
+        int elem = l2.recuperar(j);
+        while(j < l2.numElem()){
+            if(this->buscar(elem, l1)){
+                j++;
+                elem = l2.recuperar(j);
+            }else{
+                l1.insertar(elem, l1.numElem());
+                j++;
+                elem = l2.recuperar(j);
+            }
+        }
+    }else if(l1.vacia() && !l2.vacia()){
+        for(int i = 0; i < l2.numElem(); i++){
+            l1.insertar(l2.recuperar(i), i);
+        }
+    }
 }
 
 void AlgListaIndex::unionDos(Lista l1, Lista l2){
-    
+    if(!l2.vacia() && !l1.vacia()){
+        int j = 0;
+        int elem = l2.recuperar(j);
+        while(j < l2.numElem()){
+            if(this->buscar(elem, l1)){
+                j++;
+                elem = l2.recuperar(j);
+            }else{
+                l1.insertar(elem, l1.numElem());
+                j++;
+                elem = l2.recuperar(j);
+            }
+        }
+    }else if(l1.vacia() && !l2.vacia()){
+        for(int i = 0; i < l2.numElem(); i++){
+            l1.insertar(l2.recuperar(i), i);
+        }
+    }
 }
 
 Lista AlgListaIndex::interseccionUno(Lista l1, Lista l2){
-    
+    Lista lista;
+    lista.iniciar();
+    if(!l2.vacia() && !l1.vacia()){
+        int j = 0, i = 0;
+        int elem = l2.recuperar(j);
+        while(j < l2.numElem()){
+            if(this->buscar(elem, l1)){
+                lista.insertar(elem, i);
+                j++;
+                i++;
+                elem = l2.recuperar(j);
+            }else{
+                j++;
+                elem = l2.recuperar(j);
+            }
+        }
+    }
+    return lista;
 }
 
 Lista AlgListaIndex::interseccionDos(Lista l1, Lista l2){
-    
+    Lista lista;
+    lista.iniciar();
+    if(!l2.vacia() && !l1.vacia()){
+        int j = 0, i = 0;
+        int elem = l2.recuperar(j);
+        while(j < l2.numElem()){
+            if(this->buscar(elem, l1)){
+                lista.insertar(elem, i);
+                j++;
+                i++;
+                elem = l2.recuperar(j);
+            }else{
+                j++;
+                elem = l2.recuperar(j);
+            }
+        }
+    }
+    return lista;
 }
 
 void AlgListaIndex::eliminarUno(Lista l1, Lista l2){
-    
+    if(!l2.vacia() && !l1.vacia()){
+        int j = 0;
+        int elem = l1.recuperar(j);
+        while(j < l1.numElem()){
+            if(this->buscar(elem, l2)){
+                elem = l1.recuperar(j+1);
+                l1.borrar(j);
+            }else{
+                j++;
+                elem = l2.recuperar(j);
+            }
+        }
+    }
 }
 
 void AlgListaIndex::eliminarDos(Lista l1, Lista l2){
-    
+    if(!l2.vacia() && !l1.vacia()){
+        int j = 0;
+        int elem = l1.recuperar(j);
+        while(j < l1.numElem()){
+            if(this->buscar(elem, l2)){
+                elem = l1.recuperar(j+1);
+                l1.borrar(j);
+            }else{
+                j++;
+                elem = l2.recuperar(j);
+            }
+        }
+    }
 }
