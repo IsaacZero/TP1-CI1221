@@ -275,7 +275,28 @@ void AlgListaIndex::quickSortDos(Lista l, int pInicial, int pFinal){
 }
 
 void AlgListaIndex::mergeSort(Lista l){
-    
+    if(l.numElem() > 1){
+        int medio = l.numElem()/2;
+        Lista izq, der;
+        izq.iniciar();
+        der.iniciar();
+        for(int i = 0; i < medio-1; i++)
+            izq.insertar(l.recuperar(i), i);
+        for(int i = medio; i < l.numElem(); i++)
+            der.insertar(l.recuperar(i), i);
+        this->mergeSort(izq);
+        this->mergeSort(der);
+        if(izq.recuperar(izq.numElem()-1) <= der.recuperar(0)){
+            int i = izq.numElem();
+            for(int j = 0; j < der.numElem(); j++){
+                izq.insertar(der.recuperar(j), i);
+                i++;
+            }
+            der.destruir();
+        }
+        else
+            l = this->merge(izq, der);
+    }
 }
 
 Lista AlgListaIndex::merge(Lista izq, Lista der){
