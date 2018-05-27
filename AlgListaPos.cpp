@@ -21,7 +21,7 @@ AlgListaPos::AlgListaPos(const AlgListaPos& orig) {
 
 AlgListaPos::~AlgListaPos() {
 }
-void AlgListaPos::burbuja(listaPos listaPos1){
+void AlgListaPos::burbuja(listaPos &listaPos1){
     int largo = listaPos1.numElem();
     int contFaltantes = largo - 1;
     for(int i = 0; i < largo; i++){
@@ -38,7 +38,7 @@ void AlgListaPos::burbuja(listaPos listaPos1){
     }
 }
 
-void AlgListaPos::burbujaBidireccional(listaPos listaPos1){
+void AlgListaPos::burbujaBidireccional(listaPos &listaPos1){
     int largo = listaPos1.numElem();
     int contFaltantes = largo - 1;
     bool haciaElFondo = true;
@@ -91,7 +91,7 @@ bool AlgListaPos::buscar(listaPos listaPos1, int elem) {
     }
     return existe;
 }
-void AlgListaPos::eliminarRepetidos(listaPos listaPos1){
+void AlgListaPos::eliminarRepetidos(listaPos &listaPos1){
     Position iter1 = listaPos1.primera();
     Position fin = listaPos1.ultima();
     while (iter1 != fin){
@@ -111,7 +111,7 @@ void AlgListaPos::eliminarRepetidos(listaPos listaPos1){
     }
 }
 
-void AlgListaPos::eliminarElementosListaConOrden(listaPos listaPos1, listaPos listaPos2){
+void AlgListaPos::eliminarElementosListaConOrden(listaPos &listaPos1, listaPos listaPos2){
     bool estaInterseccion = false;
     Position iter1 = listaPos1.primera();
     Position iter2 = listaPos2.primera();
@@ -137,7 +137,7 @@ void AlgListaPos::eliminarElementosListaConOrden(listaPos listaPos1, listaPos li
     }
 }
 
-void AlgListaPos::eliminarElementosListaSinOrden(listaPos listaPos1, listaPos listaPos2){
+void AlgListaPos::eliminarElementosListaSinOrden(listaPos &listaPos1, listaPos listaPos2){
     bool estaInterseccion = false;
     Position iter2 = listaPos2.primera();
     int largo1 = listaPos1.numElem();
@@ -185,7 +185,7 @@ bool AlgListaPos::iguales(listaPos listaPos1,listaPos listaPos2){
     return iguales;
 }
 
-void AlgListaPos::insercion(listaPos listaPos1){
+void AlgListaPos::insercion(listaPos &listaPos1){
     int largo = listaPos1.numElem();
     Position actual = listaPos1.primera();
         
@@ -213,7 +213,7 @@ void AlgListaPos::insercion(listaPos listaPos1){
     }
 }
 
-void AlgListaPos::interseccionConOrden(listaPos listaPos1, listaPos listaPos2, listaPos listaPos3){
+void AlgListaPos::interseccionConOrden(listaPos listaPos1, listaPos listaPos2, listaPos &listaPos3){
     bool estaInterseccion = false;
     Position iter1 = listaPos1.primera();
     
@@ -248,7 +248,7 @@ void AlgListaPos::interseccionConOrden(listaPos listaPos1, listaPos listaPos2, l
     }
 }
 
-void AlgListaPos::interseccionSinOrden(listaPos listaPos1, listaPos listaPos2, listaPos listaPos3){
+void AlgListaPos::interseccionSinOrden(listaPos listaPos1, listaPos listaPos2, listaPos &listaPos3){
     bool estaInterseccion = false;
     Position iter1 = listaPos1.primera();
     Position fin1 = listaPos1.ultima();
@@ -283,7 +283,7 @@ void AlgListaPos::interseccionSinOrden(listaPos listaPos1, listaPos listaPos2, l
     }
 }
 
-void AlgListaPos::invertirLista(listaPos listaPos1){
+void AlgListaPos::invertirLista(listaPos &listaPos1){
     Position iter = listaPos1.primera();
     int largo = listaPos1.numElem();
     int aux[largo];
@@ -312,7 +312,7 @@ string AlgListaPos::listar(listaPos listaPos1){
     return listaString;
 }
 
-void AlgListaPos::selecccionIterativa(listaPos listaPos1){
+void AlgListaPos::selecccionIterativa(listaPos &listaPos1){
     int largo = listaPos1.numElem();
     Position actual = listaPos1.primera();
     for(int i = 0; i < largo; i++){
@@ -331,7 +331,7 @@ void AlgListaPos::selecccionIterativa(listaPos listaPos1){
     }
 }
 
-void AlgListaPos::selecccionIterativaRecComp(listaPos listaPos1){
+void AlgListaPos::selecccionIterativaRecComp(listaPos &listaPos1){
     int largo = listaPos1.numElem();
     Position actual = listaPos1.primera();
     Position iter = listaPos1.siguiente(actual);
@@ -349,7 +349,7 @@ void AlgListaPos::selecccionIterativaRecComp(listaPos listaPos1){
     selecccionIterativaRecCompR( listaPos1, actual,largo-1);
 }
     
-void AlgListaPos::selecccionIterativaRecCompR(listaPos listaPos1,Position actual,int faltantes){
+void AlgListaPos::selecccionIterativaRecCompR(listaPos &listaPos1,Position actual,int faltantes){
     if(faltantes == 0){
         Position iter = listaPos1.siguiente(actual);
         Position masPeque = actual;
@@ -404,7 +404,7 @@ bool AlgListaPos::subLista(listaPos listaPos1,listaPos listaPos2){
     return esSubLista;
 }
 
-void AlgListaPos::unionConOrden(listaPos listaPos1,listaPos listaPos2){
+void AlgListaPos::unionConOrden(listaPos &listaPos1,listaPos listaPos2){
     Position iter1 = listaPos1.primera();
     Position fin1 = listaPos1.ultima();
     Position iter2 = listaPos2.primera();
@@ -423,7 +423,7 @@ void AlgListaPos::unionConOrden(listaPos listaPos1,listaPos listaPos2){
     }
 }
 
-void AlgListaPos::unionSinOrden(listaPos listaPos1,listaPos listaPos2){
+void AlgListaPos::unionSinOrden(listaPos &listaPos1,listaPos listaPos2){
     Position iter1 = listaPos1.primera();
     Position fin1 = listaPos1.ultima();
     Position iter2 = listaPos2.primera();
@@ -454,5 +454,321 @@ void AlgListaPos::unionSinOrden(listaPos listaPos1,listaPos listaPos2){
         }else{
             iter2 = listaPos2.siguiente(iter2);
         }
+    } 
+}
+
+/*void AlgListaPos::insercion(listaPos &listaPos1,Position pos,Position fin){
+    int largo = 1;
+    Position iter = pos;
+    while(iter != fin){
+        largo++;
+        iter = listaPos1.siguiente(iter);
     }
+    Position actual = pos;
+        
+    for(int i = 1; i <= largo; i++){
+        int j = i-1;
+        bool bienPuesto = false;
+        if(j > 0){
+            Position iter1 = actual;
+            Position iter2 = listaPos1.anterior(iter1);
+            do{
+                if(listaPos1.recuperar(iter2) > listaPos1.recuperar(iter1)){
+                    listaPos1.intercambiar(iter1,iter2);
+                    iter1 = iter2;
+                    iter2 = listaPos1.anterior(iter2);
+                    j--;
+                }else{
+                    bienPuesto=true;
+                }
+                if(j == 0){
+                    bienPuesto=true;
+                }
+            }while((j>0) && (bienPuesto == false));                        
+        }
+        actual = listaPos1.siguiente(actual);
+    }
+}*/
+
+void AlgListaPos::mergeSort(listaPos &listaPos1){
+    int largo = listaPos1.numElem();
+    Position iter1 = listaPos1.primera();
+    Position fin1 = listaPos1.primera();
+    int largo1 = largo/2;
+    int largo2 = largo - largo1;
+    for(int i = 1; i < largo1; i++){
+        fin1 = listaPos1.siguiente(fin1);
+    }
+    Position iter2 = listaPos1.siguiente(fin1);
+    Position fin2 = listaPos1.ultima();
+    mergeSortR(listaPos1,iter1,fin1,largo1);
+    mergeSortR(listaPos1,iter2,fin2,largo2);
+    merge(listaPos1,iter1,fin1,largo1,iter2,fin2,largo2);
+}
+
+void AlgListaPos::mergeSortR(listaPos &listaPos1,Position pos, Position fin,int largo){
+    if(largo > 1){
+        Position iter1 = pos;
+        Position fin1 = pos;
+        int largo1 = largo/2;
+        int largo2 = largo - largo1;
+        for(int i = 1; i < largo1; i++){
+            fin1 = listaPos1.siguiente(fin1);
+        }
+        Position iter2 = listaPos1.siguiente(fin1);
+        Position fin2 = fin;
+        mergeSortR(listaPos1,iter1,fin1,largo1);
+        mergeSortR(listaPos1,iter2,fin2,largo2);
+        merge(listaPos1,iter1,fin1,largo1,iter2,fin2,largo2);
+    }
+}
+void AlgListaPos::merge(listaPos &listaPos1,Position pos1, Position fin1,int largo1,Position pos2, Position fin2,int largo2){
+    bool ordenada = false;
+    while(ordenada == false){
+        if(largo1 > 0 && largo2 > 0){
+            if(listaPos1.recuperar(pos1) <= listaPos1.recuperar(pos2)){
+                pos1 = listaPos1.siguiente(pos1);
+                largo1--;
+            }else{
+                Position auxiliar = pos2;
+                for(int i = 0; i < largo1; i++){
+                    listaPos1.intercambiar(auxiliar,listaPos1.anterior(auxiliar));
+                    auxiliar = listaPos1.anterior(auxiliar);
+                }
+                pos1 = listaPos1.siguiente(pos1);
+                fin1 = listaPos1.siguiente(fin1);
+                pos2 = listaPos1.siguiente(pos2);
+                largo2--;
+            }
+        }else{
+            ordenada = true;
+        }
+    }
+}
+void AlgListaPos::quickSortAho(listaPos &listaPos1){
+    int largo = listaPos1.numElem();
+    if(largo>1){
+        Position izq = listaPos1.primera();
+        Position der = listaPos1.ultima();
+        int i = 0;
+        bool pivoteEncontrado = false;
+        Position pivote = listaPos1.primera();
+        while(i < largo && pivoteEncontrado == false){
+            if(listaPos1.recuperar(pivote) > listaPos1.recuperar(listaPos1.siguiente(pivote))){
+                pivoteEncontrado = true;
+                pivote = listaPos1.siguiente(pivote);
+            }else if(listaPos1.recuperar(pivote) == listaPos1.recuperar(listaPos1.siguiente(pivote))){
+                pivote = listaPos1.siguiente(pivote);
+                i++;
+            }else{
+                pivoteEncontrado = true;
+            }
+        }
+        if(pivoteEncontrado == true){
+            while(listaPos1.siguiente(der) != izq){
+                if(listaPos1.recuperar(pivote) > listaPos1.recuperar(der)){
+                    if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                        listaPos1.intercambiar(izq,der);
+                        if(izq = pivote){
+                            pivote = der;
+                        }
+                        izq = listaPos1.siguiente(izq);
+                    }else{
+                        izq = listaPos1.siguiente(izq);
+                    }   
+                }else if(listaPos1.recuperar(pivote) <= listaPos1.recuperar(der)){
+                    if(der == izq){
+                        if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                            listaPos1.intercambiar(izq,pivote);
+                            pivote = izq;
+                            izq = listaPos1.siguiente(izq);
+                        }
+                    }else{
+                        der = listaPos1.anterior(der);
+                    }
+                }    
+            }
+            if(pivote == listaPos1.ultima()){
+                quickSortAhoR(listaPos1,listaPos1.primera(),listaPos1.anterior(pivote));
+            }else if(pivote == listaPos1.primera()){
+                quickSortAhoR(listaPos1,listaPos1.siguiente(pivote),listaPos1.ultima());
+            }else{
+                quickSortAhoR(listaPos1,listaPos1.primera(),listaPos1.anterior(pivote));
+                quickSortAhoR(listaPos1,listaPos1.siguiente(pivote),listaPos1.ultima());
+            }
+        }
+    }
+}
+
+void AlgListaPos::quickSortAhoR(listaPos &listaPos1,Position pos, Position fin){
+    if(pos != fin){
+        Position izq = pos;
+        Position der = fin;
+        int i = 0;
+        bool pivoteEncontrado = false;
+        Position pivote = pos;
+        while(pivote!=fin && pivoteEncontrado == false){
+            if(listaPos1.recuperar(pivote) > listaPos1.recuperar(listaPos1.siguiente(pivote))){
+                pivoteEncontrado = true;
+                pivote = listaPos1.siguiente(pivote);
+            }else if(listaPos1.recuperar(pivote) == listaPos1.recuperar(listaPos1.siguiente(pivote))){
+                pivote = listaPos1.siguiente(pivote);
+                i++;
+            }else{
+                pivoteEncontrado = true;
+            }
+        }
+        if(pivoteEncontrado == true){
+            while(listaPos1.siguiente(der) != izq){
+                if(listaPos1.recuperar(pivote) > listaPos1.recuperar(der)){
+                    if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                        listaPos1.intercambiar(izq,der);
+                        if(izq = pivote){
+                            pivote = der;
+                        }
+                        izq = listaPos1.siguiente(izq);
+                    }else{
+                        izq = listaPos1.siguiente(izq);
+                    }   
+                }else if(listaPos1.recuperar(pivote) <= listaPos1.recuperar(der)){
+                    if(der == izq){
+                        if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                            listaPos1.intercambiar(izq,pivote);
+                            pivote = izq;
+                            izq = listaPos1.siguiente(izq);
+                        }
+                    }else{
+                        der = listaPos1.anterior(der);
+                    }
+                }
+            }
+            if(pivote == listaPos1.ultima()){
+                quickSortAhoR(listaPos1,pos,listaPos1.anterior(pivote));
+            }else if(pivote == listaPos1.primera()){
+                quickSortAhoR(listaPos1,listaPos1.siguiente(pivote),fin);
+            }else{
+                quickSortAhoR(listaPos1,pos,listaPos1.anterior(pivote));
+                quickSortAhoR(listaPos1,listaPos1.siguiente(pivote),fin);
+            }
+        }
+    }
+}    
+
+void AlgListaPos::quickSortN(listaPos &listaPos1,int n){
+    int largo = listaPos1.numElem();
+    if(largo>=n){
+        Position izq = listaPos1.primera();
+        Position der = listaPos1.ultima();
+        int i = 0;
+        bool pivoteEncontrado = false;
+        Position pivote = listaPos1.primera();
+        while(i < largo && pivoteEncontrado == false){
+            if(listaPos1.recuperar(pivote) > listaPos1.recuperar(listaPos1.siguiente(pivote))){
+                pivoteEncontrado = true;
+                pivote = listaPos1.siguiente(pivote);
+            }else if(listaPos1.recuperar(pivote) == listaPos1.recuperar(listaPos1.siguiente(pivote))){
+                pivote = listaPos1.siguiente(pivote);
+                i++;
+            }else{
+                pivoteEncontrado = true;
+            }
+        }
+        if(pivoteEncontrado == true){
+            while(listaPos1.siguiente(der) != izq){
+                if(listaPos1.recuperar(pivote) > listaPos1.recuperar(der)){
+                    if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                        listaPos1.intercambiar(izq,der);
+                        if(izq = pivote){
+                            pivote = der;
+                        }
+                        izq = listaPos1.siguiente(izq);
+                    }else{
+                        izq = listaPos1.siguiente(izq);
+                    }   
+                }else if(listaPos1.recuperar(pivote) <= listaPos1.recuperar(der)){
+                    if(der == izq){
+                        if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                            listaPos1.intercambiar(izq,pivote);
+                            pivote = izq;
+                            izq = listaPos1.siguiente(izq);
+                        }
+                    }else{
+                        der = listaPos1.anterior(der);
+                    }
+                }    
+            }
+            if(pivote == listaPos1.ultima()){
+                quickSortAhoR(listaPos1,listaPos1.primera(),listaPos1.anterior(pivote));
+            }else if(pivote == listaPos1.primera()){
+                quickSortAhoR(listaPos1,listaPos1.siguiente(pivote),listaPos1.ultima());
+            }else{
+                quickSortAhoR(listaPos1,listaPos1.primera(),listaPos1.anterior(pivote));
+                quickSortAhoR(listaPos1,listaPos1.siguiente(pivote),listaPos1.ultima());
+            }
+        }
+    }else{
+        insercion(listaPos1);
+    }
+}
+
+void AlgListaPos::quickSortNR(listaPos &listaPos1,Position pos, Position fin, int n){
+    int largo = 1;
+    Position iter = pos;
+    while(iter != fin){
+        largo++;
+        iter = listaPos1.siguiente(iter);
+    }
+    if(pos != fin && largo >= n){
+        Position izq = pos;
+        Position der = fin;
+        int i = 0;
+        bool pivoteEncontrado = false;
+        Position pivote = pos;
+        while(pivote!=fin && pivoteEncontrado == false){
+            if(listaPos1.recuperar(pivote) > listaPos1.recuperar(listaPos1.siguiente(pivote))){
+                pivoteEncontrado = true;
+                pivote = listaPos1.siguiente(pivote);
+            }else if(listaPos1.recuperar(pivote) == listaPos1.recuperar(listaPos1.siguiente(pivote))){
+                pivote = listaPos1.siguiente(pivote);
+                i++;
+            }else{
+                pivoteEncontrado = true;
+            }
+        }
+        if(pivoteEncontrado == true){
+            while(listaPos1.siguiente(der) != izq){
+                if(listaPos1.recuperar(pivote) > listaPos1.recuperar(der)){
+                    if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                        listaPos1.intercambiar(izq,der);
+                        if(izq = pivote){
+                            pivote = der;
+                        }
+                        izq = listaPos1.siguiente(izq);
+                    }else{
+                        izq = listaPos1.siguiente(izq);
+                    }   
+                }else if(listaPos1.recuperar(pivote) <= listaPos1.recuperar(der)){
+                    if(der == izq){
+                        if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                            listaPos1.intercambiar(izq,pivote);
+                            pivote = izq;
+                            izq = listaPos1.siguiente(izq);
+                        }
+                    }else{
+                        der = listaPos1.anterior(der);
+                    }
+                }
+            }
+            if(pivote == listaPos1.ultima()){
+                quickSortAhoR(listaPos1,pos,listaPos1.anterior(pivote));
+            }else if(pivote == listaPos1.primera()){
+                quickSortAhoR(listaPos1,listaPos1.siguiente(pivote),fin);
+            }else{
+                quickSortAhoR(listaPos1,pos,listaPos1.anterior(pivote));
+                quickSortAhoR(listaPos1,listaPos1.siguiente(pivote),fin);
+            }
+        }
+    }/*else{
+        insercion(listaPos1,pos,fin);
+    }*/
 }
