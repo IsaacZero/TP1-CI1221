@@ -22,7 +22,7 @@ AlgListaOrd::AlgListaOrd(const AlgListaOrd& orig) {
 AlgListaOrd::~AlgListaOrd() {
 }
 
-bool AlgListaOrd::iguales(Lista l1, Lista l2){
+bool AlgListaOrd::iguales(listaOrd l1, listaOrd l2){
     bool igual = true;
     int elemUno = l1.primero();
     int elemDos = l2.primero();
@@ -37,7 +37,7 @@ bool AlgListaOrd::iguales(Lista l1, Lista l2){
     return igual;
 }
 
-void AlgListaOrd::copiar(Lista l1, Lista l2){
+void AlgListaOrd::copiar(listaOrd l1, listaOrd &l2){
     l2.vaciar();
     int elem = l1.primero();
     while(elem != -1){
@@ -46,7 +46,7 @@ void AlgListaOrd::copiar(Lista l1, Lista l2){
     }
 }
 
-bool AlgListaOrd::contenida(Lista l1, Lista l2){
+bool AlgListaOrd::contenida(listaOrd l1, listaOrd l2){
     bool content = true;
     if ((l1.vacia() && !l2.vacia()) || (!l1.vacia() && l2.vacia()))
         content = false;
@@ -68,7 +68,7 @@ bool AlgListaOrd::contenida(Lista l1, Lista l2){
     return content;
 }
 
-bool AlgListaOrd::pertene(int elemento, Lista l){
+bool AlgListaOrd::pertene(int elemento, listaOrd l){
     bool belong = false;
     int elem = l.primero();
     while(elem != -1 && belong){
@@ -82,7 +82,7 @@ bool AlgListaOrd::pertene(int elemento, Lista l){
     return belong;
 }
 
-void AlgListaOrd::eliminarElemRep(Lista l1, Lista l2){
+void AlgListaOrd::eliminarElemRep(listaOrd &l1, listaOrd l2){
     if(!l1.vacia() && !l2.vacia()){
         int elemUno = l1.primero();
         int elemDos = l2.primero();
@@ -103,7 +103,7 @@ void AlgListaOrd::eliminarElemRep(Lista l1, Lista l2){
     }
 }
 
-void AlgListaOrd::unionPrim(Lista l1, Lista l2){
+void AlgListaOrd::unionPrim(listaOrd &l1, listaOrd l2){
     if(!l2.vacia()){
         int elem = l2.primero();
         while(elem != -1){
@@ -113,8 +113,8 @@ void AlgListaOrd::unionPrim(Lista l1, Lista l2){
     }
 }
 
-Lista AlgListaOrd::unionSeg(Lista l1, Lista l2){
-    Lista l3;
+listaOrd AlgListaOrd::unionSeg(listaOrd l1, listaOrd l2){
+    listaOrd l3;
     l3.iniciar();
     int elemUno = l1.primero();
     int elemDos = l2.primero();
@@ -142,8 +142,8 @@ Lista AlgListaOrd::unionSeg(Lista l1, Lista l2){
     return l3;
 }
 
-Lista AlgListaOrd::interseccionPrim(Lista l1, Lista l2){//uso  de  un  algoritmo  auxiliar  de  búsqueda (Pertenece)
-    Lista l3;
+listaOrd AlgListaOrd::interseccionPrim(listaOrd l1, listaOrd l2){//uso  de  un  algoritmo  auxiliar  de  búsqueda (Pertenece)
+    listaOrd l3;
     l3.iniciar();
     if(!l1.vacia() && !l2.vacia()){
         bool belong;
@@ -160,8 +160,8 @@ Lista AlgListaOrd::interseccionPrim(Lista l1, Lista l2){//uso  de  un  algoritmo
     return l3;
 }
 
-Lista AlgListaOrd::interseccionSeg(Lista l1, Lista l2){//se moverá simultáneamente en ambas listas.
-    Lista l3;
+listaOrd AlgListaOrd::interseccionSeg(listaOrd l1, listaOrd l2){//se moverá simultáneamente en ambas listas.
+    listaOrd l3;
     l3.iniciar();
     if(!l1.vacia() && !l2.vacia()){
         int elemUno = l1.primero();
@@ -178,4 +178,19 @@ Lista AlgListaOrd::interseccionSeg(Lista l1, Lista l2){//se moverá simultáneam
         }
     }
     return l3;
+}
+
+void AlgListaOrd::llenarLista(ifstream& archivo, listaOrd &l){
+    int entObt;
+    char finLinea = ' ';
+    archivo >> entObt;
+    archivo.get();
+    finLinea = archivo.peek();
+    while (!archivo.eof() &&(finLinea != 10)) {
+        l.agregar(entObt);
+        archivo >> entObt;
+        archivo.get(); // consume un blanco
+        finLinea = archivo.peek(); // intenta leer fin de línea
+    }
+    l.agregar(entObt);    
 }

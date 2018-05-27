@@ -78,6 +78,7 @@ private:
     
     E arreglo[MAX];
     int cantidadElem;
+    int ultimo;
     static E elemNulo;
 };
 
@@ -94,21 +95,18 @@ ListaIndArr<E>::~ListaIndArr(){
 
 template < typename E >
 void ListaIndArr<E>::iniciar(){
-    int cantidadElem = 0;
+    cantidadElem = 0;
+    ultimo = 0;
 }
 
 template < typename E >
 void ListaIndArr<E>::destruir(){
-    ListaIndArr<E>::~ListaIndArr();
 }
 
 template < typename E >
 void ListaIndArr<E>::vaciar(){
-    E arregloVacio[MAX];
-    for(int i = 0; i < MAX; i++){
-        arreglo[i] = arregloVacio[i];
-    }
-    int cantidadElem = 0;
+    ultimo = 0;
+    cantidadElem = 0;
 }
     
 template < typename E >
@@ -123,17 +121,38 @@ bool ListaIndArr<E>::vacia(){
 
 template < typename E >
 void ListaIndArr<E>::insertar(E elem, int i){
-    arreglo[i] = elem;
+    if(cantidadElem == 0){
+        arreglo[i] = elem;
+        cantidadElem++;
+    }else if(i == ultimo+1 && cantidadElem != 0){
+        arreglo[i] = elem;
+        ultimo++;
+        cantidadElem++;
+    }else{
+        E aux = arreglo[i];
+        arreglo[i] = elem;
+        elem = aux;
+        for(int j = i+1; j <= cantidadElem-1; j++){
+            aux = arreglo[j];
+            arreglo[j] = elem;
+            elem = aux;
+        }
+        ultimo++;
+        cantidadElem++;
+    }
 }
 
 template < typename E >
 void ListaIndArr<E>::borrar(int i){
-    for(int m = i; m < cantidadElem; m++){
-        if (m < (cantidadElem-1)) {
+    if(i == ultimo){
+        ultimo--;
+        cantidadElem--;
+    }
+    else{
+        for(int m = i; m < ultimo; m++)
             arreglo[m] = arreglo[m+1];
-        } else if ((m == (MAX - 1)) || (m == (cantidadElem - 1)) ){
-            arreglo[m] = elemNulo;
-        }
+        ultimo--;
+        cantidadElem--;
     }
 }
 

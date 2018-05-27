@@ -22,7 +22,7 @@ AlgListaIndex::AlgListaIndex(const AlgListaIndex& orig) {
 AlgListaIndex::~AlgListaIndex() {
 }
 
-string AlgListaIndex::listar(Lista l){
+string AlgListaIndex::listar(listaInd l){
     string listado = "";
     if(l.numElem() > 0){
         listado = "La lista tiene como elementos: \n";
@@ -36,7 +36,7 @@ string AlgListaIndex::listar(Lista l){
     return listado;
 }
 
-bool AlgListaIndex::simetrica(Lista l){
+bool AlgListaIndex::simetrica(listaInd l){
     bool esSim = true;
     int i = 0;
     int j = l.numElem()-1;
@@ -51,7 +51,7 @@ bool AlgListaIndex::simetrica(Lista l){
     return esSim;
 }
 
-void AlgListaIndex::invertir(Lista l){
+void AlgListaIndex::invertir(listaInd &l){
     int i = 0;
     int j = l.numElem()-1;
     while(i < j){
@@ -61,7 +61,7 @@ void AlgListaIndex::invertir(Lista l){
     }
 }
 
-bool AlgListaIndex::buscar(int elem, Lista l){
+bool AlgListaIndex::buscar(int elem, listaInd l){
     bool encontrado = false;
     int i = 0;
     while (i < l.numElem() && !encontrado){
@@ -73,7 +73,7 @@ bool AlgListaIndex::buscar(int elem, Lista l){
     return encontrado;
 }
 
-void AlgListaIndex::eliminarRep(Lista l){
+void AlgListaIndex::eliminarRep(listaInd &l){
     for(int i = 0; i < l.numElem()-1; i++){
         int elem = l.recuperar(i);
         for(int j = i+1; j < l.numElem(); j++){
@@ -85,7 +85,7 @@ void AlgListaIndex::eliminarRep(Lista l){
     }
 }
 
-bool AlgListaIndex::sublista(Lista l1, Lista l2){
+bool AlgListaIndex::sublista(listaInd l1, listaInd l2){
     bool esSubLista = false;
     int elem = l1.recuperar(0);
     int indice = 0;
@@ -106,7 +106,7 @@ bool AlgListaIndex::sublista(Lista l1, Lista l2){
     return esSubLista;
 }
 
-bool AlgListaIndex::iguales(Lista l1, Lista l2){
+bool AlgListaIndex::iguales(listaInd l1, listaInd l2){
     bool igualdad = true;
     if (l1.numElem() != l2.numElem())
         igualdad = false;
@@ -122,7 +122,7 @@ bool AlgListaIndex::iguales(Lista l1, Lista l2){
     return igualdad;
 }
 
-void AlgListaIndex::burbujaOri(Lista l){
+void AlgListaIndex::burbujaOri(listaInd &l){
     if(l.numElem() > 1){
         for(int i = 0; i < l.numElem()-1; i++){
             for(int j = i+1; j < l.numElem(); j++){
@@ -133,7 +133,7 @@ void AlgListaIndex::burbujaOri(Lista l){
     }
 }
 
-void AlgListaIndex::burbujaBi(Lista l){
+void AlgListaIndex::burbujaBi(listaInd &l){
     if(l.numElem() > 1){
         int i = 0;
         int ciclo = 2;
@@ -152,7 +152,7 @@ void AlgListaIndex::burbujaBi(Lista l){
     }
 }
 
-void AlgListaIndex::seleccionIter(Lista l){
+void AlgListaIndex::seleccionIter(listaInd &l){
     if(l.numElem() > 1){
         int aux = 0;
         for(int i = 0; i < l.numElem()-1; i++){
@@ -165,7 +165,7 @@ void AlgListaIndex::seleccionIter(Lista l){
     }
 }
 
-void AlgListaIndex::seleccionRecUno(Lista l, int elem, int indice){
+void AlgListaIndex::seleccionRecUno(listaInd &l, int elem, int indice){
     if(l.numElem() > 1){
         int temp = 0;
         for(int j = indice+1; j < l.numElem(); j++){
@@ -178,7 +178,7 @@ void AlgListaIndex::seleccionRecUno(Lista l, int elem, int indice){
     }
 }
 
-void AlgListaIndex::seleccionRecDos(Lista l){
+void AlgListaIndex::seleccionRecDos(listaInd &l){
     if(l.numElem() > 1){
         pila pilaR;
         pilaR.iniciar();
@@ -200,7 +200,7 @@ void AlgListaIndex::seleccionRecDos(Lista l){
     }
 }
 
-void AlgListaIndex::insercion(Lista l){
+void AlgListaIndex::insercion(listaInd &l){
     for(int i = 0; i < l.numElem()-1; i++){
         int j = i+1;
         if(l.recuperar(i) > l.recuperar(j)){
@@ -217,16 +217,20 @@ void AlgListaIndex::insercion(Lista l){
     }
 }
 
-void AlgListaIndex::quickSort(Lista l, int opcion){
+void AlgListaIndex::quickSort(listaInd &l, int opcion){
     if(l.numElem() > 1){
         if(opcion == 1)
             this->quickSortAho(l, 0, l.numElem()-1);
-        else
-            this->quickSortDos(l, 0, l.numElem()-1);
+        else if (opcion == 2){
+            if(l.numElem() < 50)//Tamaño que varia.
+                this->insercion(l);
+            else
+                this->quickSortDos(l, 0, l.numElem()-1);
+        }
     }
 }
 
-int AlgListaIndex::pivoteAho(Lista l, int pInicial, int pFinal){
+int AlgListaIndex::pivoteAho(listaInd l, int pInicial, int pFinal){
     int pivote = -1;
     int i = pInicial;
     while(i < pFinal-1 && pivote != -1){
@@ -241,7 +245,7 @@ int AlgListaIndex::pivoteAho(Lista l, int pInicial, int pFinal){
     return pivote;
 }
 
-int AlgListaIndex::encontrarParticion(Lista l, int pInicial, int pFinal, int pivote){
+int AlgListaIndex::encontrarParticion(listaInd &l, int pInicial, int pFinal, int pivote){
     int i = pInicial;
     int j = pFinal;
     while(i <= j){
@@ -254,7 +258,7 @@ int AlgListaIndex::encontrarParticion(Lista l, int pInicial, int pFinal, int piv
     return i;
 }
 
-void AlgListaIndex::quickSortAho(Lista l, int pInicial, int pFinal){
+void AlgListaIndex::quickSortAho(listaInd &l, int pInicial, int pFinal){
     if (pInicial != pFinal){
         int pivote = this->pivoteAho(l, pInicial, pFinal);
         if (pivote != -1){
@@ -265,7 +269,7 @@ void AlgListaIndex::quickSortAho(Lista l, int pInicial, int pFinal){
     }
 }
 
-void AlgListaIndex::quickSortDos(Lista l, int pInicial, int pFinal){
+void AlgListaIndex::quickSortDos(listaInd &l, int pInicial, int pFinal){
     if (pInicial != pFinal){
         int pivote = l.recuperar(pInicial);
         int particion = this->encontrarParticion(l, pInicial, pFinal, l.recuperar(pivote));
@@ -274,10 +278,10 @@ void AlgListaIndex::quickSortDos(Lista l, int pInicial, int pFinal){
     }
 }
 
-void AlgListaIndex::mergeSort(Lista l){
+void AlgListaIndex::mergeSort(listaInd &l){
     if(l.numElem() > 1){
         int medio = l.numElem()/2;
-        Lista izq, der;
+        listaInd izq, der;
         izq.iniciar();
         der.iniciar();
         for(int i = 0; i < medio; i++)
@@ -299,7 +303,7 @@ void AlgListaIndex::mergeSort(Lista l){
     }
 }
 
-void AlgListaIndex::merge(Lista izq, Lista der, Lista l){
+void AlgListaIndex::merge(listaInd &izq, listaInd &der, listaInd &l){
     int i = 0, j = 0, pos = 0;
     while(i < izq.numElem() && j < der.numElem()){
         if(izq.recuperar(i) < der.recuperar(j)){
@@ -324,7 +328,7 @@ void AlgListaIndex::merge(Lista izq, Lista der, Lista l){
     }
 }
 
-void AlgListaIndex::unionUno(Lista l1, Lista l2){
+void AlgListaIndex::unionUno(listaInd &l1, listaInd &l2){
     if(!l2.vacia() && !l1.vacia()){
         int j = 0;
         int elem = l2.recuperar(j);
@@ -345,7 +349,7 @@ void AlgListaIndex::unionUno(Lista l1, Lista l2){
     }
 }
 
-void AlgListaIndex::unionDos(Lista l1, Lista l2){
+void AlgListaIndex::unionDos(listaInd &l1, listaInd &l2){
     if(!l2.vacia() && !l1.vacia()){
         int j = 0;
         int elem = l2.recuperar(j);
@@ -366,8 +370,8 @@ void AlgListaIndex::unionDos(Lista l1, Lista l2){
     }
 }
 
-Lista AlgListaIndex::interseccionUno(Lista l1, Lista l2){
-    Lista lista;
+listaInd AlgListaIndex::interseccionUno(listaInd l1, listaInd l2){
+    listaInd lista;
     lista.iniciar();
     if(!l2.vacia() && !l1.vacia()){
         int j = 0, i = 0;
@@ -387,8 +391,8 @@ Lista AlgListaIndex::interseccionUno(Lista l1, Lista l2){
     return lista;
 }
 
-Lista AlgListaIndex::interseccionDos(Lista l1, Lista l2){
-    Lista lista;
+listaInd AlgListaIndex::interseccionDos(listaInd l1, listaInd l2){
+    listaInd lista;
     lista.iniciar();
     if(!l2.vacia() && !l1.vacia()){
         int j = 0, i = 0;
@@ -408,7 +412,7 @@ Lista AlgListaIndex::interseccionDos(Lista l1, Lista l2){
     return lista;
 }
 
-void AlgListaIndex::eliminarUno(Lista l1, Lista l2){
+void AlgListaIndex::eliminarUno(listaInd &l1, listaInd &l2){
     if(!l2.vacia() && !l1.vacia()){
         int j = 0;
         int elem = l1.recuperar(j);
@@ -424,7 +428,7 @@ void AlgListaIndex::eliminarUno(Lista l1, Lista l2){
     }
 }
 
-void AlgListaIndex::eliminarDos(Lista l1, Lista l2){
+void AlgListaIndex::eliminarDos(listaInd &l1, listaInd &l2){
     if(!l2.vacia() && !l1.vacia()){
         int j = 0;
         int elem = l1.recuperar(j);
@@ -438,4 +442,28 @@ void AlgListaIndex::eliminarDos(Lista l1, Lista l2){
             }
         }
     }
+}
+
+void AlgListaIndex::llenarLista(ifstream& archivo, listaInd &l){
+    int entObt;
+    //ifstream archivoEnterosEntrada("dodecaedro.txt", ios::in);
+    char finLinea = ' ';
+    int posicion = 0;
+ 
+    /*if (!archivoEnterosEntrada) { // operador ! sobrecargado
+        cerr << "No se pudo abrir el archivo de entrada" << endl;
+        exit(1);
+    }*/
+    
+    archivo >> entObt;
+    archivo.get();
+    finLinea = archivo.peek();
+    while (!archivo.eof() &&(finLinea != 10)) {
+        l.insertar(entObt, posicion);
+        archivo >> entObt;
+        archivo.get(); // consume un blanco
+        finLinea = archivo.peek(); // intenta leer fin de línea
+        posicion++;
+    }
+    l.insertar(entObt, posicion);    
 }
