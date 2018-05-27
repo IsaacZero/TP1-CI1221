@@ -23,15 +23,13 @@ using namespace std;
 
 
 //typedef ListaPosDoEn<int> listaPos;
-//typedef ListaPosDoEn<int>::Pos Position;
-
 
 //typedef ListaPosSimEn<int> listaPos;
-//typedef ListaPosSimEn<int>::Pos Position;
 
 typedef ListaPosArr<int> listaPos;
-typedef listaPos::Pos Position;
 
+typedef listaPos::Pos Position;
+typedef Pila<Position> pila;
 
 #ifndef ALGLISTAPOS_H
 #define ALGLISTAPOS_H
@@ -166,6 +164,13 @@ public:
     
     void quickSortN(listaPos &listaPos1,int n);    
     void quickSortNR(listaPos &listaPos1,Position pos, Position fin, int n);
+    
+    //EFE: Llena la lista con los numeros en el archivo, los números deben estar separados por espacio solamente.
+    // Por ejemplo, al abrir el archivo .txt debe estar escrita la lista 2 4 6 8 si se quiere la lista {2,4,6,8}.
+    // Se agregaran por el final de la lista los números.
+    //REQ: Archivo valido en la carpeta del proyecto.
+    //MOD: La lista
+    void llenarLista(ifstream& archivo, listaPos &l);
 private:
     
 };    

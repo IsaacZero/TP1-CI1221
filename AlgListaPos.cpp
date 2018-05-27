@@ -366,7 +366,31 @@ void AlgListaPos::selecccionIterativaRecCompR(listaPos &listaPos1,Position actua
     }
 }
     
-
+void AlgListaPos::selecccionIterativaRecPila(listaPos& listaPos1){
+    if(listaPos1.numElem() > 1){
+        pila pilaR;
+        pilaR.iniciar();
+        Position indice = listaPos1.primera();
+        int elem = listaPos1.recuperar(indice);
+        Position aux;
+        pilaR.meter(indice);
+        while(!pilaR.vacia()){
+            indice = pilaR.sacar();
+            Position j = listaPos1.siguiente(indice);
+            while(j != listaPos1.siguiente(listaPos1.ultima())){
+                if(listaPos1.recuperar(indice) > listaPos1.recuperar(j)){
+                    aux = j;
+                    j = listaPos1.siguiente(j);
+                }else
+                    j = listaPos1.siguiente(j);
+            }
+            listaPos1.intercambiar(indice, aux);
+            if(indice != listaPos1.anterior(listaPos1.ultima()))
+                pilaR.meter(listaPos1.siguiente(indice));
+        }
+        pilaR.destruir();
+    }
+}
 
 bool AlgListaPos::simetrica(listaPos listaPos1){
     bool esSimetrica = true;
@@ -771,4 +795,28 @@ void AlgListaPos::quickSortNR(listaPos &listaPos1,Position pos, Position fin, in
     }/*else{
         insercion(listaPos1,pos,fin);
     }*/
+}
+
+void AlgListaPos::llenarLista(ifstream& archivo, listaPos &l){
+    int entObt;
+    //ifstream archivoEnterosEntrada("dodecaedro.txt", ios::in);
+    char finLinea = ' ';
+    int posicion = 0;
+ 
+    /*if (!archivoEnterosEntrada) { // operador ! sobrecargado
+        cerr << "No se pudo abrir el archivo de entrada" << endl;
+        exit(1);
+    }*/
+    
+    archivo >> entObt;
+    archivo.get();
+    finLinea = archivo.peek();
+    while (!archivo.eof() &&(finLinea != 10)) {
+        l.agregarAlFinal(entObt);
+        archivo >> entObt;
+        archivo.get(); // consume un blanco
+        finLinea = archivo.peek(); // intenta leer fin de línea
+        posicion++;
+    }
+    l.agregarAlFinal(entObt);    
 }
