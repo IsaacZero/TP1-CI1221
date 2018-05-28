@@ -443,7 +443,7 @@ int main(int argc, char** argv) {
                                         int decision4;
                                         cout << "¿Cual desea que sea el mínimo para que use Quicksort? \n Digite el numero." << endl;
                                         cin >> decision4;
-                                        algoritmos.quickSortN(L2,decision4);
+                                        algoritmos.quickSortN   (L2,decision4);
                                     }
                                 } while (desicion != 1 && desicion != 2);
                                 cout << "Se termino de ordenar la lista." << endl;

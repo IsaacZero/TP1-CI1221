@@ -736,13 +736,8 @@ void AlgListaPos::quickSortN(listaPos &listaPos1,int n){
 }
 
 void AlgListaPos::quickSortNR(listaPos &listaPos1,Position pos, Position fin, int n){
-    int largo = 1;
-    Position iter = pos;
-    while(iter != fin){
-        largo++;
-        iter = listaPos1.siguiente(iter);
-    }
-    if(pos != fin && largo >= n){
+    
+    if(pos != fin){
         Position izq = pos;
         Position der = fin;
         int i = 0;
