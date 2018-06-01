@@ -126,7 +126,7 @@ void AlgListaIndex::burbujaOri(listaInd &l){
     if(l.numElem() > 1){
         for(int i = 0; i < l.numElem()-1; i++){
             for(int j = i+1; j < l.numElem(); j++){
-                if(l.recuperar(i) < l.recuperar(j))
+                if(l.recuperar(i) > l.recuperar(j))
                     l.intercambiar(i, j);
             }
         }
@@ -139,7 +139,7 @@ void AlgListaIndex::burbujaBi(listaInd &l){
         int ciclo = 2;
         while((l.numElem() - ciclo) >= i){
             for (int j = i; j <= l.numElem()-ciclo; j++){
-                if(l.recuperar(j) < l.recuperar(j+1))
+                if(l.recuperar(j) > l.recuperar(j+1))
                     l.intercambiar(j, (j+1));
             }
             for(int j = l.numElem()-ciclo; j > i; j--){
@@ -156,8 +156,9 @@ void AlgListaIndex::seleccionIter(listaInd &l){
     if(l.numElem() > 1){
         int aux = 0;
         for(int i = 0; i < l.numElem()-1; i++){
+            aux = i;
             for(int j = i+1; j < l.numElem(); j++){
-                if(l.recuperar(i) < l.recuperar(j))
+                if(l.recuperar(aux) > l.recuperar(j))
                     aux = j;
             }
             l.intercambiar(i, aux);
@@ -167,9 +168,9 @@ void AlgListaIndex::seleccionIter(listaInd &l){
 
 void AlgListaIndex::seleccionRecUno(listaInd &l, int elem, int indice){
     if(l.numElem() > 1){
-        int temp = 0;
+        int temp = indice;
         for(int j = indice+1; j < l.numElem(); j++){
-            if(elem > l.recuperar(j))
+            if(elem > l.recuperar(j) && l.recuperar(j) < l.recuperar(temp))
                 temp = j;
         }
         l.intercambiar(indice, temp);
@@ -188,8 +189,9 @@ void AlgListaIndex::seleccionRecDos(listaInd &l){
         pilaR.meter(indice);
         while(!pilaR.vacia()){
             indice = pilaR.sacar();
+            aux = indice;
             for(int j = indice+1; j < l.numElem(); j++){
-                if(l.recuperar(indice) > l.recuperar(j))
+                if(l.recuperar(aux) > l.recuperar(j))
                     aux = j;
             }
             l.intercambiar(indice, aux);
@@ -205,8 +207,9 @@ void AlgListaIndex::insercion(listaInd &l){
         int j = i+1;
         if(l.recuperar(i) > l.recuperar(j)){
             int elemAux = l.recuperar(j);
+            l.borrar(j);
             while (j > 0){
-                if(l.recuperar(i+1) < l.recuperar(j-1)){
+                if(elemAux < l.recuperar(j-1)){
                     j--;
                 }else{
                     l.insertar(elemAux, j);

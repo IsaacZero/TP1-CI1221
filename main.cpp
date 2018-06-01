@@ -199,6 +199,7 @@ int main(int argc, char** argv) {
                             cout << "Ingrese un numero valido." << endl;
                         }
                     }
+                    archivo.close();
                     while (continuar3) {
                         cout << "ALGORITMOS DISPONIBLES" << endl;
                         cout << "Escoja el algoritmo que desea aplicar" << endl;
@@ -688,6 +689,7 @@ int main(int argc, char** argv) {
                             cout << "Ingrese un numero valido." << endl;
                         }
                     }
+                    archivo.close();
                     while (continuar3) {
                         cout << "ALGORITMOS DISPONIBLES" << endl;
                         cout << "Escoja el algoritmo que desea aplicar" << endl;
@@ -1104,6 +1106,7 @@ int main(int argc, char** argv) {
                             cout << "Ingrese un numero valido." << endl;
                         }
                     }
+                    archivo.close();
                     cout << "1. Lista Uno." << endl;
                     cout << "2. Lista Dos." << endl;
                     cout << "3. Lista Tres." << endl;
@@ -1162,6 +1165,7 @@ int main(int argc, char** argv) {
                             cout << "Ingrese un numero valido." << endl;
                         }
                     }
+                    archivo.close();
                     while (continuar3) {
                         cout << "ALGORITMOS DISPONIBLES" << endl;
                         cout << "Escoja el algoritmo que desea aplicar" << endl;
