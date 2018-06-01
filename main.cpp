@@ -140,6 +140,7 @@ int main(int argc, char** argv) {
                             cout << "Ingrese un numero valido." << endl;
                         }
                     }
+                    archivo.close();
                     cout << "1. Lista Uno." << endl;
                     cout << "2. Lista Dos." << endl;
                     cout << "3. Lista Tres." << endl;
@@ -415,6 +416,7 @@ int main(int argc, char** argv) {
                                 } while (desicion != 1 && desicion != 2);
                                 cout << "Se termino de ordenar la lista." << endl;
                             }
+                                break;
                             case 14:
                             {
                                 do {
@@ -627,6 +629,7 @@ int main(int argc, char** argv) {
                             cout << "Ingrese un numero valido." << endl;
                         }
                     }
+                    archivo.close();
                     cout << "1. Lista Uno." << endl;
                     cout << "2. Lista Dos." << endl;
                     cout << "3. Lista Tres." << endl;
@@ -898,6 +901,7 @@ int main(int argc, char** argv) {
                                 } while (desicion != 1 && desicion != 2);
                                 cout << "Se termino de ordenar la lista." << endl;
                             }
+                                break;
                             case 14:
                             {
                                 do {
@@ -1105,6 +1109,7 @@ int main(int argc, char** argv) {
                     cout << "3. Lista Tres." << endl;
                     cout << "4. Lista Cuatro." << endl;
                     cin >> decision2;
+                    archivo.close();
                     switch (decision2) {
                         case 1:
                         {
