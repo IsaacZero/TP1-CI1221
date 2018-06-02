@@ -208,12 +208,15 @@ void AlgListaIndex::insercion(listaInd &l){
         if(l.recuperar(i) > l.recuperar(j)){
             int elemAux = l.recuperar(j);
             l.borrar(j);
-            while (j > 0){
+            while (j >= 0){
                 if(elemAux < l.recuperar(j-1)){
                     j--;
+                }else if(j == 0){
+                    l.insertar(elemAux,j);
+                    j = -1;
                 }else{
                     l.insertar(elemAux, j);
-                    j = 0;
+                    j = -1;
                 }
             }
         }
@@ -236,7 +239,7 @@ void AlgListaIndex::quickSort(listaInd &l, int opcion){
 int AlgListaIndex::pivoteAho(listaInd l, int pInicial, int pFinal){
     int pivote = -1;
     int i = pInicial;
-    while(i < pFinal-1 && pivote != -1){
+    while(i < pFinal-1 && pivote == -1){
         int primElem = l.recuperar(i);
         if(primElem < l.recuperar(i+1))
             pivote = i;
@@ -251,12 +254,12 @@ int AlgListaIndex::pivoteAho(listaInd l, int pInicial, int pFinal){
 int AlgListaIndex::encontrarParticion(listaInd &l, int pInicial, int pFinal, int pivote){
     int i = pInicial;
     int j = pFinal;
-    while(i <= j){
+    while(i < j){
         l.intercambiar(i,j);
         while(l.recuperar(i) < pivote)
             i++;
         while(l.recuperar(j) >= pivote)
-            j++;
+            j--;
     }
     return i;
 }

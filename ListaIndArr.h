@@ -55,8 +55,7 @@ public:
     
     // EFE: Retorna el elemento i-ésimo de la lista L\\
     // REQ: Lista L inicializada, p válida en L\\
-    // MOD:: \\
-
+    // MOD: 
     E recuperar(int i);
     
     // EFE: Reemplaza el elemento por el elemento i-ésimo de la lista.
@@ -137,6 +136,7 @@ void ListaIndArr<E>::insertar(E elem, int i){
             arreglo[j] = elem;
             elem = aux;
         }
+        arreglo[ultimo+1] = elem;
         ultimo++;
         cantidadElem++;
     }
