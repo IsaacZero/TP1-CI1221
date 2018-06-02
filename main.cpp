@@ -74,6 +74,9 @@ int main(int argc, char** argv) {
                 listaPos L1;
                 listaPos L2;
                 listaPos L3;
+                L1.iniciar();
+                L2.iniciar();
+                L3.iniciar();           
                 algPos algoritmos;
                 ifstream archivo;
                 while (continuar2) {
@@ -90,7 +93,7 @@ int main(int argc, char** argv) {
                     cin >> desicion2;
                     switch (desicion2) {
                         case 1:
-                        {
+                        {   
                             archivo.open("ListaUno.txt", ios::in);
                             if (!archivo) { // operador ! sobrecargado
                                 cerr << "No se pudo abrir el archivo de entrada." << endl;
@@ -284,11 +287,11 @@ int main(int argc, char** argv) {
                                     if (desicion == 1) {
                                         cout << "Inserte el número que desea buscar. Recuerde insertar solo números enteros." << endl;
                                         cin >> des;
-                                        found = algoritmos.buscar( L1,des);
+                                        found = algoritmos.buscar( L1,int(des));
                                     } else if (desicion == 2) {
                                         cout << "Inserte el número que desea buscar. Recuerde insertar solo números enteros." << endl;
                                         cin >> des;
-                                        found = algoritmos.buscar(L2,des);
+                                        found = algoritmos.buscar(L2,int(des));
                                     }
                                 } while (desicion != 1 && desicion != 2);
                                 if (found)
