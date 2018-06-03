@@ -28,7 +28,7 @@ void AlgListaPos::burbuja(listaPos &listaPos1){
         Position iter1 = listaPos1.primera();
         Position iter2 = listaPos1.siguiente(iter1);
         for(int j = contFaltantes; j > 0; j--){
-            if(int(listaPos1.recuperar(iter1)) <int(listaPos1.recuperar(iter2))){
+            if(int(listaPos1.recuperar(iter1)) >int(listaPos1.recuperar(iter2))){
                 listaPos1.intercambiar(iter1,iter2);
             }
             iter1 = iter2;
@@ -108,7 +108,9 @@ void AlgListaPos::eliminarRepetidos(listaPos &listaPos1){
                 iter2 = listaPos1.siguiente(iter2);
             } 
         }
-        iter1 = listaPos1.siguiente(iter1);
+        if(fin != iter1){
+            iter1 = listaPos1.siguiente(iter1);
+        }
     }
 }
 
@@ -180,6 +182,7 @@ bool AlgListaPos::iguales(listaPos listaPos1,listaPos listaPos2){
             else{
                 iter1 = listaPos1.siguiente(iter1);
                 iter2 = listaPos2.siguiente(iter2);
+                i++;
             }
         }
     }

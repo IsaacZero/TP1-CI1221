@@ -74,12 +74,13 @@ int main(int argc, char** argv) {
                 listaPos L1;
                 listaPos L2;
                 listaPos L3;
-                L1.iniciar();
-                L2.iniciar();
-                L3.iniciar();           
+                           
                 algPos algoritmos;
                 ifstream archivo;
                 while (continuar2) {
+                    L1.iniciar();
+                    L2.iniciar();
+                    L3.iniciar();
                     bool continuar3 = true;
                     cout << "CREACION DE LISTAS PREDEFINIDAS" << endl;
                     cout << "Escoger dos de las listas." << endl;
