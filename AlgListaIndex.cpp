@@ -242,9 +242,9 @@ int AlgListaIndex::pivoteAho(listaInd l, int pInicial, int pFinal){
     while(i < pFinal-1 && pivote == -1){
         int primElem = l.recuperar(i);
         if(primElem < l.recuperar(i+1))
-            pivote = i;
-        else if(primElem > l.recuperar(i+1))
             pivote = i+1;
+        else if(primElem > l.recuperar(i+1))
+            pivote = i;
         else
             i++;
     }
@@ -254,23 +254,26 @@ int AlgListaIndex::pivoteAho(listaInd l, int pInicial, int pFinal){
 int AlgListaIndex::encontrarParticion(listaInd &l, int pInicial, int pFinal, int pivote){
     int i = pInicial;
     int j = pFinal;
+    bool firstIt = true;
     while(i < j){
-        l.intercambiar(i,j);
+        if (!firstIt)
+            l.intercambiar(i,j);
         while(l.recuperar(i) < pivote)
             i++;
         while(l.recuperar(j) >= pivote)
             j--;
+        firstIt = false;
     }
     return i;
 }
 
 void AlgListaIndex::quickSortAho(listaInd &l, int pInicial, int pFinal){
-    if (pInicial != pFinal){
+    if (pInicial < pFinal){
         int pivote = this->pivoteAho(l, pInicial, pFinal);
         if (pivote != -1){
             int particion = this->encontrarParticion(l, pInicial, pFinal, l.recuperar(pivote));
             this->quickSortAho(l, pInicial, particion);
-            this->quickSortAho(l, pInicial+1, pFinal);
+            this->quickSortAho(l, particion, pFinal);
         }
     }
 }
@@ -280,7 +283,7 @@ void AlgListaIndex::quickSortDos(listaInd &l, int pInicial, int pFinal){
         int pivote = l.recuperar(pInicial);
         int particion = this->encontrarParticion(l, pInicial, pFinal, l.recuperar(pivote));
         this->quickSortAho(l, pInicial, particion);
-        this->quickSortAho(l, pInicial+1, pFinal);
+        this->quickSortAho(l, particion+1, pFinal);
     }
 }
 
@@ -292,8 +295,11 @@ void AlgListaIndex::mergeSort(listaInd &l){
         der.iniciar();
         for(int i = 0; i < medio; i++)
             izq.insertar(l.recuperar(i), i);
-        for(int i = medio; i < l.numElem(); i++)
-            der.insertar(l.recuperar(i), i);
+        int j = 0;
+        for(int i = medio; i < l.numElem(); i++){
+            der.insertar(l.recuperar(i), j);
+            j++;
+        }
         this->mergeSort(izq);
         this->mergeSort(der);
         if(izq.recuperar(izq.numElem()-1) <= der.recuperar(0)){
@@ -316,9 +322,14 @@ void AlgListaIndex::merge(listaInd &izq, listaInd &der, listaInd &l){
             l.modificarElemento(izq.recuperar(i), pos);
             i++;
             pos++;
+        }else if(izq.recuperar(i) > der.recuperar(j)){
+            l.modificarElemento(der.recuperar(j), pos);
+            j++;
+            pos++;
         }else{
             l.modificarElemento(der.recuperar(j), pos);
             j++;
+            i++;
             pos++;
         }
     }
