@@ -158,7 +158,7 @@ public:
     template < typename E>
     void ListaPosArr<E>::agregarAlFinal(E elem){
         arreglo[ultimo+1] = elem;
-        ultimo++;
+        ultimo = ultimo + 1;
         cantElem++;
     }
     
@@ -211,7 +211,7 @@ public:
     
     template < typename E>
     typename ListaPosArr<E>::Pos ListaPosArr<E>::anterior(Pos pos){
-        return pos + 1;
+        return pos - 1;
     }
     
     template < typename E>

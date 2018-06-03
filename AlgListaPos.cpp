@@ -28,7 +28,7 @@ void AlgListaPos::burbuja(listaPos &listaPos1){
         Position iter1 = listaPos1.primera();
         Position iter2 = listaPos1.siguiente(iter1);
         for(int j = contFaltantes; j > 0; j--){
-            if(listaPos1.recuperar(iter1) <listaPos1.recuperar(iter2)){
+            if(int(listaPos1.recuperar(iter1)) <int(listaPos1.recuperar(iter2))){
                 listaPos1.intercambiar(iter1,iter2);
             }
             iter1 = iter2;
@@ -47,7 +47,7 @@ void AlgListaPos::burbujaBidireccional(listaPos &listaPos1){
     for(int i = 0; i < largo; i++){
         if(haciaElFondo == true){
             for(int j = contFaltantes; j > 0; j--){
-                if(listaPos1.recuperar(iter1) > listaPos1.recuperar(iter2)){
+                if(int(listaPos1.recuperar(iter1)) > int(listaPos1.recuperar(iter2))){
                     listaPos1.intercambiar(iter1,iter2);
                 }
                 if(j != 1){
@@ -61,7 +61,7 @@ void AlgListaPos::burbujaBidireccional(listaPos &listaPos1){
             haciaElFondo = false;
         }else{
             for(int j = contFaltantes; j > 0; j--){
-                if(listaPos1.recuperar(iter1) > listaPos1.recuperar(iter2)){
+                if(int(listaPos1.recuperar(iter1)) > int(listaPos1.recuperar(iter2))){
                     listaPos1.intercambiar(iter1,iter2);
                 }
                 if(j == 1){
@@ -83,8 +83,9 @@ bool AlgListaPos::buscar(listaPos listaPos1, int elem) {
     Position iter = listaPos1.primera();
     Position fin = listaPos1.ultima();
     while ((existe == false) && (iter != listaPos1.siguiente(fin))){
-        if(listaPos1.recuperar(iter) == elem){
-            existe ==true;
+        int elemIter = int(listaPos1.recuperar(iter));
+        if(elemIter == elem){
+            existe = true;
         }else{
             iter = listaPos1.siguiente(iter);
         }
@@ -97,10 +98,10 @@ void AlgListaPos::eliminarRepetidos(listaPos &listaPos1){
     while (iter1 != fin){
         Position iter2 = listaPos1.siguiente(iter1);
         while (iter2 != listaPos1.siguiente(fin)){
-            if ((listaPos1.recuperar(iter2) == listaPos1.recuperar(iter1)) && (iter2 == fin)){
+            if ((int(listaPos1.recuperar(iter2)) == int(listaPos1.recuperar(iter1))) && (iter2 == fin)){
                 listaPos1.borrar(iter2);
                 fin = listaPos1.ultima();
-            }else if(listaPos1.recuperar(iter2) == listaPos1.recuperar(iter1)){
+            }else if(int(listaPos1.recuperar(iter2)) == int(listaPos1.recuperar(iter1))){
                 listaPos1.borrar(iter2);
             }
             else{
@@ -120,14 +121,14 @@ void AlgListaPos::eliminarElementosListaConOrden(listaPos &listaPos1, listaPos l
     int i = 0;
     int j = 0;
     while((i<largo1)&&(j<largo2)){
-        if(listaPos1.recuperar(iter1) == listaPos2.recuperar(iter2)){
+        if(int(listaPos1.recuperar(iter1)) == int(listaPos2.recuperar(iter2))){
             Position aux = listaPos1.siguiente(iter1);
             listaPos1.borrar(iter1);
             largo1--;
             iter1 = aux;
             iter2 = listaPos2.siguiente(iter2);
             j++;
-        }else if(listaPos1.recuperar(iter1) > listaPos2.recuperar(iter2) ){
+        }else if(int(listaPos1.recuperar(iter1)) > int(listaPos2.recuperar(iter2)) ){
             iter2 = listaPos2.siguiente(iter2);
             j++;
         }else{
@@ -149,7 +150,7 @@ void AlgListaPos::eliminarElementosListaSinOrden(listaPos &listaPos1, listaPos l
         Position iter1 = listaPos1.primera();
         bool eliminar = false;
         while((i < largo1)&&(eliminar == false)){
-            if(listaPos1.recuperar(iter1) == listaPos2.recuperar(iter2)){
+            if(int(listaPos1.recuperar(iter1)) == int(listaPos2.recuperar(iter2))){
                 eliminar = true;
             }else{
                 iter1= listaPos1.siguiente(iter1);
@@ -173,7 +174,7 @@ bool AlgListaPos::iguales(listaPos listaPos1,listaPos listaPos2){
         Position fin2 = listaPos2.ultima();
         int i = 0;
         while((i<largo1)&&(iguales == true)){
-            if(listaPos1.recuperar(iter1) != listaPos2.recuperar(iter2)){
+            if(int(listaPos1.recuperar(iter1)) != int(listaPos2.recuperar(iter2))){
                 iguales = false;
             }
             else{
@@ -196,7 +197,7 @@ void AlgListaPos::insercion(listaPos &listaPos1){
             Position iter1 = actual;
             Position iter2 = listaPos1.anterior(iter1);
             do{
-                if(listaPos1.recuperar(iter2) > listaPos1.recuperar(iter1)){
+                if(int(listaPos1.recuperar(iter2)) > int(listaPos1.recuperar(iter1))){
                     listaPos1.intercambiar(iter1,iter2);
                     iter1 = iter2;
                     iter2 = listaPos1.anterior(iter2);
@@ -225,9 +226,9 @@ void AlgListaPos::interseccionConOrden(listaPos listaPos1, listaPos listaPos2, l
         for(int i = 0; i < largo1; i++){
             int j = 0;
             while( (j<largo2) && (estaInterseccion == false)){
-                if(listaPos2.recuperar(iter2) == listaPos1.recuperar(iter1)){
+                if(int(listaPos2.recuperar(iter2)) == int(listaPos1.recuperar(iter1))){
                     estaInterseccion = true;
-                    listaPos3.agregarAlFinal(listaPos2.recuperar(iter2));
+                    listaPos3.agregarAlFinal(int(listaPos2.recuperar(iter2)));
                 }
                 iter2 = listaPos2.siguiente(iter2);
             }
@@ -237,9 +238,9 @@ void AlgListaPos::interseccionConOrden(listaPos listaPos1, listaPos listaPos2, l
         for(int i = 0; i < largo2; i++){
             int j = 0;
             while( (j<largo1) && (estaInterseccion == false)){
-                if(listaPos1.recuperar(iter1) == listaPos2.recuperar(iter2)){
+                if(int(listaPos1.recuperar(iter1)) == int(listaPos2.recuperar(iter2))){
                     estaInterseccion = true;
-                    listaPos3.agregarAlFinal(listaPos2.recuperar(iter1));
+                    listaPos3.agregarAlFinal(int(listaPos2.recuperar(iter1)));
                 }
                 iter1 = listaPos1.siguiente(iter1);
             }
@@ -260,9 +261,9 @@ void AlgListaPos::interseccionSinOrden(listaPos listaPos1, listaPos listaPos2, l
         for(int i = 0; i < largo1; i++){
             int j = 0;
             while( (j<largo2) && (estaInterseccion == false)){
-                if(listaPos2.recuperar(iter2) == listaPos1.recuperar(iter1)){
+                if(int(listaPos2.recuperar(iter2)) == int(listaPos1.recuperar(iter1))){
                     estaInterseccion = true;
-                    listaPos3.agregarAlFinal(listaPos2.recuperar(iter2));
+                    listaPos3.agregarAlFinal(int(listaPos2.recuperar(iter2)));
                 }
                 iter2 = listaPos2.siguiente(iter2);
             }
@@ -272,9 +273,9 @@ void AlgListaPos::interseccionSinOrden(listaPos listaPos1, listaPos listaPos2, l
         for(int i = 0; i < largo2; i++){
             int j = 0;
             while( (j<largo1) && (estaInterseccion == false)){
-                if(listaPos1.recuperar(iter1) == listaPos2.recuperar(iter2)){
+                if(int(listaPos1.recuperar(iter1)) == int(listaPos2.recuperar(iter2))){
                     estaInterseccion = true;
-                    listaPos3.agregarAlFinal(listaPos2.recuperar(iter1));
+                    listaPos3.agregarAlFinal(int(listaPos2.recuperar(iter1)));
                 }
                 iter1 = listaPos1.siguiente(iter1);
             }
@@ -288,7 +289,8 @@ void AlgListaPos::invertirLista(listaPos &listaPos1){
     int largo = listaPos1.numElem();
     int aux[largo];
     for(int i = largo-1; i >= 0; i--){
-        aux[i] = listaPos1.recuperar(iter);
+        aux[i] = int(listaPos1.recuperar(iter));
+        iter = listaPos1.siguiente(iter);
     }
     listaPos1.vaciar();
     for(int i = 0; i < largo; i++){
@@ -304,8 +306,8 @@ string AlgListaPos::listar(listaPos listaPos1){
         Position iter = listaPos1.primera();
         Position fin = listaPos1.ultima();
         listaString = "La lista tiene como elementos: \n";
-        while (iter != fin){
-            listaString += "-> " + std::to_string(listaPos1.recuperar(iter)) + " \n";
+        while (iter != listaPos1.siguiente(fin)){
+            listaString += "-> " + std::to_string(int(listaPos1.recuperar(iter))) + " \n";
             iter = listaPos1.siguiente(iter);
         }
     }
@@ -319,7 +321,7 @@ void AlgListaPos::selecccionIterativa(listaPos &listaPos1){
         Position iter = listaPos1.siguiente(actual);
         Position masPeque = actual;
         for(int j = i+1; j < largo; j++){
-            if(listaPos1.recuperar(iter) < listaPos1.recuperar(masPeque)){
+            if(int(listaPos1.recuperar(iter)) < int(listaPos1.recuperar(masPeque))){
                 masPeque = iter;
             }
             iter = listaPos1.siguiente(iter);
@@ -337,7 +339,7 @@ void AlgListaPos::selecccionIterativaRecComp(listaPos &listaPos1){
     Position iter = listaPos1.siguiente(actual);
     Position masPeque = actual;
     for(int j = 1; j < largo; j++){
-        if(listaPos1.recuperar(iter) < listaPos1.recuperar(masPeque)){
+        if(int(listaPos1.recuperar(iter)) < int(listaPos1.recuperar(masPeque))){
             masPeque = iter;
         }
         iter = listaPos1.siguiente(iter);
@@ -354,7 +356,7 @@ void AlgListaPos::selecccionIterativaRecCompR(listaPos &listaPos1,Position actua
         Position iter = listaPos1.siguiente(actual);
         Position masPeque = actual;
         for(int j = 1; j < faltantes; j++){
-            if(listaPos1.recuperar(iter) < listaPos1.recuperar(masPeque)){
+            if(int(listaPos1.recuperar(iter)) < int(listaPos1.recuperar(masPeque))){
                 masPeque = iter;
             }
             iter = listaPos1.siguiente(iter);
@@ -371,14 +373,14 @@ void AlgListaPos::selecccionIterativaRecPila(listaPos& listaPos1){
         pila pilaR;
         pilaR.iniciar();
         Position indice = listaPos1.primera();
-        int elem = listaPos1.recuperar(indice);
+        int elem = int(listaPos1.recuperar(indice));
         Position aux;
         pilaR.meter(indice);
         while(!pilaR.vacia()){
             indice = pilaR.sacar();
             Position j = listaPos1.siguiente(indice);
             while(j != listaPos1.siguiente(listaPos1.ultima())){
-                if(listaPos1.recuperar(indice) > listaPos1.recuperar(j)){
+                if(int(listaPos1.recuperar(indice)) > int(listaPos1.recuperar(j))){
                     aux = j;
                     j = listaPos1.siguiente(j);
                 }else
@@ -396,8 +398,8 @@ bool AlgListaPos::simetrica(listaPos listaPos1){
     bool esSimetrica = true;
     Position punteroIzq = listaPos1.primera();
     Position punteroDer = listaPos1.ultima();
-    while((punteroIzq != punteroDer)&&(listaPos1.siguiente(punteroDer) != punteroIzq)&&(esSimetrica == true)){
-        if(listaPos1.recuperar(punteroIzq) != listaPos1.recuperar(punteroDer)){
+    while((punteroIzq != punteroDer) && (listaPos1.siguiente(punteroDer) != punteroIzq) && (esSimetrica == true)){
+        if(int(listaPos1.recuperar(punteroIzq)) != int(listaPos1.recuperar(punteroDer))){
             esSimetrica = false;
         }else{
             punteroIzq = listaPos1.siguiente(punteroIzq);
@@ -414,7 +416,7 @@ bool AlgListaPos::subLista(listaPos listaPos1,listaPos listaPos2){
     Position iter2 = listaPos2.primera();
     Position fin2 = listaPos2.ultima();
     while ((iter2 != listaPos2.siguiente(fin2))&&(esSubLista == false)){
-        if(listaPos2.recuperar(iter2) == listaPos1.recuperar(iter1)){
+        if(int(listaPos2.recuperar(iter2)) == int(listaPos1.recuperar(iter1))){
             if(iter1 == fin1){
                 esSubLista = true;
             }else{
@@ -435,10 +437,10 @@ void AlgListaPos::unionConOrden(listaPos &listaPos1,listaPos listaPos2){
     Position fin2 = listaPos2.ultima();
     while (iter2 != listaPos2.siguiente(fin2)){
         if(iter1 == listaPos1.siguiente(fin1)){
-            listaPos1.agregarAlFinal(listaPos2.recuperar(iter2));
+            listaPos1.agregarAlFinal(int(listaPos2.recuperar(iter2)));
             iter2 = listaPos2.siguiente(iter2);
-        }else if(listaPos1.recuperar(iter1) < listaPos2.recuperar(iter2)){
-            listaPos1.insertar(listaPos2.recuperar(iter2),iter1);
+        }else if(int(listaPos1.recuperar(iter1)) < int(listaPos2.recuperar(iter2))){
+            listaPos1.insertar(int(listaPos2.recuperar(iter2)),iter1);
             iter1 = listaPos1.siguiente(iter1);
             iter2 = listaPos2.siguiente(iter2);
         }else{
@@ -458,7 +460,7 @@ void AlgListaPos::unionSinOrden(listaPos &listaPos1,listaPos listaPos2){
         int i = 0;
         while ((i < largo1)&&(existe == false)){
             Position iter3 = listaPos1.primera();
-            if(listaPos1.recuperar(iter3) == listaPos2.recuperar(iter2)){
+            if(int(listaPos1.recuperar(iter3)) == int(listaPos2.recuperar(iter2))){
                 existe = true;
             }
             iter3 = listaPos1.siguiente(iter3);
@@ -466,10 +468,10 @@ void AlgListaPos::unionSinOrden(listaPos &listaPos1,listaPos listaPos2){
         }
         if(existe == true){
             if(iter1 == listaPos1.siguiente(fin1)){
-                listaPos1.agregarAlFinal(listaPos2.recuperar(iter2));
+                listaPos1.agregarAlFinal(int(listaPos2.recuperar(iter2)));
                 iter2 = listaPos2.siguiente(iter2);
-            }else if(listaPos1.recuperar(iter1) < listaPos2.recuperar(iter2)){
-                listaPos1.insertar(listaPos2.recuperar(iter2),iter1);
+            }else if(int(listaPos1.recuperar(iter1)) < int(listaPos2.recuperar(iter2))){
+                listaPos1.insertar(int(listaPos2.recuperar(iter2)),iter1);
                 iter1 = listaPos1.siguiente(iter1);
                 iter2 = listaPos2.siguiente(iter2);
             }else{
@@ -497,7 +499,7 @@ void AlgListaPos::unionSinOrden(listaPos &listaPos1,listaPos listaPos2){
             Position iter1 = actual;
             Position iter2 = listaPos1.anterior(iter1);
             do{
-                if(listaPos1.recuperar(iter2) > listaPos1.recuperar(iter1)){
+                if(int(listaPos1.recuperar(iter2)) > int(listaPos1.recuperar(iter1))){
                     listaPos1.intercambiar(iter1,iter2);
                     iter1 = iter2;
                     iter2 = listaPos1.anterior(iter2);
@@ -550,7 +552,7 @@ void AlgListaPos::merge(listaPos &listaPos1,Position pos1, Position fin1,int lar
     bool ordenada = false;
     while(ordenada == false){
         if(largo1 > 0 && largo2 > 0){
-            if(listaPos1.recuperar(pos1) <= listaPos1.recuperar(pos2)){
+            if(int(listaPos1.recuperar(pos1)) <= int(listaPos1.recuperar(pos2))){
                 pos1 = listaPos1.siguiente(pos1);
                 largo1--;
             }else{
@@ -578,10 +580,10 @@ void AlgListaPos::quickSortAho(listaPos &listaPos1){
         bool pivoteEncontrado = false;
         Position pivote = listaPos1.primera();
         while(i < largo && pivoteEncontrado == false){
-            if(listaPos1.recuperar(pivote) > listaPos1.recuperar(listaPos1.siguiente(pivote))){
+            if(int(listaPos1.recuperar(pivote)) > int(listaPos1.recuperar(listaPos1.siguiente(pivote)))){
                 pivoteEncontrado = true;
                 pivote = listaPos1.siguiente(pivote);
-            }else if(listaPos1.recuperar(pivote) == listaPos1.recuperar(listaPos1.siguiente(pivote))){
+            }else if(int(listaPos1.recuperar(pivote)) == int(listaPos1.recuperar(listaPos1.siguiente(pivote)))){
                 pivote = listaPos1.siguiente(pivote);
                 i++;
             }else{
@@ -590,8 +592,8 @@ void AlgListaPos::quickSortAho(listaPos &listaPos1){
         }
         if(pivoteEncontrado == true){
             while(listaPos1.siguiente(der) != izq){
-                if(listaPos1.recuperar(pivote) > listaPos1.recuperar(der)){
-                    if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                if(int(listaPos1.recuperar(pivote)) > int(listaPos1.recuperar(der))){
+                    if(int(listaPos1.recuperar(izq)) >= int(listaPos1.recuperar(pivote))){
                         listaPos1.intercambiar(izq,der);
                         if(izq = pivote){
                             pivote = der;
@@ -600,9 +602,9 @@ void AlgListaPos::quickSortAho(listaPos &listaPos1){
                     }else{
                         izq = listaPos1.siguiente(izq);
                     }   
-                }else if(listaPos1.recuperar(pivote) <= listaPos1.recuperar(der)){
+                }else if(int(listaPos1.recuperar(pivote)) <= int(listaPos1.recuperar(der))){
                     if(der == izq){
-                        if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                        if(int(listaPos1.recuperar(izq)) >= int(listaPos1.recuperar(pivote))){
                             listaPos1.intercambiar(izq,pivote);
                             pivote = izq;
                             izq = listaPos1.siguiente(izq);
@@ -632,10 +634,10 @@ void AlgListaPos::quickSortAhoR(listaPos &listaPos1,Position pos, Position fin){
         bool pivoteEncontrado = false;
         Position pivote = pos;
         while(pivote!=fin && pivoteEncontrado == false){
-            if(listaPos1.recuperar(pivote) > listaPos1.recuperar(listaPos1.siguiente(pivote))){
+            if(int(listaPos1.recuperar(pivote)) > int(listaPos1.recuperar(listaPos1.siguiente(pivote)))){
                 pivoteEncontrado = true;
                 pivote = listaPos1.siguiente(pivote);
-            }else if(listaPos1.recuperar(pivote) == listaPos1.recuperar(listaPos1.siguiente(pivote))){
+            }else if(int(listaPos1.recuperar(pivote)) == int(listaPos1.recuperar(listaPos1.siguiente(pivote)))){
                 pivote = listaPos1.siguiente(pivote);
                 i++;
             }else{
@@ -644,8 +646,8 @@ void AlgListaPos::quickSortAhoR(listaPos &listaPos1,Position pos, Position fin){
         }
         if(pivoteEncontrado == true){
             while(listaPos1.siguiente(der) != izq){
-                if(listaPos1.recuperar(pivote) > listaPos1.recuperar(der)){
-                    if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                if(int(listaPos1.recuperar(pivote)) > int(listaPos1.recuperar(der))){
+                    if(int(listaPos1.recuperar(izq)) >= int(listaPos1.recuperar(pivote))){
                         listaPos1.intercambiar(izq,der);
                         if(izq = pivote){
                             pivote = der;
@@ -654,9 +656,9 @@ void AlgListaPos::quickSortAhoR(listaPos &listaPos1,Position pos, Position fin){
                     }else{
                         izq = listaPos1.siguiente(izq);
                     }   
-                }else if(listaPos1.recuperar(pivote) <= listaPos1.recuperar(der)){
+                }else if(int(listaPos1.recuperar(pivote)) <= int(listaPos1.recuperar(der))){
                     if(der == izq){
-                        if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                        if(int(listaPos1.recuperar(izq)) >= int(listaPos1.recuperar(pivote))){
                             listaPos1.intercambiar(izq,pivote);
                             pivote = izq;
                             izq = listaPos1.siguiente(izq);
@@ -687,10 +689,10 @@ void AlgListaPos::quickSortN(listaPos &listaPos1,int n){
         bool pivoteEncontrado = false;
         Position pivote = listaPos1.primera();
         while(i < largo && pivoteEncontrado == false){
-            if(listaPos1.recuperar(pivote) > listaPos1.recuperar(listaPos1.siguiente(pivote))){
+            if(int(listaPos1.recuperar(pivote)) > int(listaPos1.recuperar(listaPos1.siguiente(pivote)))){
                 pivoteEncontrado = true;
                 pivote = listaPos1.siguiente(pivote);
-            }else if(listaPos1.recuperar(pivote) == listaPos1.recuperar(listaPos1.siguiente(pivote))){
+            }else if(int(listaPos1.recuperar(pivote)) == int(listaPos1.recuperar(listaPos1.siguiente(pivote)))){
                 pivote = listaPos1.siguiente(pivote);
                 i++;
             }else{
@@ -699,8 +701,8 @@ void AlgListaPos::quickSortN(listaPos &listaPos1,int n){
         }
         if(pivoteEncontrado == true){
             while(listaPos1.siguiente(der) != izq){
-                if(listaPos1.recuperar(pivote) > listaPos1.recuperar(der)){
-                    if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                if(int(listaPos1.recuperar(pivote)) > int(listaPos1.recuperar(der))){
+                    if(int(listaPos1.recuperar(izq)) >= int(listaPos1.recuperar(pivote))){
                         listaPos1.intercambiar(izq,der);
                         if(izq = pivote){
                             pivote = der;
@@ -709,9 +711,9 @@ void AlgListaPos::quickSortN(listaPos &listaPos1,int n){
                     }else{
                         izq = listaPos1.siguiente(izq);
                     }   
-                }else if(listaPos1.recuperar(pivote) <= listaPos1.recuperar(der)){
+                }else if(int(listaPos1.recuperar(pivote)) <= int(listaPos1.recuperar(der))){
                     if(der == izq){
-                        if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                        if(int(listaPos1.recuperar(izq)) >= int(listaPos1.recuperar(pivote))){
                             listaPos1.intercambiar(izq,pivote);
                             pivote = izq;
                             izq = listaPos1.siguiente(izq);
@@ -744,10 +746,10 @@ void AlgListaPos::quickSortNR(listaPos &listaPos1,Position pos, Position fin, in
         bool pivoteEncontrado = false;
         Position pivote = pos;
         while(pivote!=fin && pivoteEncontrado == false){
-            if(listaPos1.recuperar(pivote) > listaPos1.recuperar(listaPos1.siguiente(pivote))){
+            if(int(listaPos1.recuperar(pivote)) > int(listaPos1.recuperar(listaPos1.siguiente(pivote)))){
                 pivoteEncontrado = true;
                 pivote = listaPos1.siguiente(pivote);
-            }else if(listaPos1.recuperar(pivote) == listaPos1.recuperar(listaPos1.siguiente(pivote))){
+            }else if(int(listaPos1.recuperar(pivote)) == int(listaPos1.recuperar(listaPos1.siguiente(pivote)))){
                 pivote = listaPos1.siguiente(pivote);
                 i++;
             }else{
@@ -756,8 +758,8 @@ void AlgListaPos::quickSortNR(listaPos &listaPos1,Position pos, Position fin, in
         }
         if(pivoteEncontrado == true){
             while(listaPos1.siguiente(der) != izq){
-                if(listaPos1.recuperar(pivote) > listaPos1.recuperar(der)){
-                    if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                if(int(listaPos1.recuperar(pivote)) > int(listaPos1.recuperar(der))){
+                    if(int(listaPos1.recuperar(izq)) >= int(listaPos1.recuperar(pivote))){
                         listaPos1.intercambiar(izq,der);
                         if(izq = pivote){
                             pivote = der;
@@ -766,9 +768,9 @@ void AlgListaPos::quickSortNR(listaPos &listaPos1,Position pos, Position fin, in
                     }else{
                         izq = listaPos1.siguiente(izq);
                     }   
-                }else if(listaPos1.recuperar(pivote) <= listaPos1.recuperar(der)){
+                }else if(int(listaPos1.recuperar(pivote)) <= int(listaPos1.recuperar(der))){
                     if(der == izq){
-                        if(listaPos1.recuperar(izq) >= listaPos1.recuperar(pivote)){
+                        if(int(listaPos1.recuperar(izq)) >= int(listaPos1.recuperar(pivote))){
                             listaPos1.intercambiar(izq,pivote);
                             pivote = izq;
                             izq = listaPos1.siguiente(izq);
